@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		934D68E02AF50ACD00924492 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934D68DF2AF50ACD00924492 /* UIViewController+Keyboard.swift */; };
 		935FB9A92AEAB8E1004A841F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9A82AEAB8E1004A841F /* AppDelegate.swift */; };
 		935FB9AB2AEAB8E1004A841F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9AA2AEAB8E1004A841F /* SceneDelegate.swift */; };
 		935FB9AD2AEAB8E1004A841F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9AC2AEAB8E1004A841F /* AuthViewController.swift */; };
@@ -16,6 +17,9 @@
 		935FB9C02AEAB8E5004A841F /* ToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9BF2AEAB8E5004A841F /* ToDoTests.swift */; };
 		935FB9CA2AEAB8E5004A841F /* ToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9C92AEAB8E5004A841F /* ToDoUITests.swift */; };
 		935FB9CC2AEAB8E5004A841F /* ToDoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9CB2AEAB8E5004A841F /* ToDoUITestsLaunchTests.swift */; };
+		93B02E362AF3F28600C8C6DA /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B02E352AF3F28600C8C6DA /* ParentViewController.swift */; };
+		93B02E392AF3F36600C8C6DA /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B02E382AF3F36600C8C6DA /* TextField.swift */; };
+		93B02E3B2AF3FE4200C8C6DA /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */; };
 		93C272362AF166AE008AEEAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93C272352AF166AE008AEEAB /* Localizable.strings */; };
 		93C272382AF16745008AEEAB /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C272372AF16745008AEEAB /* L10n.swift */; };
 		93C2723A2AF168E8008AEEAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93C272392AF168E8008AEEAB /* Main.storyboard */; };
@@ -41,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		934D68DF2AF50ACD00924492 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		935FB9A52AEAB8E1004A841F /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		935FB9A82AEAB8E1004A841F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		935FB9AA2AEAB8E1004A841F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +59,9 @@
 		935FB9C52AEAB8E5004A841F /* ToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		935FB9C92AEAB8E5004A841F /* ToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUITests.swift; sourceTree = "<group>"; };
 		935FB9CB2AEAB8E5004A841F /* ToDoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		93B02E352AF3F28600C8C6DA /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
+		93B02E382AF3F36600C8C6DA /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
 		93C272352AF166AE008AEEAB /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		93C272372AF16745008AEEAB /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		93C272392AF168E8008AEEAB /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -109,6 +117,8 @@
 		935FB9A72AEAB8E1004A841F /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
+				93B02E3C2AF406E000C8C6DA /* Extentions */,
+				93B02E372AF3F33100C8C6DA /* UIKit */,
 				93C2722F2AF163F3008AEEAB /* Classes */,
 				93C272332AF1643F008AEEAB /* Resources */,
 				935FB9A82AEAB8E1004A841F /* AppDelegate.swift */,
@@ -134,6 +144,31 @@
 			path = ToDoUITests;
 			sourceTree = "<group>";
 		};
+		93B02E342AF3F26500C8C6DA /* Parent */ = {
+			isa = PBXGroup;
+			children = (
+				93B02E352AF3F28600C8C6DA /* ParentViewController.swift */,
+			);
+			path = Parent;
+			sourceTree = "<group>";
+		};
+		93B02E372AF3F33100C8C6DA /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				93B02E382AF3F36600C8C6DA /* TextField.swift */,
+				93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		93B02E3C2AF406E000C8C6DA /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				934D68DF2AF50ACD00924492 /* UIViewController+Keyboard.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
 		93C2722F2AF163F3008AEEAB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +180,7 @@
 		93C272302AF16419008AEEAB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				93B02E342AF3F26500C8C6DA /* Parent */,
 				93C272322AF16434008AEEAB /* Main */,
 				93C272312AF1642B008AEEAB /* Auth */,
 			);
@@ -326,9 +362,13 @@
 			files = (
 				93C272382AF16745008AEEAB /* L10n.swift in Sources */,
 				935FB9AD2AEAB8E1004A841F /* AuthViewController.swift in Sources */,
+				93B02E362AF3F28600C8C6DA /* ParentViewController.swift in Sources */,
+				93B02E392AF3F36600C8C6DA /* TextField.swift in Sources */,
+				934D68E02AF50ACD00924492 /* UIViewController+Keyboard.swift in Sources */,
 				935FB9A92AEAB8E1004A841F /* AppDelegate.swift in Sources */,
 				935FB9AB2AEAB8E1004A841F /* SceneDelegate.swift in Sources */,
 				93C2723C2AF1692B008AEEAB /* MainViewController.swift in Sources */,
+				93B02E3B2AF3FE4200C8C6DA /* TextInput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

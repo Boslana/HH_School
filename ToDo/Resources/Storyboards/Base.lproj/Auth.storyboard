@@ -25,22 +25,14 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FB4-OH-pVw">
                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="128"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XDC-Ki-YmO">
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="361" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="pIk-An-0HE" customClass="TextInput" customModule="ToDo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="56"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="56" id="IFt-by-LK6"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydJ-vu-Jkh">
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="361" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="Mcc-Rv-tPb" customClass="TextInput" customModule="ToDo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="72" width="361" height="56"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="56" id="Lhi-De-C3E"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BME-qD-zI1">
@@ -80,8 +72,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="HaB-cJ-lX7"/>
                     <connections>
-                        <outlet property="emailTextField" destination="XDC-Ki-YmO" id="nZ7-jC-1aF"/>
-                        <outlet property="passwordTextField" destination="ydJ-vu-Jkh" id="7ZO-ph-po4"/>
+                        <outlet property="emailTextField" destination="pIk-An-0HE" id="uBh-ab-r2A"/>
+                        <outlet property="passwordTextField" destination="Mcc-Rv-tPb" id="v0s-yo-ijH"/>
                         <outlet property="signInButton" destination="N8B-Tu-hwt" id="Qwc-mh-uBU"/>
                         <outlet property="signUpButton" destination="lE3-3t-YQO" id="GVB-KG-aa5"/>
                     </connections>
