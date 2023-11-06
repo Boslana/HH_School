@@ -35,6 +35,6 @@ final class AuthViewController: ParentViewController {
         passwordTextField.show(error: "Ошибка!")
      //   let storyboard = UIStoryboard(name: "Main", bundle: nil)
      //   let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
-      //  view.window?.rootViewController = vc
+     //   view.window?.rootViewController = vc
     }
 }

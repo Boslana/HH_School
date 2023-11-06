@@ -4,6 +4,12 @@
 "auth.email-text-field-placeholder" = "E-mail";
 "auth.password-text-field-placeholder" = "Пароль";
 
+"sign-up.title" = "Регистрация";
+"sign-up.user-name-text-field-placeholder" = "Имя пользователя";
+"sign-up.email-text-field-placeholder" = "E-mail";
+"sign-up.password-text-field-placeholder" = "Пароль";
+"sign-up.sign-up-button" = "Зарегистрироваться";
+
 "main.title" = "Cписок дел";
 "main.profile-button" = "Профиль";
 "main.empty-lable" = "Пока здесь нет ни одной записи.\nСоздайте новую!";
