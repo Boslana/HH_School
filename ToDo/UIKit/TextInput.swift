@@ -63,7 +63,7 @@ final class TextInput: UIView {
     }
     
     func isEmpty() -> Bool {
-        return textField.text == ""
+        return (textField.text == "" || textField.text == nil)
     }
 
     func enableSecurityMode() {
