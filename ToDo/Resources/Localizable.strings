@@ -9,6 +9,7 @@
 "sign-up.email-text-field-placeholder" = "E-mail";
 "sign-up.password-text-field-placeholder" = "Пароль";
 "sign-up.sign-up-button" = "Зарегистрироваться";
+"sign-up.error-empty-text-field" = "Поле должно быть заполнено";
 
 "main.title" = "Cписок дел";
 "main.profile-button" = "Профиль";

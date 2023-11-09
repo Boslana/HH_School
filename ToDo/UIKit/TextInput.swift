@@ -61,9 +61,17 @@ final class TextInput: UIView {
         bottomConstraint.isActive = true
         invalidateIntrinsicContentSize()
     }
+    
+    func isEmpty() -> Bool {
+        return textField.text == ""
+    }
 
     func enableSecurityMode() {
         textField.enableSecurityMode()
+    }
+    
+    func enableSecurityModeWithoutEye() {
+        textField.enableSecurityModeWithoutEye()
     }
 
     private lazy var bottomConstraint = textField.bottomAnchor.constraint(equalTo: bottomAnchor)

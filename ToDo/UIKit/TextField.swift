@@ -18,6 +18,12 @@ final class TextField: UITextField {
         setup()
     }
     
+    func enableSecurityModeWithoutEye() {
+        textContentType = .password
+        isSecureTextEntry = true
+        rightViewMode = .always
+    }
+    
     func enableSecurityMode() {
         textContentType = .password
         isSecureTextEntry = true

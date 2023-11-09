@@ -17,49 +17,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wjY-SN-OGz">
-                                <rect key="frame" x="16" y="94" width="361" height="724"/>
+                                <rect key="frame" x="16" y="94" width="361" height="708"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ryV-O2-8hk">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="200"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Mvv-Og-2Bw">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Mvv-Og-2Bw">
                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="200"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcI-mV-NlN">
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="361" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="BYL-lE-GhT" customClass="TextInput" customModule="ToDo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="56"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="56" id="vQ2-MU-GR8"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qd6-mX-YP7">
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="361" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="ynF-o5-TvS" customClass="TextInput" customModule="ToDo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="72" width="361" height="56"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="56" id="MRF-Mg-tMI"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lbc-n2-MZb">
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="361" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="FTu-fE-Avr" customClass="TextInput" customModule="ToDo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="144" width="361" height="56"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="56" id="XdI-jL-JgN"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hlw-K3-TRM">
-                                        <rect key="frame" x="0.0" y="668" width="361" height="56"/>
+                                        <rect key="frame" x="0.0" y="652" width="361" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="YsX-6y-T8V"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="didTapSignUpButton" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ds1-HQ-G3B"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -67,17 +58,17 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="wjY-SN-OGz" secondAttribute="bottom" id="AaU-Q6-FCe"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="wjY-SN-OGz" secondAttribute="bottom" constant="16" id="AaU-Q6-FCe"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="wjY-SN-OGz" secondAttribute="trailing" constant="16" id="XTr-9y-70B"/>
                             <constraint firstItem="wjY-SN-OGz" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="35" id="hQR-n9-dsP"/>
                             <constraint firstItem="wjY-SN-OGz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="qai-8F-9qp"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="Qd6-mX-YP7" id="vCl-kT-b0N"/>
-                        <outlet property="passwordTextField" destination="Lbc-n2-MZb" id="Q8b-ac-GNS"/>
+                        <outlet property="emailTextField" destination="ynF-o5-TvS" id="DPa-tA-CuS"/>
+                        <outlet property="passwordTextField" destination="FTu-fE-Avr" id="LxR-l0-jz8"/>
                         <outlet property="signUpButton" destination="Hlw-K3-TRM" id="XPI-2p-oSr"/>
-                        <outlet property="userNameTextField" destination="tcI-mV-NlN" id="xpf-x1-KKG"/>
+                        <outlet property="userNameTextField" destination="BYL-lE-GhT" id="IrF-HM-lZ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

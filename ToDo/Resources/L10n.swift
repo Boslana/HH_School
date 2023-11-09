@@ -15,6 +15,7 @@ enum L10n {
         static let emailTextFieldPlaceholder = NSLocalizedString("sign-up.email-text-field-placeholder", comment: "")
         static let passwordTextFieldPlaceholder = NSLocalizedString("sign-up.password-text-field-placeholder", comment: "")
         static let signUpButton = NSLocalizedString("sign-up.sign-up-button", comment: "")
+        static let errorEmptyTextField = NSLocalizedString("sign-up.error-empty-text-field", comment: "")
     }
     
     enum Main {
