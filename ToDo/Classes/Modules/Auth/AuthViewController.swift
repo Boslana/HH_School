@@ -13,6 +13,7 @@ final class AuthViewController: ParentViewController {
         
         navigationItem.title = L10n.Auth.title
         navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         emailTextField.setup(placeholder: L10n.Auth.emailTextFieldPlaceholder, text: nil)
         passwordTextField.setup(placeholder: L10n.Auth.passwordTextFieldPlaceholder, text: nil)
@@ -32,9 +33,9 @@ final class AuthViewController: ParentViewController {
     @IBOutlet private var signUpButton: UIButton!
     
     @IBAction private func didTapSignIn() {
-        passwordTextField.show(error: "Ошибка!")
-     //   let storyboard = UIStoryboard(name: "Main", bundle: nil)
-     //   let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
-      //  view.window?.rootViewController = vc
+//        passwordTextField.show(error: "Ошибка!")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
+        view.window?.rootViewController = vc
     }
 }

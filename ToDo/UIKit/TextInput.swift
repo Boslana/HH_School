@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 final class TextInput: UIView {
     private lazy var textField: TextField = {
         let textField = TextField(frame: .zero)
@@ -35,36 +36,39 @@ final class TextInput: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-            let height: CGFloat = 56
-            if errorLabel.isHidden {
-                return CGSize(width: UIView.noIntrinsicMetric, height: height)
-            }
-            let rect = errorLabel.textRect(forBounds: bounds, limitedToNumberOfLines: errorLabel.numberOfLines)
-            return CGSize(width: UIView.noIntrinsicMetric, height: height + rect.height + 4)
+        let height: CGFloat = 56
+        if errorLabel.isHidden {
+            return CGSize(width: UIView.noIntrinsicMetric, height: height)
         }
+        let rect = errorLabel.textRect(forBounds: bounds, limitedToNumberOfLines: errorLabel.numberOfLines)
+        return CGSize(width: UIView.noIntrinsicMetric, height: height + rect.height + 4)
+    }
     
     func setup(placeholder: String?, text: String?) {
-                textField.placeholder = placeholder
-                textField.text = text
-            }
+        textField.placeholder = placeholder
+        textField.text = text
+    }
 
-        func show(error: String) {
-                errorLabel.text = error
-                bottomConstraint.isActive = false
-                errorLabel.isHidden = false
-                invalidateIntrinsicContentSize()
-            }
+    func show(error: String) {
+        errorLabel.text = error
+        bottomConstraint.isActive = false
+        errorLabel.isHidden = false
+        invalidateIntrinsicContentSize()
+    }
 
-        func hideError() {
-                errorLabel.isHidden = true
-                bottomConstraint.isActive = true
-                invalidateIntrinsicContentSize()
-            }
+    func hideError() {
+        errorLabel.isHidden = true
+        bottomConstraint.isActive = true
+        invalidateIntrinsicContentSize()
+    }
+    
+    func isEmpty() -> Bool {
+        return (textField.text == "" || textField.text == nil)
+    }
 
-        func enableSecurityMode() {
-            textField.enableSecurityMode()
-        }
-
+    func enableSecurityMode() {
+        textField.enableSecurityMode()
+    }
 
     private lazy var bottomConstraint = textField.bottomAnchor.constraint(equalTo: bottomAnchor)
     
