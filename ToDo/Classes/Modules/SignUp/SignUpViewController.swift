@@ -20,7 +20,7 @@ final class SignUpViewController: ParentViewController {
         
         signUpButton.setTitle(L10n.SignUp.signUpButton, for: .normal)
         
-        passwordTextField.enableSecurityModeWithoutEye()
+        passwordTextField.enableSecurityMode()
         
         addTapToHideKeyboardGesture()
     }

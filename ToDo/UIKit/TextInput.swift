@@ -69,10 +69,6 @@ final class TextInput: UIView {
     func enableSecurityMode() {
         textField.enableSecurityMode()
     }
-    
-    func enableSecurityModeWithoutEye() {
-        textField.enableSecurityModeWithoutEye()
-    }
 
     private lazy var bottomConstraint = textField.bottomAnchor.constraint(equalTo: bottomAnchor)
     
