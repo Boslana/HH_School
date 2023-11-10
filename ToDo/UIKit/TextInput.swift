@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 final class TextInput: UIView {
     private lazy var textField: TextField = {
         let textField = TextField(frame: .zero)
@@ -27,6 +28,10 @@ final class TextInput: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
+    }
+    
+    var text: String? {
+        textField.text
     }
     
     required init?(coder: NSCoder) {
