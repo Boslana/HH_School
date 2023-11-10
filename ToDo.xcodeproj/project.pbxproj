@@ -17,6 +17,7 @@
 		935FB9C02AEAB8E5004A841F /* ToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9BF2AEAB8E5004A841F /* ToDoTests.swift */; };
 		935FB9CA2AEAB8E5004A841F /* ToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9C92AEAB8E5004A841F /* ToDoUITests.swift */; };
 		935FB9CC2AEAB8E5004A841F /* ToDoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9CB2AEAB8E5004A841F /* ToDoUITestsLaunchTests.swift */; };
+		93812E712AF5399300A18BD2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93812E702AF5399300A18BD2 /* SignUpViewController.swift */; };
 		93B02E362AF3F28600C8C6DA /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B02E352AF3F28600C8C6DA /* ParentViewController.swift */; };
 		93B02E392AF3F36600C8C6DA /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B02E382AF3F36600C8C6DA /* TextField.swift */; };
 		93B02E3B2AF3FE4200C8C6DA /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */; };
@@ -62,6 +63,7 @@
 		935FB9C52AEAB8E5004A841F /* ToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		935FB9C92AEAB8E5004A841F /* ToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUITests.swift; sourceTree = "<group>"; };
 		935FB9CB2AEAB8E5004A841F /* ToDoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		93812E702AF5399300A18BD2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		93B02E352AF3F28600C8C6DA /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		93B02E382AF3F36600C8C6DA /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
@@ -150,6 +152,14 @@
 			path = ToDoUITests;
 			sourceTree = "<group>";
 		};
+		93812E6F2AF5396E00A18BD2 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				93812E702AF5399300A18BD2 /* SignUpViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		93B02E342AF3F26500C8C6DA /* Parent */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +199,7 @@
 		93C272302AF16419008AEEAB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				93812E6F2AF5396E00A18BD2 /* SignUp */,
 				93B02E342AF3F26500C8C6DA /* Parent */,
 				93C272322AF16434008AEEAB /* Main */,
 				93C272312AF1642B008AEEAB /* Auth */,
@@ -384,6 +395,7 @@
 				93B02E362AF3F28600C8C6DA /* ParentViewController.swift in Sources */,
 				93B02E392AF3F36600C8C6DA /* TextField.swift in Sources */,
 				93E077162AFD2BB5009478CA /* MainButton.swift in Sources */,
+				93812E712AF5399300A18BD2 /* SignUpViewController.swift in Sources */,
 				934D68E02AF50ACD00924492 /* UIViewController+Keyboard.swift in Sources */,
 				935FB9A92AEAB8E1004A841F /* AppDelegate.swift in Sources */,
 				935FB9AB2AEAB8E1004A841F /* SceneDelegate.swift in Sources */,

@@ -40,9 +40,7 @@ final class TextField: UITextField {
     private let insets = UIEdgeInsets(top: 18, left: 16, bottom: 16, right: 16)
     
     private lazy var showPasswordButton: UIButton = {
-        let button = UIButton(type: .custom, primaryAction: UIAction(handler: { [weak self] _ in
-            self?.toggleSecureMode()
-        }))
+        let button = UIButton(type: .custom, primaryAction: UIAction(handler: { [weak self] _ in self?.toggleSecureMode() }))
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: 24).isActive = true
         button.setImage(UIImage.TextInput.eyeOpen, for: .normal)
