@@ -10,22 +10,39 @@ import UIKit
 final class PrimaryButton: MainButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        setup(mode: Mode.large)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setup()
+        setup(mode: Mode.large)
     }
     
-    private func setup() {
-        style = Style(
-            cornerRadius: 8,
-            insets: 32,
-            bgColor: .Color.primary,
-            heightbgColor: .Color.primary.withAlphaComponent(0.5),
-            titleColor: .Color.white,
-            heightedTitleColor: .Color.white
-        )
+    enum Mode {
+        case large
+        case small
+    }
+    
+    func setup(mode: Mode) {
+        if mode == Mode.large {
+            style = Style(
+                cornerRadius: 8,
+                insets: 32,
+                bgColor: .Color.primary,
+                heightbgColor: .Color.primary.withAlphaComponent(0.5),
+                titleColor: .Color.white,
+                heightedTitleColor: .Color.white
+            )
+        } else if mode == Mode.small {
+            style = Style(
+                cornerRadius: 8,
+                insets: 22,
+                height: 34,
+                bgColor: .Color.primary,
+                heightbgColor: .Color.primary.withAlphaComponent(0.5),
+                titleColor: .Color.white,
+                heightedTitleColor: .Color.white
+            )
+        }
     }
 }

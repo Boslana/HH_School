@@ -36,7 +36,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BME-qD-zI1">
-                                                <rect key="frame" x="0.0" y="557.66666666666663" width="361" height="106.33333333333337"/>
+                                                <rect key="frame" x="0.0" y="579.33333333333337" width="361" height="84.666666666666629"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8B-Tu-hwt" customClass="PrimaryButton" customModule="ToDo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="34.333333333333336"/>
@@ -46,8 +46,8 @@
                                                             <action selector="didTapSignIn" destination="BYZ-38-t0r" eventType="touchUpInside" id="V76-CN-NWk"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lE3-3t-YQO">
-                                                        <rect key="frame" x="0.0" y="72" width="361" height="34.333333333333343"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lE3-3t-YQO" customClass="TextButton" customModule="ToDo" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="50.333333333333258" width="361" height="34.333333333333343"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                         <connections>

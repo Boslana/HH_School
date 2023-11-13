@@ -65,10 +65,6 @@ final class TextInput: UIView {
         bottomConstraint.isActive = true
         invalidateIntrinsicContentSize()
     }
-    
-    func isEmpty() -> Bool {
-        return (textField.text == "" || textField.text == nil)
-    }
 
     func enableSecurityMode() {
         textField.enableSecurityMode()

@@ -52,7 +52,7 @@ class MainButton: UIButton {
         configuration?.background.cornerRadius = style.cornerRadius
         configuration?.background.backgroundColor = style.bgColor
         
-        configurationUpdateHandler = { [weak self] button in 
+        configurationUpdateHandler = { [weak self] button in
             guard let self else {
                 return
             }

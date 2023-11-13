@@ -16,4 +16,8 @@ enum ValidationManager {
     static func isValid(commonText: String?, symbolsCount: Int) -> Bool {
         (commonText ?? "").count <= symbolsCount
     }
+    
+    static func isEmpty(commonText: String?) -> Bool {
+         (commonText == "" || commonText == nil)
+    }
 }
