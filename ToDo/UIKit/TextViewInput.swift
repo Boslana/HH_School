@@ -73,6 +73,10 @@ class TextViewInput: UIView, UITextViewDelegate {
         invalidateIntrinsicContentSize()
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+            didBeginEditing()
+        }
+    
     override var intrinsicContentSize: CGSize {
         var totalHeight = titleLabel.intrinsicContentSize.height + textView.frame.size.height + 8
         
@@ -123,5 +127,10 @@ class TextViewInput: UIView, UITextViewDelegate {
                 textView.isScrollEnabled = (newHeight == 200)
             }
         }
+    }
+    
+    @objc
+    private func didBeginEditing() {
+        hideError()
     }
 }
