@@ -56,6 +56,7 @@ final class TextInput: UIView {
     func show(error: String) {
         errorLabel.text = error
         bottomConstraint.isActive = false
+        errorLabelTopConstraint.isActive = true
         errorLabel.isHidden = false
         invalidateIntrinsicContentSize()
     }
@@ -63,6 +64,7 @@ final class TextInput: UIView {
     func hideError() {
         errorLabel.isHidden = true
         bottomConstraint.isActive = true
+        errorLabelTopConstraint.isActive = false
         invalidateIntrinsicContentSize()
     }
 
@@ -71,6 +73,7 @@ final class TextInput: UIView {
     }
 
     private lazy var bottomConstraint = textField.bottomAnchor.constraint(equalTo: bottomAnchor)
+    private lazy var errorLabelTopConstraint = errorLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 4)
     
     private func setup() {
         addSubview(textField)
@@ -83,7 +86,6 @@ final class TextInput: UIView {
             bottomConstraint,
             
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            errorLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 4),
             trailingAnchor.constraint(equalTo:errorLabel.trailingAnchor, constant: 8),
             errorLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
