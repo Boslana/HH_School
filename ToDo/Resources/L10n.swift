@@ -1,7 +1,6 @@
 import Foundation
 
 enum L10n {
-    
     enum Auth {
         static let title = NSLocalizedString("auth.title", comment: "")
         static let signInButton = NSLocalizedString("auth.sign-in-button", comment: "")

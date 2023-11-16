@@ -26,17 +26,19 @@ final class TextButton: MainButton {
     func setup(mode: Mode) {
         if mode == Mode.normal {
             style = Style(
-                font: .boldSystemFont(ofSize: 16),
-                height: 22,
+                font: .systemFont(ofSize: 16, weight: .bold),
+                insets: 32,
+                height: 54,
                 titleColor: .Color.black,
-                heightedTitleColor: .Color.black.withAlphaComponent(0.5)
+                highlightedTitleColor: .Color.black.withAlphaComponent(0.5)
             )
         } else if mode == Mode.destructive {
             style = Style(
-                font: .boldSystemFont(ofSize: 16),
-                height: 22,
+                font: .systemFont(ofSize: 16, weight: .bold),
+                insets: 32,
+                height: 54,
                 titleColor: .Color.red,
-                heightedTitleColor: .Color.red.withAlphaComponent(0.5)
+                highlightedTitleColor: .Color.red.withAlphaComponent(0.5)
             )
         }
     }

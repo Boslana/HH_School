@@ -36,35 +36,30 @@ final class SignUpViewController: ParentViewController {
     @IBAction private func didTapSignUpButton() {
         var isValid = true
         
-        if ValidationManager.isEmpty(commonText: userNameTextField.text) {
+        if userNameTextField.text?.isEmpty ?? true {
             userNameTextField.show(error: L10n.Validation.emptyTextField)
             isValid = false
-        }
-        
-        if !ValidationManager.isValid(commonText: userNameTextField.text, symbolsCount: 70) {
+        } else if !ValidationManager.isValid(commonText: userNameTextField.text, symbolsCount: 70) {
             userNameTextField.show(error: L10n.Validation.symbolCountUserNameTextField)
             isValid = false
         }
         
-        if !ValidationManager.isValid(email: emailTextField.text) {
+        if emailTextField.text?.isEmpty ?? true {
+            emailTextField.show(error: L10n.Validation.emptyTextField)
+            isValid = false
+        } else if !ValidationManager.isValid(email: emailTextField.text) {
             emailTextField.show(error: L10n.Validation.emailTextField)
             isValid = false
         }
         
-        if ValidationManager.isEmpty(commonText: emailTextField.text) {
-            emailTextField.show(error: L10n.Validation.emptyTextField)
-            isValid = false
-        }
-        
-        if ValidationManager.isEmpty(commonText: passwordTextField.text) {
+        if passwordTextField.text?.isEmpty ?? true {
             passwordTextField.show(error: L10n.Validation.emptyTextField)
             isValid = false
+        } else if !ValidationManager.isValid(commonText: passwordTextField.text, symbolsCount: 256) {
+            passwordTextField.show(error: L10n.Validation.symbolCountPasswordTextField)
+            isValid = false
         }
         
-        if !ValidationManager.isValid(commonText: passwordTextField.text, symbolsCount: 256) {
-            passwordTextField.show(error: L10n.Validation.symbolCountPasswordTextField)
-        }
-
         if isValid {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")

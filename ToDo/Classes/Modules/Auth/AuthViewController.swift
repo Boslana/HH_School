@@ -37,17 +37,15 @@ final class AuthViewController: ParentViewController {
     @IBAction private func didTapSignIn() {
         var isValid = true
         
-        if !ValidationManager.isValid(email: emailTextField.text) {
-            emailTextField.show(error: L10n.Validation.emailTextField)
-            isValid = false
-        }
-        
-        if ValidationManager.isEmpty(commonText: emailTextField.text) {
+        if emailTextField.text?.isEmpty ?? true {
             emailTextField.show(error: L10n.Validation.emptyTextField)
             isValid = false
-        }
+        } else if !ValidationManager.isValid(email: emailTextField.text) {
+            emailTextField.show(error: L10n.Validation.emailTextField)
+            isValid = false
+          }
         
-        if ValidationManager.isEmpty(commonText: passwordTextField.text) {
+        if passwordTextField.text?.isEmpty ?? true {
             passwordTextField.show(error: L10n.Validation.emptyTextField)
             isValid = false
         }

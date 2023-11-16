@@ -29,19 +29,19 @@ final class PrimaryButton: MainButton {
                 cornerRadius: 8,
                 insets: 32,
                 bgColor: .Color.primary,
-                heightbgColor: .Color.primary.withAlphaComponent(0.5),
+                highlightedBgColor: .Color.primary.withAlphaComponent(0.5),
                 titleColor: .Color.white,
-                heightedTitleColor: .Color.white
+                highlightedTitleColor: .Color.white
             )
         } else if mode == Mode.small {
             style = Style(
                 cornerRadius: 8,
-                insets: 22,
+                insets: 44,
                 height: 34,
                 bgColor: .Color.primary,
-                heightbgColor: .Color.primary.withAlphaComponent(0.5),
+                highlightedBgColor: .Color.primary.withAlphaComponent(0.5),
                 titleColor: .Color.white,
-                heightedTitleColor: .Color.white
+                highlightedTitleColor: .Color.white
             )
         }
     }
