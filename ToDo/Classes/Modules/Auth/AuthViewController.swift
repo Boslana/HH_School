@@ -43,7 +43,7 @@ final class AuthViewController: ParentViewController {
         } else if !ValidationManager.isValid(email: emailTextField.text) {
             emailTextField.show(error: L10n.Validation.emailTextField)
             isValid = false
-          }
+        }
         
         if passwordTextField.text?.isEmpty ?? true {
             passwordTextField.show(error: L10n.Validation.emptyTextField)
