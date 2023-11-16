@@ -20,6 +20,7 @@ final class TextViewInput: UIView, UITextViewDelegate {
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textColor = .Color.black
         titleLabel.font = UIFont.systemFont(ofSize: 14)
         return titleLabel
@@ -32,8 +33,6 @@ final class TextViewInput: UIView, UITextViewDelegate {
     func setup(titleText: String?) {
         titleLabel.text = titleText
     }
-    
-    private let insets = UIEdgeInsets(top: 18, left: 16, bottom: 16, right: 16)
     
     private lazy var textView: UITextView = {
         let textView = UITextView()
@@ -48,7 +47,7 @@ final class TextViewInput: UIView, UITextViewDelegate {
         
         textView.layer.cornerRadius = 8
         textView.tintColor = UIColor.Color.black
-        textView.textContainerInset = insets
+        textView.textContainerInset = UIEdgeInsets(top: 18, left: 16, bottom: 16, right: 16)
         textView.isScrollEnabled = false
         return textView
     }()
@@ -65,14 +64,16 @@ final class TextViewInput: UIView, UITextViewDelegate {
     
     func show(error: String) {
         errorLabel.text = error
-        bottomConstraint.isActive = false
+        textViewHeightConstraint?.isActive = true
+        errorLabelTopConstraint.isActive = true
         errorLabel.isHidden = false
         invalidateIntrinsicContentSize()
     }
     
     func hideError() {
         errorLabel.isHidden = true
-        bottomConstraint.isActive = true
+        textViewHeightConstraint?.isActive = true
+        errorLabelTopConstraint.isActive = false
         invalidateIntrinsicContentSize()
     }
     
@@ -81,16 +82,19 @@ final class TextViewInput: UIView, UITextViewDelegate {
     }
     
     override var intrinsicContentSize: CGSize {
-        let totalHeight = titleLabel.intrinsicContentSize.height + textView.frame.size.height + 8
+        let totalHeight = titleLabel.intrinsicContentSize.height + (textViewHeightConstraint?.constant ?? 0) + 8
         
         if errorLabel.isHidden {
             return CGSize(width: UIView.noIntrinsicMetric, height: totalHeight)
         }
+        
         let rect = errorLabel.textRect(forBounds: bounds, limitedToNumberOfLines: errorLabel.numberOfLines)
         return CGSize(width: UIView.noIntrinsicMetric, height: totalHeight + rect.height + 4)
     }
     
-    private lazy var bottomConstraint = textView.bottomAnchor.constraint(equalTo: bottomAnchor)
+    private lazy var errorLabelTopConstraint = errorLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 4)
+    
+    private var textViewHeightConstraint: NSLayoutConstraint?
     
     private func setup() {
         addSubview(titleLabel)
@@ -99,7 +103,7 @@ final class TextViewInput: UIView, UITextViewDelegate {
         
         textView.delegate = self
         
-        titleLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: 22)
+        textViewHeightConstraint = textView.heightAnchor.constraint(equalToConstant: 56)
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -109,27 +113,27 @@ final class TextViewInput: UIView, UITextViewDelegate {
             textView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             textView.leadingAnchor.constraint(equalTo: leadingAnchor),
             textView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            textView.heightAnchor.constraint(equalToConstant: 56),
-            bottomConstraint,
+            textViewHeightConstraint!,
             
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            errorLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 4),
-            trailingAnchor.constraint(equalTo: errorLabel.trailingAnchor, constant: 8),
-            errorLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            trailingAnchor.constraint(equalTo:errorLabel.trailingAnchor, constant: 8),
         ])
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        let size = CGSize(width: frame.width, height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
+        textView.isScrollEnabled = false
         
-        textView.constraints.forEach { (constraint) in
-            if constraint.firstAttribute == .height {
-                let newHeight = min(max(estimatedSize.height, 56), 200)
-                constraint.constant = newHeight
-                textView.isScrollEnabled = newHeight == 200
-            }
+        let newSize = textView.sizeThatFits(CGSize(width: frame.width, height: .infinity))
+        let newHeight = min(max(newSize.height, 56), 200)
+        
+        if textViewHeightConstraint?.constant != newHeight {
+            textViewHeightConstraint?.constant = newHeight
+            self.layoutIfNeeded()
         }
+        
+        textView.isScrollEnabled = newHeight == 200
+        
+        invalidateIntrinsicContentSize()
     }
     
     @objc
