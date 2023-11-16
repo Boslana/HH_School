@@ -15,10 +15,10 @@ class MainButton: UIButton {
         var height: CGFloat = 56
         
         var bgColor: UIColor = .clear
-        var heightbgColor: UIColor = .clear
+        var highlightedBgColor: UIColor = .clear
         
         var titleColor: UIColor = .clear
-        var heightedTitleColor: UIColor = .clear // прозрачный
+        var highlightedTitleColor: UIColor = .clear // прозрачный
     }
     
     var style: Style = Style() {
@@ -52,7 +52,7 @@ class MainButton: UIButton {
         configuration?.background.cornerRadius = style.cornerRadius
         configuration?.background.backgroundColor = style.bgColor
         
-        configurationUpdateHandler = { [weak self] button in 
+        configurationUpdateHandler = { [weak self] button in
             guard let self else {
                 return
             }
@@ -73,7 +73,7 @@ class MainButton: UIButton {
     
     private func colors(for button: UIButton) -> (fgColor: UIColor, bgColor: UIColor) {
         if button.isHighlighted {
-            return (fgColor: style.heightedTitleColor, bgColor: style.heightbgColor)
+            return (fgColor: style.highlightedTitleColor, bgColor: style.highlightedBgColor)
         }
         return (fgColor: style.titleColor, bgColor: style.bgColor)
     }

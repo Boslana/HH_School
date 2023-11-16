@@ -12,6 +12,7 @@
 		9317F52E2B03DDC200B00A48 /* MainItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9317F52D2B03DDC200B00A48 /* MainItemCell.xib */; };
 		9317F5302B03DDD100B00A48 /* MainItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9317F52F2B03DDD100B00A48 /* MainItemCell.swift */; };
 		934D68E02AF50ACD00924492 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934D68DF2AF50ACD00924492 /* UIViewController+Keyboard.swift */; };
+		93564BE92AFF537200C3631D /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93564BE82AFF537200C3631D /* TextButton.swift */; };
 		935FB9A92AEAB8E1004A841F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9A82AEAB8E1004A841F /* AppDelegate.swift */; };
 		935FB9AB2AEAB8E1004A841F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9AA2AEAB8E1004A841F /* SceneDelegate.swift */; };
 		935FB9AD2AEAB8E1004A841F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935FB9AC2AEAB8E1004A841F /* AuthViewController.swift */; };
@@ -58,6 +59,7 @@
 		9317F52D2B03DDC200B00A48 /* MainItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainItemCell.xib; sourceTree = "<group>"; };
 		9317F52F2B03DDD100B00A48 /* MainItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItemCell.swift; sourceTree = "<group>"; };
 		934D68DF2AF50ACD00924492 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
+		93564BE82AFF537200C3631D /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
 		935FB9A52AEAB8E1004A841F /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		935FB9A82AEAB8E1004A841F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		935FB9AA2AEAB8E1004A841F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */,
 				93E077152AFD2BB5009478CA /* MainButton.swift */,
 				93E077172AFD3242009478CA /* PrimaryButton.swift */,
+				93564BE82AFF537200C3631D /* TextButton.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 			files = (
 				93E0771B2AFD357A009478CA /* ValidationManager.swift in Sources */,
 				93C272382AF16745008AEEAB /* L10n.swift in Sources */,
+				93564BE92AFF537200C3631D /* TextButton.swift in Sources */,
 				93E077182AFD3242009478CA /* PrimaryButton.swift in Sources */,
 				935FB9AD2AEAB8E1004A841F /* AuthViewController.swift in Sources */,
 				93B02E362AF3F28600C8C6DA /* ParentViewController.swift in Sources */,

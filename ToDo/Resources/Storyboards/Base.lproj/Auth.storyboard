@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWY-1w-DIg">
-                                <rect key="frame" x="16" y="138" width="361" height="664"/>
+                                <rect key="frame" x="16" y="138" width="361" height="680"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="fXq-j8-Qme">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="680"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FB4-OH-pVw">
                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="128"/>
@@ -35,8 +35,8 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BME-qD-zI1">
-                                                <rect key="frame" x="0.0" y="557.66666666666663" width="361" height="106.33333333333337"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="BME-qD-zI1">
+                                                <rect key="frame" x="0.0" y="611.33333333333337" width="361" height="68.666666666666629"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8B-Tu-hwt" customClass="PrimaryButton" customModule="ToDo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="34.333333333333336"/>
@@ -46,8 +46,8 @@
                                                             <action selector="didTapSignIn" destination="BYZ-38-t0r" eventType="touchUpInside" id="V76-CN-NWk"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lE3-3t-YQO">
-                                                        <rect key="frame" x="0.0" y="72" width="361" height="34.333333333333343"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lE3-3t-YQO" customClass="TextButton" customModule="ToDo" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="34.333333333333258" width="361" height="34.333333333333343"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                         <connections>
@@ -67,7 +67,7 @@
                             <constraint firstItem="IWY-1w-DIg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="35" id="2A9-d7-YWN"/>
                             <constraint firstItem="IWY-1w-DIg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="7aH-wk-Owq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IWY-1w-DIg" secondAttribute="trailing" constant="16" id="Oyk-nE-tnF"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="IWY-1w-DIg" secondAttribute="bottom" constant="16" id="XKu-os-Ygf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="IWY-1w-DIg" secondAttribute="bottom" id="XKu-os-Ygf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HaB-cJ-lX7"/>

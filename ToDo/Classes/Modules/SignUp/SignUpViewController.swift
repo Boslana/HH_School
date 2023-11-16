@@ -20,6 +20,8 @@ final class SignUpViewController: ParentViewController {
         
         signUpButton.setTitle(L10n.SignUp.signUpButton, for: .normal)
         
+        signUpButton.setup(mode: PrimaryButton.Mode.large)
+        
         passwordTextField.enableSecurityMode()
         
         addTapToHideKeyboardGesture()
@@ -29,15 +31,39 @@ final class SignUpViewController: ParentViewController {
     @IBOutlet private var emailTextField: TextInput!
     @IBOutlet private var passwordTextField: TextInput!
     
-    @IBOutlet private var signUpButton: UIButton!
+    @IBOutlet private var signUpButton: PrimaryButton!
     
     @IBAction private func didTapSignUpButton() {
-        if userNameTextField.isEmpty() {
-            userNameTextField.show(error: L10n.SignUp.errorEmptyTextField)
-        } else {
+        var isValid = true
+        
+        if userNameTextField.text?.isEmpty ?? true {
+            userNameTextField.show(error: L10n.Validation.emptyTextField)
+            isValid = false
+        } else if !ValidationManager.isValid(commonText: userNameTextField.text, symbolsCount: 70) {
+            userNameTextField.show(error: L10n.Validation.symbolCountUserNameTextField)
+            isValid = false
+        }
+        
+        if emailTextField.text?.isEmpty ?? true {
+            emailTextField.show(error: L10n.Validation.emptyTextField)
+            isValid = false
+        } else if !ValidationManager.isValid(email: emailTextField.text) {
+            emailTextField.show(error: L10n.Validation.emailTextField)
+            isValid = false
+        }
+        
+        if passwordTextField.text?.isEmpty ?? true {
+            passwordTextField.show(error: L10n.Validation.emptyTextField)
+            isValid = false
+        } else if !ValidationManager.isValid(commonText: passwordTextField.text, symbolsCount: 256) {
+            passwordTextField.show(error: L10n.Validation.symbolCountPasswordTextField)
+            isValid = false
+        }
+        
+        if isValid {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
             view.window?.rootViewController = vc
-            }
         }
     }
+}

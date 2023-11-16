@@ -67,10 +67,6 @@ final class TextInput: UIView {
         errorLabelTopConstraint.isActive = false
         invalidateIntrinsicContentSize()
     }
-    
-    func isEmpty() -> Bool {
-        return (textField.text == "" || textField.text == nil)
-    }
 
     func enableSecurityMode() {
         textField.enableSecurityMode()

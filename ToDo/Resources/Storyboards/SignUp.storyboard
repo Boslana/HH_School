@@ -41,7 +41,7 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hlw-K3-TRM">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hlw-K3-TRM" customClass="PrimaryButton" customModule="ToDo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="652" width="361" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="YsX-6y-T8V"/>
