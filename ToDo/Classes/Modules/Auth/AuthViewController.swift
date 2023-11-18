@@ -13,13 +13,15 @@ final class AuthViewController: ParentViewController {
         
         navigationItem.title = L10n.Auth.title
         navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         emailTextField.setup(placeholder: L10n.Auth.emailTextFieldPlaceholder, text: nil)
         passwordTextField.setup(placeholder: L10n.Auth.passwordTextFieldPlaceholder, text: nil)
         
         signInButton.setTitle(L10n.Auth.signInButton, for: .normal)
         signUpButton.setTitle(L10n.Auth.signUpButton, for: .normal)
+        
+        signInButton.setup(mode: PrimaryButton.Mode.large)
+        signUpButton.setup(mode: TextButton.Mode.normal)
         
         passwordTextField.enableSecurityMode()
         
@@ -29,19 +31,29 @@ final class AuthViewController: ParentViewController {
     @IBOutlet private var emailTextField: TextInput!
     @IBOutlet private var passwordTextField: TextInput!
     
-    @IBOutlet private var signInButton: UIButton!
-    @IBOutlet private var signUpButton: UIButton!
+    @IBOutlet private var signInButton: PrimaryButton!
+    @IBOutlet private var signUpButton: TextButton!
     
     @IBAction private func didTapSignIn() {
-
-        passwordTextField.show(error: "Ошибка!")
+        var isValid = true
         
-        if ValidationManager.isValid(email: emailTextField.text) {
+        if emailTextField.text?.isEmpty ?? true {
+            emailTextField.show(error: L10n.Validation.emptyTextField)
+            isValid = false
+        } else if !ValidationManager.isValid(email: emailTextField.text) {
+            emailTextField.show(error: L10n.Validation.emailTextField)
+            isValid = false
+        }
+        
+        if passwordTextField.text?.isEmpty ?? true {
+            passwordTextField.show(error: L10n.Validation.emptyTextField)
+            isValid = false
+        }
+        
+        if isValid {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
             view.window?.rootViewController = vc
-        } else {
-            emailTextField.show(error: "Email некорректный")
         }
     }
 }
