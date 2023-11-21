@@ -18,22 +18,24 @@ protocol NewItemViewControllerDelegate: AnyObject {
 }
 
 final class NewItemViewController: ParentViewController {
-    @IBOutlet private var whatToDoLable: UIView!
-    @IBOutlet private var descriptionLabel: UIView!
-    @IBOutlet private var deadline: UILabel!
+    @IBOutlet private var whatToDoView: UIView!
+    @IBOutlet private var descriptionView: UIView!
+    @IBOutlet private var deadlineLabel: UILabel!
     @IBOutlet private var datePicker: UIDatePicker!
-    @IBOutlet private var creat: UIButton!
+    @IBOutlet private var creatButton: PrimaryButton!
     
     weak var delegate: NewItemViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Новая запись"
+        navigationItem.title = L10n.NewItem.title
+        deadlineLabel.text = L10n.NewItem.deadlineTitle
+        creatButton.setTitle(L10n.NewItem.createButton, for: .normal)
     }
     
     @IBAction private func didTap() {
-        delegate?.didSelect(self, data: NewItemData(title: "textView.text", description: "textView.text2", deadline: datePicker.date))
+        delegate?.didSelect(self, data: NewItemData(title: "Приготовить ужин", description: "textView.text2", deadline: datePicker.date))
         navigationController?.popViewController(animated: true)
     }
 }

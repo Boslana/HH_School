@@ -9,9 +9,16 @@ import UIKit
 
 struct MainDataItem {
     let title: String
+    let deadlineDate: Date
+    var deadlineString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy 'в' HH:mm"
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        return "Дедлайн: \(dateFormatter.string(from: deadlineDate))"
+    }
 }
 
-final class MainViewController:  ParentViewController {
+final class MainViewController: ParentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,11 +43,11 @@ final class MainViewController:  ParentViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         switch segue.destination {
+            
         case let destination as EmptyViewController:
-            destination.state = .empty
+            destination.state = .empty   // .empty .error(.noConnection)
             destination.action = { [weak self] in
-                
-            self?.performSegue(withIdentifier: "new-item", sender: nil)
+                self?.performSegue(withIdentifier: "new-item", sender: nil)
             }
             
         case let destination as NewItemViewController:
@@ -63,7 +70,7 @@ final class MainViewController:  ParentViewController {
         }
     }
 }
-    
+
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         data.count
@@ -82,8 +89,7 @@ extension MainViewController: UICollectionViewDelegate {}
 
 extension MainViewController: NewItemViewControllerDelegate {
     func didSelect(_ vc: NewItemViewController, data: NewItemData) {
-        self.data.append(.init(title: data.title))
-  //      self.data = [.init(title: data.title)]
+        self.data.append(.init(title: data.title, deadlineDate: data.deadline))
         reloadData()
     }
 }

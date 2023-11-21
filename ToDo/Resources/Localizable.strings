@@ -12,8 +12,15 @@
 
 "main.title" = "Cписок дел";
 "main.profile-button" = "Профиль";
-"main.empty-lable" = "Пока здесь нет ни одной записи.\nСоздайте новую!";
-"main.empty-button" = "Новая запись";
+"main.empty-label" = "Пока здесь нет ни одной записи.\nСоздайте новую!";
+"main.no-connection-label" = "Нет соединения";
+"main.default-error-label" = "Что-то пошло не так";
+"main.button" = "Новая запись";
+"main.refresh-button" = "Обновить";
+
+"new-item.title" = "Новая запись";
+"new-item.create-button" = "Cоздать";
+"new-item.deadline-title" = "Дедлайн";
 
 "validation.empty-text-field" = "Поле должно быть заполнено";
 "validation.email-text-field" = "Введите корректный email";

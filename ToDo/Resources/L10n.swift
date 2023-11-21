@@ -20,8 +20,19 @@ enum L10n {
     enum Main {
         static let title = NSLocalizedString("main.title", comment: "")
         static let profileButton = NSLocalizedString("main.profile-button", comment: "")
-        static let emptyLable = NSLocalizedString("main.empty-lable", comment: "")
-        static let emptyButton = NSLocalizedString("main.empty-button", comment: "")
+        static let emptyLabel = NSLocalizedString("main.empty-label", comment: "")
+        static let button = NSLocalizedString("main.button", comment: "")
+        static let noConnectionLabel = NSLocalizedString("main.no-connection-label", comment: "")
+        static let defaultErrorLabel = NSLocalizedString("main.default-error-label", comment: "")
+        static let refreshButton = NSLocalizedString("main.refresh-button", comment: "")
+        
+        
+    }
+    
+    enum NewItem {
+        static let title = NSLocalizedString("new-item.title", comment: "")
+        static let deadlineTitle = NSLocalizedString("new-item.deadline-title", comment: "")
+        static let createButton = NSLocalizedString("new-item.create-button", comment: "")
     }
     
     enum Validation {
