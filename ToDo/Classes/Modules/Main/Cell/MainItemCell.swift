@@ -13,7 +13,7 @@ final class MainItemCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         updateColor()
-        setupradioButtonView()
+        setupRadioButtonView()
         setupAppearance()
     }
     
@@ -51,7 +51,7 @@ final class MainItemCell: UICollectionViewCell {
         checkmarkImageView.isHidden = !isSelected
     }
     
-    private func setupradioButtonView() {
+    private func setupRadioButtonView() {
         radioButtonView.layer.cornerRadius = radioButtonView.frame.height / 2
         radioButtonView.clipsToBounds = true
     }

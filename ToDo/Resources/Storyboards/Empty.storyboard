@@ -70,7 +70,7 @@
                         <outlet property="emptyLabel" destination="FHC-Kh-qNY" id="bLP-cy-wb8"/>
                         <outlet property="firstSV" destination="cWv-V9-hOf" id="Emm-L3-fbm"/>
                         <outlet property="lastSV" destination="SAH-G4-851" id="kTT-KQ-3K3"/>
-                        <outlet property="secondVC" destination="XdH-fq-huQ" id="4Uf-gx-w5b"/>
+                        <outlet property="secondSV" destination="XdH-fq-huQ" id="2ma-ak-dfs"/>
                         <outlet property="thirdSV" destination="Owa-Ug-Jvx" id="AaP-7N-YUg"/>
                     </connections>
                 </viewController>

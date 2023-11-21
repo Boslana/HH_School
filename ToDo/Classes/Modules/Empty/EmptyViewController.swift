@@ -26,7 +26,7 @@ final class EmptyViewController: ParentViewController {
     }
     
     @IBOutlet private var firstSV: UIStackView!
-    @IBOutlet private var secondVC: UIStackView!
+    @IBOutlet private var secondSV: UIStackView!
     @IBOutlet private var thirdSV: UIStackView!
     @IBOutlet private var lastSV: UIStackView!
     
@@ -41,40 +41,44 @@ final class EmptyViewController: ParentViewController {
     private func updateState() {
         switch state {
         case .empty:
+            emptyButtonTrailingAnchor.isActive = true
+            emptyButtonLeadingAnchor.isActive = true
+            emptyButtonTopAnchor.isActive = false
+            
+            firstSV.alignment = .fill
+            secondSV.alignment = .fill
+            lastSV.alignment = .fill
+            lastSV.spacing = 16
+            
             emptyImageView.image = UIImage.Main.empty
             emptyLabel.text = L10n.Main.emptyLabel
             emptyLabel.font = .boldSystemFont(ofSize: 18)
             emptyButton.setTitle(L10n.Main.button, for: .normal)
-            emptyButtonTrailingAnchor.isActive = true
-            emptyButtonLeadingAnchor.isActive = true
-            firstSV.alignment = .fill
-            secondVC.alignment = .fill
-            lastSV.alignment = .fill
-            lastSV.spacing = 16
+            
         case let .error(error):
+            emptyButtonTrailingAnchor.isActive = false
+            emptyButtonLeadingAnchor.isActive = false
+            emptyButtonTopAnchor.isActive = true
+            
             switch error {
             case .noConnection:
                 emptyImageView.image = UIImage.Main.noConnection
                 emptyLabel.text = L10n.Main.noConnectionLabel
-                emptyButton.setTitle(L10n.Main.refreshButton, for: .normal)
             case .otherError:
                 emptyImageView.image = UIImage.Main.defaultError
                 emptyLabel.text = L10n.Main.defaultErrorLabel
-                emptyButton.setTitle(L10n.Main.refreshButton, for: .normal)
             }
             
             emptyLabel.font = .boldSystemFont(ofSize: 18)
             emptyButton.setup(mode: .small)
+            emptyButton.setTitle(L10n.Main.refreshButton, for: .normal)
             
-            emptyButtonTopAnchor.isActive = true
             firstSV.alignment = .center
-            secondVC.alignment = .center
+            secondSV.alignment = .center
             lastSV.alignment = .center
             lastSV.spacing = 16
-            emptyButtonTrailingAnchor.isActive = false
-            emptyButtonLeadingAnchor.isActive = false
-            emptyButtonTopAnchor.isActive = true
         }
+        view.layoutIfNeeded()
     }
     
     @IBAction private func didTapEmptyButton() {
