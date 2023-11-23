@@ -52,8 +52,9 @@ final class EmptyViewController: ParentViewController {
             
             emptyImageView.image = UIImage.Main.empty
             emptyLabel.text = L10n.Main.emptyLabel
-            emptyLabel.font = .boldSystemFont(ofSize: 18)
+            emptyLabel.font = .systemFont(ofSize: 18, weight: .semibold)
             emptyButton.setTitle(L10n.Main.button, for: .normal)
+            emptyButton.setup(mode: .large)
             
         case let .error(error):
             emptyButtonTrailingAnchor.isActive = false
@@ -69,7 +70,7 @@ final class EmptyViewController: ParentViewController {
                 emptyLabel.text = L10n.Main.defaultErrorLabel
             }
             
-            emptyLabel.font = .boldSystemFont(ofSize: 18)
+            emptyLabel.font = .systemFont(ofSize: 18, weight: .semibold)
             emptyButton.setup(mode: .small)
             emptyButton.setTitle(L10n.Main.refreshButton, for: .normal)
             

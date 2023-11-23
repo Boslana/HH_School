@@ -22,7 +22,7 @@ final class NewItemViewController: ParentViewController {
     @IBOutlet private var descriptionView: UIView!
     @IBOutlet private var deadlineLabel: UILabel!
     @IBOutlet private var datePicker: UIDatePicker!
-    @IBOutlet private var creatButton: PrimaryButton!
+    @IBOutlet private var createButton: PrimaryButton!
     
     weak var delegate: NewItemViewControllerDelegate?
     
@@ -31,7 +31,7 @@ final class NewItemViewController: ParentViewController {
         
         navigationItem.title = L10n.NewItem.title
         deadlineLabel.text = L10n.NewItem.deadlineTitle
-        creatButton.setTitle(L10n.NewItem.createButton, for: .normal)
+        createButton.setTitle(L10n.NewItem.createButton, for: .normal)
     }
     
     @IBAction private func didTap() {

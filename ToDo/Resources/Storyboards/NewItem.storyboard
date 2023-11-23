@@ -118,7 +118,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="creatButton" destination="NCQ-Go-nl1" id="q1m-wI-jGP"/>
+                        <outlet property="createButton" destination="NCQ-Go-nl1" id="lxE-gw-w87"/>
                         <outlet property="datePicker" destination="heU-CK-i8S" id="yI7-l4-WgC"/>
                         <outlet property="deadlineLabel" destination="u9k-s9-EmB" id="lwB-WN-3bK"/>
                         <outlet property="descriptionView" destination="ETp-qE-5d4" id="r1w-PI-kTE"/>

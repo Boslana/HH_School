@@ -61,6 +61,7 @@ final class MainItemCell: UICollectionViewCell {
         self.layer.masksToBounds = true
         
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        titleLabel.textColor = UIColor.Color.black
         deadlineLabel.font = .systemFont(ofSize: 14)
         backgroundColor = UIColor.Color.ItemCell.backgraund
     }

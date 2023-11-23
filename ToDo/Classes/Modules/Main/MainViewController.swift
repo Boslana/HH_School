@@ -12,7 +12,7 @@ struct MainDataItem {
     let deadlineDate: Date
     var deadlineString: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM yyyy 'в' HH:mm"
+        dateFormatter.dateFormat = L10n.Main.dateFormat
         dateFormatter.locale = Locale(identifier: "ru_RU")
         return "Дедлайн: \(dateFormatter.string(from: deadlineDate))"
     }
@@ -28,10 +28,12 @@ final class MainViewController: ParentViewController {
         
         collectionView.register(UINib(nibName: "MainItemCell", bundle: nil), forCellWithReuseIdentifier: MainItemCell.reuseID)
         collectionView.allowsMultipleSelection = true
+        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(93))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
             let section = NSCollectionLayoutSection(group: group)
             return section

@@ -17,6 +17,7 @@
 "main.default-error-label" = "Что-то пошло не так";
 "main.button" = "Новая запись";
 "main.refresh-button" = "Обновить";
+"main.item-cell-date-format" = "dd MMMM yyyy 'в' HH:mm";
 
 "new-item.title" = "Новая запись";
 "new-item.create-button" = "Cоздать";
