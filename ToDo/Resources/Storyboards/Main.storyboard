@@ -25,25 +25,26 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <containerView key="backgroundView" opaque="NO" contentMode="scaleToFill" id="0pX-dS-rWo">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="715"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    <connections>
-                                        <segue destination="FCM-gh-hcR" kind="embed" id="It7-jS-SNW"/>
-                                    </connections>
-                                </containerView>
                                 <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="QNK-Md-ZzL"/>
                                 </connections>
                             </collectionView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pX-dS-rWo">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <connections>
+                                    <segue destination="FCM-gh-hcR" kind="embed" id="It7-jS-SNW"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="leading" secondItem="ODK-cO-qrS" secondAttribute="leading" id="9zg-eW-Xyy"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ODK-cO-qrS" secondAttribute="trailing" id="BpI-sC-fvQ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="0pX-dS-rWo" secondAttribute="bottom" id="9or-oY-8oO"/>
                             <constraint firstItem="ODK-cO-qrS" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="JVB-53-hhP"/>
+                            <constraint firstItem="0pX-dS-rWo" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Pga-Mj-kNV"/>
+                            <constraint firstItem="0pX-dS-rWo" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="VF0-dX-FGO"/>
+                            <constraint firstItem="0pX-dS-rWo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="d0W-i4-K5V"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ODK-cO-qrS" secondAttribute="bottom" id="jM0-oY-cTs"/>
                         </constraints>
                     </view>
