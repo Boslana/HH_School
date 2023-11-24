@@ -68,8 +68,9 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="heU-CK-i8S">
-                                        <rect key="frame" x="9" y="261" width="375" height="346"/>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="heU-CK-i8S">
+                                        <rect key="frame" x="9" y="261" width="375" height="388"/>
+                                        <locale key="locale" localeIdentifier="ru"/>
                                     </datePicker>
                                 </subviews>
                                 <constraints>
@@ -94,7 +95,7 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="zOM-Lv-eVd"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="51V-IG-d4W"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCQ-Go-nl1">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCQ-Go-nl1" customClass="PrimaryButton" customModule="ToDo" customModuleProvider="target">
                                 <rect key="frame" x="16" y="767.66666666666663" width="361" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
@@ -117,11 +118,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="creat" destination="NCQ-Go-nl1" id="WsL-f3-M4T"/>
-                        <outlet property="datePicker" destination="heU-CK-i8S" id="aot-DA-l1w"/>
-                        <outlet property="deadline" destination="u9k-s9-EmB" id="OZe-qk-oVb"/>
-                        <outlet property="descriptionLabel" destination="ETp-qE-5d4" id="jK0-oA-kA9"/>
-                        <outlet property="whatToDoLable" destination="RiL-vy-otw" id="Bnm-JZ-7KJ"/>
+                        <outlet property="createButton" destination="NCQ-Go-nl1" id="lxE-gw-w87"/>
+                        <outlet property="datePicker" destination="heU-CK-i8S" id="yI7-l4-WgC"/>
+                        <outlet property="deadlineLabel" destination="u9k-s9-EmB" id="lwB-WN-3bK"/>
+                        <outlet property="descriptionView" destination="ETp-qE-5d4" id="r1w-PI-kTE"/>
+                        <outlet property="whatToDoView" destination="RiL-vy-otw" id="Ouh-zC-Vj9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

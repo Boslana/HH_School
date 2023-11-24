@@ -28,7 +28,6 @@
                                 <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="QNK-Md-ZzL"/>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="iCY-K1-Dt3"/>
                                 </connections>
                             </collectionView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pX-dS-rWo">
@@ -47,8 +46,6 @@
                             <constraint firstItem="0pX-dS-rWo" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="VF0-dX-FGO"/>
                             <constraint firstItem="0pX-dS-rWo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="d0W-i4-K5V"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ODK-cO-qrS" secondAttribute="bottom" id="jM0-oY-cTs"/>
-                            <constraint firstItem="ODK-cO-qrS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="mtv-Kr-0Fr"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ODK-cO-qrS" secondAttribute="trailing" id="yqi-79-gRg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="940-iG-hWz"/>
@@ -70,7 +67,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNI-vr-8ts" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1753" y="116"/>
+            <point key="canvasLocation" x="1637" y="-61"/>
         </scene>
         <!--Empty-->
         <scene sceneID="NRQ-28-E70">
@@ -78,7 +75,7 @@
                 <viewControllerPlaceholder storyboardName="Empty" id="FCM-gh-hcR" userLabel="Empty" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bm0-YT-aUT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1683" y="-28"/>
+            <point key="canvasLocation" x="1625" y="5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4gs-SO-qP0">

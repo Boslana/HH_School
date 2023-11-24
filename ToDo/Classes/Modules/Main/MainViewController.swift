@@ -9,9 +9,13 @@ import UIKit
 
 struct MainDataItem {
     let title: String
+    let deadlineDate: Date
+    var deadlineString: String {
+        "Дедлайн: \(DateFormatter.dateFormate.string(from: deadlineDate))"
+    }
 }
 
-final class MainViewController:  ParentViewController {
+final class MainViewController: ParentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,10 +25,12 @@ final class MainViewController:  ParentViewController {
         
         collectionView.register(UINib(nibName: "MainItemCell", bundle: nil), forCellWithReuseIdentifier: MainItemCell.reuseID)
         collectionView.allowsMultipleSelection = true
+        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(93))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
             let section = NSCollectionLayoutSection(group: group)
             return section
@@ -36,11 +42,11 @@ final class MainViewController:  ParentViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         switch segue.destination {
+            
         case let destination as EmptyViewController:
             destination.state = .empty
             destination.action = { [weak self] in
-                
-            self?.performSegue(withIdentifier: "new-item", sender: nil)
+                self?.performSegue(withIdentifier: "new-item", sender: nil)
             }
             
         case let destination as NewItemViewController:
@@ -63,7 +69,7 @@ final class MainViewController:  ParentViewController {
         }
     }
 }
-    
+
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         data.count
@@ -82,8 +88,7 @@ extension MainViewController: UICollectionViewDelegate {}
 
 extension MainViewController: NewItemViewControllerDelegate {
     func didSelect(_ vc: NewItemViewController, data: NewItemData) {
-        self.data.append(.init(title: data.title))
-  //      self.data = [.init(title: data.title)]
+        self.data.append(.init(title: data.title, deadlineDate: data.deadline))
         reloadData()
     }
 }
