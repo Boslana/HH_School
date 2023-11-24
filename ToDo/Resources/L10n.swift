@@ -26,8 +26,6 @@ enum L10n {
         static let defaultErrorLabel = NSLocalizedString("main.default-error-label", comment: "")
         static let refreshButton = NSLocalizedString("main.refresh-button", comment: "")
         static let dateFormat = NSLocalizedString("main.item-cell-date-format", comment: "")
-        
-        
     }
     
     enum NewItem {

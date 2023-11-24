@@ -11,10 +11,7 @@ struct MainDataItem {
     let title: String
     let deadlineDate: Date
     var deadlineString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = L10n.Main.dateFormat
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        return "Дедлайн: \(dateFormatter.string(from: deadlineDate))"
+        "Дедлайн: \(DateFormatter.dateFormate.string(from: deadlineDate))"
     }
 }
 
@@ -47,7 +44,7 @@ final class MainViewController: ParentViewController {
         switch segue.destination {
             
         case let destination as EmptyViewController:
-            destination.state = .empty   // .empty .error(.noConnection)
+            destination.state = .empty
             destination.action = { [weak self] in
                 self?.performSegue(withIdentifier: "new-item", sender: nil)
             }

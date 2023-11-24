@@ -32,6 +32,8 @@ final class NewItemViewController: ParentViewController {
         navigationItem.title = L10n.NewItem.title
         deadlineLabel.text = L10n.NewItem.deadlineTitle
         createButton.setTitle(L10n.NewItem.createButton, for: .normal)
+        
+        addTapToHideKeyboardGesture()
     }
     
     @IBAction private func didTap() {

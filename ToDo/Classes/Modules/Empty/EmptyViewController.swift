@@ -34,17 +34,9 @@ final class EmptyViewController: ParentViewController {
     @IBOutlet private var emptyLabel: UILabel!
     @IBOutlet private var emptyButton: PrimaryButton!
     
-    private lazy var emptyButtonTrailingAnchor = emptyButton.trailingAnchor.constraint(equalTo: firstSV.trailingAnchor, constant: -16)
-    private lazy var emptyButtonLeadingAnchor = emptyButton.leadingAnchor.constraint(equalTo: firstSV.leadingAnchor, constant: 16)
-    private lazy var emptyButtonTopAnchor = emptyButton.topAnchor.constraint(equalTo: thirdSV.bottomAnchor, constant: 16)
-    
     private func updateState() {
         switch state {
         case .empty:
-            emptyButtonTrailingAnchor.isActive = true
-            emptyButtonLeadingAnchor.isActive = true
-            emptyButtonTopAnchor.isActive = false
-            
             firstSV.alignment = .fill
             secondSV.alignment = .fill
             lastSV.alignment = .fill
@@ -57,10 +49,6 @@ final class EmptyViewController: ParentViewController {
             emptyButton.setup(mode: .large)
             
         case let .error(error):
-            emptyButtonTrailingAnchor.isActive = false
-            emptyButtonLeadingAnchor.isActive = false
-            emptyButtonTopAnchor.isActive = true
-            
             switch error {
             case .noConnection:
                 emptyImageView.image = UIImage.Main.noConnection
@@ -87,7 +75,7 @@ final class EmptyViewController: ParentViewController {
         case .empty:
             action?()
         case .error(.noConnection), .error(.otherError):
-            navigationController?.popToRootViewController(animated: true)
+            action?()
         }
     }
 }

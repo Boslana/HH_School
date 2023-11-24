@@ -50,13 +50,13 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lN-uZ-R00">
-                                <rect key="frame" x="16" y="56" width="320" height="70"/>
+                                <rect key="frame" x="16" y="56" width="320" height="68"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
+                        <edgeInsets key="layoutMargins" top="16" left="16" bottom="18" right="16"/>
                     </stackView>
                 </subviews>
                 <constraints>

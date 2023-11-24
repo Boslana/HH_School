@@ -33,11 +33,7 @@ final class MainItemCell: UICollectionViewCell {
         titleLabel.text = item.title
         deadlineLabel.text = item.deadlineString
         
-        if Date() > item.deadlineDate {
-            deadlineLabel.textColor = UIColor.Color.red
-        } else {
-            deadlineLabel.textColor = UIColor.Color.black
-        }
+        deadlineLabel.textColor = Date() > item.deadlineDate ? UIColor.Color.red : UIColor.Color.black
     }
     
     @IBOutlet private var titleLabel: UILabel!
@@ -63,6 +59,7 @@ final class MainItemCell: UICollectionViewCell {
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = UIColor.Color.black
         deadlineLabel.font = .systemFont(ofSize: 14)
-        backgroundColor = UIColor.Color.ItemCell.backgraund
+        deadlineLabel.numberOfLines = 2
+        backgroundColor = UIColor.Color.ItemCell.background
     }
 }
