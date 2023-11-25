@@ -41,11 +41,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="0pX-dS-rWo" secondAttribute="bottom" id="9or-oY-8oO"/>
+                            <constraint firstItem="ODK-cO-qrS" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="BDr-be-PQT"/>
                             <constraint firstItem="ODK-cO-qrS" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="JVB-53-hhP"/>
                             <constraint firstItem="0pX-dS-rWo" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Pga-Mj-kNV"/>
                             <constraint firstItem="0pX-dS-rWo" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="VF0-dX-FGO"/>
                             <constraint firstItem="0pX-dS-rWo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="d0W-i4-K5V"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ODK-cO-qrS" secondAttribute="bottom" id="jM0-oY-cTs"/>
+                            <constraint firstItem="ODK-cO-qrS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ysf-4j-RnG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="940-iG-hWz"/>
