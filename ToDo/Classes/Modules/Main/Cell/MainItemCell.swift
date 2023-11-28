@@ -34,6 +34,8 @@ final class MainItemCell: UICollectionViewCell {
         deadlineLabel.text = item.deadlineString
         
         deadlineLabel.textColor = Date() > item.deadlineDate ? UIColor.Color.red : UIColor.Color.black
+        
+        checkmarkImageView.isHidden = !item.isCompleted
     }
     
     @IBOutlet private var titleLabel: UILabel!

@@ -18,6 +18,8 @@
 "main.button" = "Новая запись";
 "main.refresh-button" = "Обновить";
 "main.item-cell-date-format" = "dd MMMM yyyy 'в' HH:mm";
+"main.what-to-do-view-title" = "Что нужно сделать";
+"main.description-view-title" = "Описание";
 
 "new-item.title" = "Новая запись";
 "new-item.create-button" = "Cоздать";
@@ -27,3 +29,7 @@
 "validation.email-text-field" = "Введите корректный email";
 "validation.symbols-count-user-name-text-field" = "Имя должно быть до 70 символов длиной";
 "validation.symbols-count-password-text-field" = "Пароль должен быть до 256 символов";
+
+"network-error.wrong-status-code" = "Упс! Что-то пошло не так. Попробуйте обновить страницу или зайдите позже.";
+"network-error.wrong-response" = "Ой! Мы не смогли обработать полученные данные. Попробуйте перезапустить приложение.";
+"network-error.wrong-url" = "Невозможно установить соединение. Проверьте ваш запрос и повторите попытку.";

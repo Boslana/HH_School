@@ -16,13 +16,13 @@ final class TextInput: UIView {
     }()
     
     private lazy var errorLabel: UILabel = {
-        let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        lable.isHidden = true
-        lable.textColor = UIColor.Color.error
-        lable.font = UIFont.systemFont(ofSize: 12)
-        lable.numberOfLines = 2
-        return lable
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        label.textColor = UIColor.Color.error
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.numberOfLines = 2
+        return label
     }()
     
     override init(frame: CGRect) {

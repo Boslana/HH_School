@@ -52,6 +52,10 @@ final class TextViewInput: UIView, UITextViewDelegate {
         return textView
     }()
     
+    var textTextView: String {
+            return textView.text
+        }
+    
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
