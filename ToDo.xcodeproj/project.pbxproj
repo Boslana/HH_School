@@ -230,21 +230,13 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		93A2E9342B1346B500305B56 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				93A2E9352B13479700305B56 /* ToDoResponseBody.swift */,
-				93A2E9402B13B41600305B56 /* ToDoRequestBody.swift */,
-				93A2E93A2B13B03E00305B56 /* SignInRequestBody.swift */,
-				93A2E93C2B13B0E000305B56 /* SignUpRequestBody.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		93A2E9372B13A25400305B56 /* Request */ = {
 			isa = PBXGroup;
 			children = (
 				93A2E9382B13A27C00305B56 /* EmptyRequest.swift */,
+				93A2E93C2B13B0E000305B56 /* SignUpRequestBody.swift */,
+				93A2E93A2B13B03E00305B56 /* SignInRequestBody.swift */,
+				93A2E9402B13B41600305B56 /* ToDoRequestBody.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -260,7 +252,6 @@
 		93A5E9572B0FA26200B0BAB2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				93A2E9342B1346B500305B56 /* Models */,
 				93A5E95B2B0FA6A300B0BAB2 /* Responses */,
 				93A2E9372B13A25400305B56 /* Request */,
 				93A5E9582B0FA27500B0BAB2 /* NetworkManager.swift */,
@@ -272,9 +263,10 @@
 		93A5E95B2B0FA6A300B0BAB2 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				93A5E95C2B0FA6B700B0BAB2 /* EmptyResponse.swift */,
 				93A5E95E2B0FA6F300B0BAB2 /* AuthResponse.swift */,
 				93A5E9602B0FA72B00B0BAB2 /* DataResponse.swift */,
+				93A5E95C2B0FA6B700B0BAB2 /* EmptyResponse.swift */,
+				93A2E9352B13479700305B56 /* ToDoResponseBody.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
