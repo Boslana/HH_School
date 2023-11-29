@@ -121,12 +121,12 @@ final class NetworkManager {
             throw NetworkError.wrongResponse
         }
         let headers = ["Authorization": "Bearer \(accessToken)"]
-        let _: EmptyResponse = try await request(
+        let markResponse: EmptyResponse = try await request(
             urlStr: "\(PlistFiles.cfApiBaseUrl)/api/todos/mark/\(todoId)",
             method: "PUT",
             requestData: EmptyRequest(),
             headers: headers
         )
-        return EmptyResponse()
+        return markResponse
     }
 }
