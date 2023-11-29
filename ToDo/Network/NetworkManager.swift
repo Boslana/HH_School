@@ -47,40 +47,22 @@ final class NetworkManager {
         headers?.forEach { request.setValue($1, forHTTPHeaderField: $0) }
         
         let (data, response) = try await URLSession.shared.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse else {
+        if let httpResponse = response as? HTTPURLResponse {
+            let response = String(data: data, encoding: .utf8) ?? ""
+            log.debug("\(response)")
+            
+            switch httpResponse.statusCode {
+            case 200..<400:
+                if data.isEmpty, let emptyData = "{}".data(using: .utf8) {
+                    return try decoder.decode(Response.self, from: emptyData)
+                }
+                return try decoder.decode(DataResponse<Response>.self, from: data).data
+            default:
+                throw NetworkError.wrongStatusCode
+            }
+        } else {
             throw NetworkError.wrongResponse
         }
-        
-        guard (200..<400).contains(httpResponse.statusCode) else {
-            throw NetworkError.wrongStatusCode
-        }
-        
-        return try decoder.decode(DataResponse<Response>.self, from: data).data
-    }
-    
-    private func requestForStatusCode(
-        urlStr: String,
-        method: String,
-        headers: [String: String]? = nil
-    ) async throws {
-        guard let url = URL(string: urlStr) else {
-            throw NetworkError.wrongURL
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = method
-        headers?.forEach { request.setValue($1, forHTTPHeaderField: $0) }
-        
-        let (_, response) = try await URLSession.shared.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw NetworkError.wrongResponse
-        }
-        
-        guard (200..<400).contains(httpResponse.statusCode) else {
-            throw NetworkError.wrongStatusCode
-        }
-        
-        return
     }
     
     func signIn(email: String, password: String) async throws -> AuthResponse {
@@ -134,15 +116,17 @@ final class NetworkManager {
         return newTodoResponse
     }
     
-    func markCompletion(todoId: String) async throws {
+    func markCompletion(todoId: String) async throws -> EmptyResponse {
         guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else {
             throw NetworkError.wrongResponse
         }
         let headers = ["Authorization": "Bearer \(accessToken)"]
-        try await requestForStatusCode(
+        let _: EmptyResponse = try await request(
             urlStr: "\(PlistFiles.cfApiBaseUrl)/api/todos/mark/\(todoId)",
             method: "PUT",
+            requestData: EmptyRequest(),
             headers: headers
         )
+        return EmptyResponse()
     }
 }
