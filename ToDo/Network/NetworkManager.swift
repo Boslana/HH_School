@@ -39,9 +39,10 @@ final class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = method
         
-        if let requestData = requestData, method != "GET" {
+        if let requestData, method != "GET" {
             request.httpBody = try encoder.encode(requestData)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
         }
         
         headers?.forEach { request.setValue($1, forHTTPHeaderField: $0) }
@@ -95,18 +96,18 @@ final class NetworkManager {
         let todosResponse: [TodoItemResponseBody] = try await request(
             urlStr: "\(PlistFiles.cfApiBaseUrl)/api/todos",
             method: "GET",
-            requestData: EmptyRequest(),
+            requestData: Optional<EmptyRequest>.none,
             headers: headers
         )
         return todosResponse
     }
     
-    func createNewTodo(category: String, title: String, description: String, date: Date, coordinate: CoordinateRequest ) async throws -> TodoItemResponseBody {
+    func createNewTodo(title: String, description: String, date: Date) async throws -> TodoItemResponseBody {
         guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else {
             throw NetworkError.wrongResponse
         }
         let headers = ["Authorization": "Bearer \(accessToken)"]
-        let newItemData = NewTodoItemRequestBody(category: category, title: title, description: description, date: date, coordinate: coordinate)
+        let newItemData = NewTodoItemRequestBody(title: title, description: description, date: date)
         let newTodoResponse: TodoItemResponseBody = try await request(
             urlStr: "\(PlistFiles.cfApiBaseUrl)/api/todos",
             method: "POST",
@@ -124,7 +125,7 @@ final class NetworkManager {
         let markResponse: EmptyResponse = try await request(
             urlStr: "\(PlistFiles.cfApiBaseUrl)/api/todos/mark/\(todoId)",
             method: "PUT",
-            requestData: EmptyRequest(),
+            requestData: Optional<EmptyRequest>.none,
             headers: headers
         )
         return markResponse

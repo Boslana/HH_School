@@ -75,13 +75,11 @@ final class NewItemViewController: ParentViewController {
     @IBAction private func didTapCreateButton() {
         Task {
             do {
-                _ = try await NetworkManager.shared.createNewTodo(category: "qwerty", title: whatToDoView.textTextView , description: descriptionView.textTextView, date: datePicker.date, coordinate: CoordinateRequest(longitude: "0",latitude: "0") )
+                _ = try await NetworkManager.shared.createNewTodo(title: whatToDoView.textTextView , description: descriptionView.textTextView, date: datePicker.date)
                 delegate?.didSelect(self)
                 navigationController?.popViewController(animated: true)
             } catch {
-                let alertVC = UIAlertController(title: "Ошибка!", message: error.localizedDescription, preferredStyle: .alert)
-                alertVC.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
-                present(alertVC,animated: true)
+                showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
             }
         }
     }

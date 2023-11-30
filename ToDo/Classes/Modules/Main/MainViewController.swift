@@ -27,9 +27,6 @@ final class MainViewController: ParentViewController {
         
         setupUI()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
         Task {
             await loadToDos()
         }
@@ -85,17 +82,18 @@ final class MainViewController: ParentViewController {
         } else {
             emptyVC?.state = .empty
             emptyVC?.action = { [weak self] in
-                self?.performSegue(withIdentifier: "new-item", sender: nil)
+                self?.navigateToNewItem()
             }
             emptyView.isHidden = !data.isEmpty
             if !data.isEmpty {
                 collectionView.reloadData()
+                //collectionView.selectItem(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: [])
             }
         }
     }
     
     @IBAction func didTapCreateButton(_ sender: PrimaryButton) {
-        performSegue(withIdentifier: "new-item", sender: nil)
+        navigateToNewItem()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -111,8 +109,12 @@ final class MainViewController: ParentViewController {
         }
     }
     
+    private func navigateToNewItem() {
+        performSegue(withIdentifier: "new-item", sender: nil)
+    }
+    
     @IBOutlet private var collectionView: UICollectionView!
-    @IBOutlet var createButton: PrimaryButton!
+    @IBOutlet private var createButton: PrimaryButton!
     @IBOutlet private var emptyView: UIView!
 }
 
@@ -137,11 +139,12 @@ extension MainViewController: UICollectionViewDelegate {
             do {
                 _ = try await NetworkManager.shared.markCompletion(todoId: selectedItem.id)
                 await loadToDos()
+                //                selectedItem.isCompleted.toggle()
+                //                collectionView.reloadData()
+                //                collectionView.reloadItems(at: [indexPath]) ??
             } catch {
                 DispatchQueue.main.async {
-                    let alertVC = UIAlertController(title: "Ошибка!", message: error.localizedDescription, preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
-                    self.present(alertVC, animated: true)
+                    self.showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
                 }
             }
         }

@@ -47,5 +47,8 @@ enum L10n {
         static let wrongStatusCodeDescription = NSLocalizedString("network-error.wrong-status-code", comment: "")
         static let wrongResponseDescription = NSLocalizedString("network-error.wrong-response", comment: "")
         static let wrongURLDescription = NSLocalizedString("network-error.wrong-url", comment: "")
+        static let alertTitle = NSLocalizedString("network-error.alert-title", comment: "")
+        static let alertButton = NSLocalizedString("network-error.alert-button", comment: "")
+        
     }
 }

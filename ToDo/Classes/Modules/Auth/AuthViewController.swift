@@ -60,9 +60,7 @@ final class AuthViewController: ParentViewController {
                     let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
                     view.window?.rootViewController = vc
                 } catch {
-                    let alertVC = UIAlertController(title: "Ошибка!", message: error.localizedDescription, preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
-                    present(alertVC,animated: true)
+                    showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
                 }
             }
         }

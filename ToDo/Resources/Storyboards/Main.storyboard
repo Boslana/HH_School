@@ -28,6 +28,7 @@
                                 <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="QNK-Md-ZzL"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="XMz-eF-ZYr"/>
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7N-sC-dBz" customClass="PrimaryButton" customModule="ToDo" customModuleProvider="target">
