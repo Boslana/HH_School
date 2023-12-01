@@ -27,6 +27,12 @@
 		93812E712AF5399300A18BD2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93812E702AF5399300A18BD2 /* SignUpViewController.swift */; };
 		93971FBE2B11180D00432A47 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93971FBD2B11180D00432A47 /* DateFormatter.swift */; };
 		93971FC22B1122D300432A47 /* PlistFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93971FC12B1122D300432A47 /* PlistFiles.swift */; };
+		93A2E9362B13479700305B56 /* ToDoResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A2E9352B13479700305B56 /* ToDoResponseBody.swift */; };
+		93A2E9392B13A27C00305B56 /* EmptyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A2E9382B13A27C00305B56 /* EmptyRequest.swift */; };
+		93A2E93B2B13B03E00305B56 /* SignInRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A2E93A2B13B03E00305B56 /* SignInRequestBody.swift */; };
+		93A2E93D2B13B0E000305B56 /* SignUpRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A2E93C2B13B0E000305B56 /* SignUpRequestBody.swift */; };
+		93A2E93F2B13B18800305B56 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A2E93E2B13B18800305B56 /* NetworkError.swift */; };
+		93A2E9412B13B41600305B56 /* ToDoRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A2E9402B13B41600305B56 /* ToDoRequestBody.swift */; };
 		93A2E9432B164F6300305B56 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93A2E9422B164F6300305B56 /* SplashScreen.storyboard */; };
 		93A2E9462B164F8200305B56 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A2E9452B164F8200305B56 /* SplashScreenViewController.swift */; };
 		93A2E9482B164FCB00305B56 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A2E9472B164FCB00305B56 /* UserManager.swift */; };
@@ -93,6 +99,12 @@
 		93812E702AF5399300A18BD2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		93971FBD2B11180D00432A47 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		93971FC12B1122D300432A47 /* PlistFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistFiles.swift; sourceTree = "<group>"; };
+		93A2E9352B13479700305B56 /* ToDoResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoResponseBody.swift; sourceTree = "<group>"; };
+		93A2E9382B13A27C00305B56 /* EmptyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRequest.swift; sourceTree = "<group>"; };
+		93A2E93A2B13B03E00305B56 /* SignInRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRequestBody.swift; sourceTree = "<group>"; };
+		93A2E93C2B13B0E000305B56 /* SignUpRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestBody.swift; sourceTree = "<group>"; };
+		93A2E93E2B13B18800305B56 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		93A2E9402B13B41600305B56 /* ToDoRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoRequestBody.swift; sourceTree = "<group>"; };
 		93A2E9422B164F6300305B56 /* SplashScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
 		93A2E9452B164F8200305B56 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		93A2E9472B164FCB00305B56 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -228,6 +240,15 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		93A2E9372B13A25400305B56 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				93A2E9382B13A27C00305B56 /* EmptyRequest.swift */,
+				93A2E93C2B13B0E000305B56 /* SignUpRequestBody.swift */,
+				93A2E93A2B13B03E00305B56 /* SignInRequestBody.swift */,
+				93A2E9402B13B41600305B56 /* ToDoRequestBody.swift */,
+			);
+			path = Request;
 		93A2E9442B164F6A00305B56 /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,7 +269,9 @@
 			isa = PBXGroup;
 			children = (
 				93A5E95B2B0FA6A300B0BAB2 /* Responses */,
+				93A2E9372B13A25400305B56 /* Request */,
 				93A5E9582B0FA27500B0BAB2 /* NetworkManager.swift */,
+				93A2E93E2B13B18800305B56 /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -256,9 +279,10 @@
 		93A5E95B2B0FA6A300B0BAB2 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				93A5E95C2B0FA6B700B0BAB2 /* EmptyResponse.swift */,
 				93A5E95E2B0FA6F300B0BAB2 /* AuthResponse.swift */,
 				93A5E9602B0FA72B00B0BAB2 /* DataResponse.swift */,
+				93A5E95C2B0FA6B700B0BAB2 /* EmptyResponse.swift */,
+				93A2E9352B13479700305B56 /* ToDoResponseBody.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -511,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93E0771B2AFD357A009478CA /* ValidationManager.swift in Sources */,
+				93A2E93B2B13B03E00305B56 /* SignInRequestBody.swift in Sources */,
 				93C272382AF16745008AEEAB /* L10n.swift in Sources */,
 				93564BE92AFF537200C3631D /* TextButton.swift in Sources */,
 				93A2E94F2B18E60900305B56 /* LoadingIndicatorImageView.swift in Sources */,
@@ -519,8 +544,10 @@
 				93CEFCB72B08A44C00D03833 /* TextViewInput.swift in Sources */,
 				93971FBE2B11180D00432A47 /* DateFormatter.swift in Sources */,
 				935FB9AD2AEAB8E1004A841F /* AuthViewController.swift in Sources */,
+				93A2E93F2B13B18800305B56 /* NetworkError.swift in Sources */,
 				93B02E362AF3F28600C8C6DA /* ParentViewController.swift in Sources */,
 				93B02E392AF3F36600C8C6DA /* TextField.swift in Sources */,
+				93A2E9362B13479700305B56 /* ToDoResponseBody.swift in Sources */,
 				93E077162AFD2BB5009478CA /* MainButton.swift in Sources */,
 				9317F5302B03DDD100B00A48 /* MainItemCell.swift in Sources */,
 				93812E712AF5399300A18BD2 /* SignUpViewController.swift in Sources */,
@@ -530,9 +557,12 @@
 				93A5E9562B0FA21900B0BAB2 /* OSLog.swift in Sources */,
 				93A2E9462B164F8200305B56 /* SplashScreenViewController.swift in Sources */,
 				93A5E95D2B0FA6B700B0BAB2 /* EmptyResponse.swift in Sources */,
+				93A2E9392B13A27C00305B56 /* EmptyRequest.swift in Sources */,
+				93A2E93D2B13B0E000305B56 /* SignUpRequestBody.swift in Sources */,
 				93A2E9482B164FCB00305B56 /* UserManager.swift in Sources */,
 				935FB9AB2AEAB8E1004A841F /* SceneDelegate.swift in Sources */,
 				9317F5332B06686E00B00A48 /* NewItemViewController.swift in Sources */,
+				93A2E9412B13B41600305B56 /* ToDoRequestBody.swift in Sources */,
 				93971FC22B1122D300432A47 /* PlistFiles.swift in Sources */,
 				93C2723C2AF1692B008AEEAB /* MainViewController.swift in Sources */,
 				9317F52B2B03DB6D00B00A48 /* EmptyViewController.swift in Sources */,
@@ -719,8 +749,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToDo/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -735,6 +767,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Handh.ToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -746,8 +779,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToDo/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -762,6 +797,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Handh.ToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

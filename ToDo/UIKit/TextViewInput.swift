@@ -56,6 +56,10 @@ final class TextViewInput: UIView, UITextViewDelegate {
         return textView
     }()
     
+    var textTextView: String? {
+        return textView.text
+    }
+    
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -76,8 +80,8 @@ final class TextViewInput: UIView, UITextViewDelegate {
     
     func hideError() {
         errorLabel.isHidden = true
-        bottomConstraint.isActive = true
         errorLabelTopConstraint.isActive = false
+        bottomConstraint.isActive = true
         invalidateIntrinsicContentSize()
     }
     
@@ -116,7 +120,7 @@ final class TextViewInput: UIView, UITextViewDelegate {
             textView.trailingAnchor.constraint(equalTo: trailingAnchor),
             textViewHeightConstraint,
             bottomConstraint,
-
+            
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             trailingAnchor.constraint(equalTo: errorLabel.trailingAnchor, constant: 8),
         ])
@@ -130,7 +134,7 @@ final class TextViewInput: UIView, UITextViewDelegate {
         
         if textViewHeightConstraint.constant != newHeight {
             textViewHeightConstraint.constant = newHeight
-                self.layoutIfNeeded()
+            self.layoutIfNeeded()
         }
         
         textView.isScrollEnabled = newHeight == 200

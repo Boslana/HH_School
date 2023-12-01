@@ -5,6 +5,7 @@
 //  Created by Светлана Полоротова on 03.11.2023.
 //
 
+import Combine
 import UIKit
 
 final class SignUpViewController: ParentViewController {
@@ -13,7 +14,7 @@ final class SignUpViewController: ParentViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = L10n.SignUp.title
-
+        
         userNameTextField.setup(placeholder: L10n.SignUp.userNameTextFieldPlaceholder, text: nil)
         emailTextField.setup(placeholder: L10n.SignUp.emailTextFieldPlaceholder, text: nil)
         passwordTextField.setup(placeholder: L10n.SignUp.passwordTextFieldPlaceholder, text: nil)
@@ -60,10 +61,18 @@ final class SignUpViewController: ParentViewController {
             isValid = false
         }
         
-        if isValid {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
-            view.window?.rootViewController = vc
+        if isValid, let name = userNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text {
+            Task {
+                do {
+                    let response = try await NetworkManager.shared.signUp(name: name , email: email , password: password)
+                    log.debug("\(response.accessToken)")
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
+                    view.window?.rootViewController = vc
+                } catch {
+                    showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
+                }
+            }
         }
     }
 }
