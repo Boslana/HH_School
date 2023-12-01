@@ -28,8 +28,8 @@ final class MainItemCell: UICollectionViewCell {
         
         deadlineLabel.textColor = Date() > item.deadlineDate ? UIColor.Color.red : UIColor.Color.black
         
-        radioButtonView.backgroundColor = item.isCompeted ? UIColor.Color.primary : UIColor.Color.ItemCell.radiobutton
-        checkmarkImageView.isHidden = !item.isCompeted
+        radioButtonView.backgroundColor = item.isCompleted ? UIColor.Color.primary : UIColor.Color.ItemCell.radiobutton
+        checkmarkImageView.isHidden = !item.isCompleted
     }
     
     @IBOutlet private var titleLabel: UILabel!

@@ -14,13 +14,18 @@ struct MainDataItem {
     var deadlineString: String {
         "\(L10n.Main.deadlineDescription) \(DateFormatter.dateFormate.string(from: deadlineDate))"
     }
-    let isCompeted: Bool = true
+    let isCompleted: Bool // = true
 }
 
 final class MainViewController: ParentViewController {
     private var data: [MainDataItem] = []
     private var error: Error?
-    private weak var emptyVC: EmptyViewController?
+    //    private weak var emptyVC: EmptyViewController?
+    private var selectedItem: MainDataItem?
+    
+    private var statefulView: StatefullView? {
+        return view as? StatefullView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +38,7 @@ final class MainViewController: ParentViewController {
     }
     
     private func setupUI() {
-        (view as? StatefullView)?.delegate = self
+        statefulView?.delegate = self
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = L10n.Main.title
@@ -69,25 +74,47 @@ final class MainViewController: ParentViewController {
         }
     }
     
+    //    private func reload() {
+    //        if let error = error {
+    //            statefulView?.state = .empty(error: error)
+    //            statefulView?.action =
+    //
+    //            emptyVC?.state = .error(customError)
+    //            emptyVC?.action = { [weak self] in
+    //                Task {
+    //                    await self?.loadToDos()
+    //                }
+    //            }
+    //            emptyView.isHidden = false
+    //        } else if data.isEmpty {
+    //            emptyVC?.state = .empty
+    //            emptyVC?.action = { [weak self] in
+    //                self?.navigateToNewItem()
+    //            }
+    //            emptyView.isHidden = false
+    //        } else {
+    //            emptyView.isHidden = true
+    //            collectionView.reloadData()
+    //        }
+    //    }
+    
     private func reload() {
+        guard let statefulView = view as? StatefullView else { return }
+        
         if let error = error {
-            let customError: EmptyViewController.Error = error is NetworkError ? .noConnection : .otherError
-            
-            emptyVC?.state = .error(customError)
-            emptyVC?.action = { [weak self] in
+            statefulView.state = .empty(error: error)
+            statefulView.emptyVC?.action = { [weak self] in
                 Task {
                     await self?.loadToDos()
                 }
             }
-            emptyView.isHidden = false
         } else if data.isEmpty {
-            emptyVC?.state = .empty
-            emptyVC?.action = { [weak self] in
+            statefulView.state = .empty()
+            statefulView.emptyVC?.action = { [weak self] in
                 self?.navigateToNewItem()
             }
-            emptyView.isHidden = false
         } else {
-            emptyView.isHidden = true
+            statefulView.state = .data
             collectionView.reloadData()
         }
     }
@@ -98,7 +125,6 @@ final class MainViewController: ParentViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
         switch segue.destination {
         case let destination as NewItemViewController:
             destination.delegate = self
@@ -116,9 +142,6 @@ final class MainViewController: ParentViewController {
     
     @IBOutlet private var collectionView: UICollectionView!
     @IBOutlet private var createButton: PrimaryButton!
-
-    private var data: [MainDataItem] = []
-    private var selectedItem: MainDataItem?
     
     private func reloadData() {
         (view as? StatefullView)?.state = .loading
@@ -147,10 +170,10 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         collectionView.deselectItem(at: indexPath, animated: true)
         selectedItem = data[indexPath.row]
-        performSegue(withIdentifier: "new-item", sender: nil)
+        navigateToNewItem()
     }
 }
 
@@ -166,7 +189,7 @@ extension MainViewController: StatefullViewDelegate {
     func statefullViewReloadData(_: StatefullView) {}
     
     func statefullViewDidTapEmptyButton(_: StatefullView) {
-        performSegue(withIdentifier: "new-item", sender: nil)
+        navigateToNewItem()
     }
     
     func statefullView(_: StatefullView, addChild controller: UIViewController) {

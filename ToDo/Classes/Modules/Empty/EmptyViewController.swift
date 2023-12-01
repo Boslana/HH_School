@@ -45,15 +45,6 @@ final class EmptyViewController: ParentViewController {
             emptyButton.setup(mode: .large)
             
         case let .error(error):
-//            switch error {
-//            case .noConnection:
-//                emptyImageView.image = UIImage.Main.noConnection
-//                emptyLabel.text = L10n.Main.noConnectionLabel
-//            case .otherError:
-//                emptyImageView.image = UIImage.Main.defaultError
-//                emptyLabel.text = L10n.Main.defaultErrorLabel
-//            }
-            
             emptyLabel.font = .systemFont(ofSize: 18, weight: .semibold)
             emptyButton.setup(mode: .small)
             emptyButton.setTitle(L10n.Main.refreshButton, for: .normal)
@@ -62,6 +53,14 @@ final class EmptyViewController: ParentViewController {
             secondSV.alignment = .center
             lastSV.alignment = .center
             lastSV.spacing = 16
+            
+            if (error as NSError).code == NSURLErrorNotConnectedToInternet {
+                emptyImageView.image = UIImage.Main.noConnection
+                emptyLabel.text = L10n.Main.noConnectionLabel
+            } else {
+                emptyImageView.image = UIImage.Main.defaultError
+                emptyLabel.text = L10n.Main.defaultErrorLabel
+            }
         }
         view.layoutIfNeeded()
     }
