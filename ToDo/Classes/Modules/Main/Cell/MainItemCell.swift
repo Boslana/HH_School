@@ -12,15 +12,8 @@ final class MainItemCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        updateColor()
         setupRadioButtonView()
         setupAppearance()
-    }
-    
-    override var isSelected: Bool {
-        didSet {
-            updateColor()
-        }
     }
     
     override var isHighlighted: Bool {
@@ -34,6 +27,9 @@ final class MainItemCell: UICollectionViewCell {
         deadlineLabel.text = item.deadlineString
         
         deadlineLabel.textColor = Date() > item.deadlineDate ? UIColor.Color.red : UIColor.Color.black
+        
+        radioButtonView.backgroundColor = item.isCompeted ? UIColor.Color.primary : UIColor.Color.ItemCell.radiobutton
+        checkmarkImageView.isHidden = !item.isCompeted
     }
     
     @IBOutlet private var titleLabel: UILabel!
@@ -41,11 +37,6 @@ final class MainItemCell: UICollectionViewCell {
     @IBOutlet private var iconView: UIImageView!
     @IBOutlet private var checkmarkImageView: UIImageView!
     @IBOutlet private var deadlineLabel: UILabel!
-    
-    private func updateColor() {
-        radioButtonView.backgroundColor = isSelected ? UIColor.Color.primary : UIColor.Color.ItemCell.radiobutton
-        checkmarkImageView.isHidden = !isSelected
-    }
     
     private func setupRadioButtonView() {
         radioButtonView.layer.cornerRadius = radioButtonView.frame.height / 2

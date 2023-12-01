@@ -18,13 +18,15 @@ protocol NewItemViewControllerDelegate: AnyObject {
 }
 
 final class NewItemViewController: ParentViewController {
-    @IBOutlet private var whatToDoView: UIView!
+    @IBOutlet private var whatToDoView: TextViewInput!
     @IBOutlet private var descriptionView: UIView!
     @IBOutlet private var deadlineLabel: UILabel!
     @IBOutlet private var datePicker: UIDatePicker!
     @IBOutlet private var createButton: PrimaryButton!
     
     weak var delegate: NewItemViewControllerDelegate?
+    
+    var selectedItem: MainDataItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,10 @@ final class NewItemViewController: ParentViewController {
         createButton.setTitle(L10n.NewItem.createButton, for: .normal)
         
         addTapToHideKeyboardGesture()
+        
+        if let selectedItem {
+            whatToDoView.set(text: selectedItem.title)
+        }
     }
     
     @IBAction private func didTap() {

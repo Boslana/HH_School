@@ -5,10 +5,6 @@ final class EmptyViewController: ParentViewController {
         case empty, error(Error)
     }
     
-    enum Error {
-        case noConnection, otherError
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateState()
@@ -49,14 +45,14 @@ final class EmptyViewController: ParentViewController {
             emptyButton.setup(mode: .large)
             
         case let .error(error):
-            switch error {
-            case .noConnection:
-                emptyImageView.image = UIImage.Main.noConnection
-                emptyLabel.text = L10n.Main.noConnectionLabel
-            case .otherError:
-                emptyImageView.image = UIImage.Main.defaultError
-                emptyLabel.text = L10n.Main.defaultErrorLabel
-            }
+//            switch error {
+//            case .noConnection:
+//                emptyImageView.image = UIImage.Main.noConnection
+//                emptyLabel.text = L10n.Main.noConnectionLabel
+//            case .otherError:
+//                emptyImageView.image = UIImage.Main.defaultError
+//                emptyLabel.text = L10n.Main.defaultErrorLabel
+//            }
             
             emptyLabel.font = .systemFont(ofSize: 18, weight: .semibold)
             emptyButton.setup(mode: .small)
@@ -71,11 +67,6 @@ final class EmptyViewController: ParentViewController {
     }
     
     @IBAction private func didTapEmptyButton() {
-        switch state {
-        case .empty:
-            action?()
-        case .error(.noConnection), .error(.otherError):
-            action?()
-        }
+        action?()
     }
 }
