@@ -34,6 +34,10 @@ final class TextViewInput: UIView, UITextViewDelegate {
         titleLabel.text = titleText
     }
     
+    func set(text: String?) {
+        textView.text = text
+    }
+    
     private lazy var textView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false

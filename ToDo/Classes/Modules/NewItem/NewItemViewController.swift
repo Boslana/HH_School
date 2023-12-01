@@ -20,6 +20,8 @@ protocol NewItemViewControllerDelegate: AnyObject {
 final class NewItemViewController: ParentViewController {
     weak var delegate: NewItemViewControllerDelegate?
     
+    var selectedItem: MainDataItem?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +59,10 @@ final class NewItemViewController: ParentViewController {
         datePicker.layer.masksToBounds = false
         
         addTapToHideKeyboardGesture()
+        
+        if let selectedItem {
+            whatToDoView.set(text: selectedItem.title)
+        }
     }
     
     private func setupDatePickerAppearance() {

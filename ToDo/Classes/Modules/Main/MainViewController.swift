@@ -14,7 +14,7 @@ struct MainDataItem {
     var deadlineString: String {
         "\(L10n.Main.deadlineDescription) \(DateFormatter.dateFormate.string(from: deadlineDate))"
     }
-    let isCompleted: Bool
+    let isCompeted: Bool = true
 }
 
 final class MainViewController: ParentViewController {
@@ -33,12 +33,13 @@ final class MainViewController: ParentViewController {
     }
     
     private func setupUI() {
+        (view as? StatefullView)?.delegate = self
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = L10n.Main.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: L10n.Main.profileButton, style: .plain, target: self, action: nil)
         
         collectionView.register(UINib(nibName: "MainItemCell", bundle: nil), forCellWithReuseIdentifier: MainItemCell.reuseID)
-        collectionView.allowsMultipleSelection = true
         collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
@@ -99,10 +100,11 @@ final class MainViewController: ParentViewController {
         super.prepare(for: segue, sender: sender)
         
         switch segue.destination {
-        case let destination as EmptyViewController:
-            emptyVC = destination
         case let destination as NewItemViewController:
             destination.delegate = self
+            destination.selectedItem = selectedItem
+            selectedItem = nil
+            
         default:
             break
         }
@@ -114,7 +116,19 @@ final class MainViewController: ParentViewController {
     
     @IBOutlet private var collectionView: UICollectionView!
     @IBOutlet private var createButton: PrimaryButton!
-    @IBOutlet private var emptyView: UIView!
+
+    private var data: [MainDataItem] = []
+    private var selectedItem: MainDataItem?
+    
+    private func reloadData() {
+        (view as? StatefullView)?.state = .loading
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            (self?.view as? StatefullView)?.state = .empty()
+        }
+        if !data.isEmpty {
+            collectionView.reloadData()
+        }
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -133,17 +147,10 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedItem = data[indexPath.row]
-        Task {
-            do {
-                _ = try await NetworkManager.shared.markCompletion(todoId: selectedItem.id)
-                await loadToDos()
-            } catch {
-                DispatchQueue.main.async {
-                    self.showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
-                }
-            }
-        }
+
+        collectionView.deselectItem(at: indexPath, animated: true)
+        selectedItem = data[indexPath.row]
+        performSegue(withIdentifier: "new-item", sender: nil)
     }
 }
 
@@ -152,5 +159,21 @@ extension MainViewController: NewItemViewControllerDelegate {
         Task {
             await loadToDos()
         }
+    }
+}
+
+extension MainViewController: StatefullViewDelegate {
+    func statefullViewReloadData(_: StatefullView) {}
+    
+    func statefullViewDidTapEmptyButton(_: StatefullView) {
+        performSegue(withIdentifier: "new-item", sender: nil)
+    }
+    
+    func statefullView(_: StatefullView, addChild controller: UIViewController) {
+        addChild(controller)
+    }
+    
+    func statefullView(_: StatefullView, didMoveToParent controller: UIViewController) {
+        controller.didMove(toParent: self)
     }
 }

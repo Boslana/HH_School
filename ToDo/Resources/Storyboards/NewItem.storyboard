@@ -89,11 +89,12 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <keyboardLayoutGuide key="keyboard" id="oVP-6b-273"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NCQ-Go-nl1" firstAttribute="top" secondItem="3hU-Om-glz" secondAttribute="bottom" id="2kD-t4-plW"/>
                             <constraint firstItem="3hU-Om-glz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Nq7-WY-B1l"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="NCQ-Go-nl1" secondAttribute="bottom" constant="16" id="adN-73-0V5"/>
+                            <constraint firstItem="oVP-6b-273" firstAttribute="top" secondItem="NCQ-Go-nl1" secondAttribute="bottom" constant="16" id="adN-73-0V5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NCQ-Go-nl1" secondAttribute="trailing" constant="16" id="b05-uO-UyI"/>
                             <constraint firstItem="NCQ-Go-nl1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="iyc-Mt-CDR"/>
                             <constraint firstItem="3hU-Om-glz" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="mwR-RL-X8P"/>
