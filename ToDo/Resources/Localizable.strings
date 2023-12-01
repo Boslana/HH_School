@@ -18,10 +18,11 @@
 "main.button" = "Новая запись";
 "main.refresh-button" = "Обновить";
 "main.item-cell-date-format" = "dd MMMM yyyy 'в' HH:mm";
-"main.what-to-do-view-title" = "Что нужно сделать";
-"main.description-view-title" = "Описание";
+"main.deadline" = "Дедлайн:";
 
 "new-item.title" = "Новая запись";
+"new-item.what-to-do-view-title" = "Что нужно сделать";
+"new-item.description-view-title" = "Описание";
 "new-item.create-button" = "Cоздать";
 "new-item.deadline-title" = "Дедлайн";
 

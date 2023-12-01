@@ -26,12 +26,13 @@ enum L10n {
         static let defaultErrorLabel = NSLocalizedString("main.default-error-label", comment: "")
         static let refreshButton = NSLocalizedString("main.refresh-button", comment: "")
         static let dateFormat = NSLocalizedString("main.item-cell-date-format", comment: "")
-        static let whatToDoViewTitle = NSLocalizedString("main.what-to-do-view-title", comment: "")
-        static let descriptionViewTitle = NSLocalizedString("main.description-view-title", comment: "")
+        static let deadlineDescription = NSLocalizedString("main.deadline", comment: "")
     }
     
     enum NewItem {
         static let title = NSLocalizedString("new-item.title", comment: "")
+        static let whatToDoViewTitle = NSLocalizedString("new-item.what-to-do-view-title", comment: "")
+        static let descriptionViewTitle = NSLocalizedString("new-item.description-view-title", comment: "")
         static let deadlineTitle = NSLocalizedString("new-item.deadline-title", comment: "")
         static let createButton = NSLocalizedString("new-item.create-button", comment: "")
     }

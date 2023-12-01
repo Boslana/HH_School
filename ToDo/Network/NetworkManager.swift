@@ -26,6 +26,14 @@ final class NetworkManager {
         return encoder
     }()
     
+    private func request<Response: Decodable>(
+            urlStr: String,
+            method: String,
+            headers: [String: String]? = nil
+        ) async throws -> Response {
+            try await request(urlStr: urlStr, method: method, requestData: Optional<EmptyRequest>.none, headers: headers)
+        }
+    
     private func request<Request: Encodable, Response: Decodable>(
         urlStr: String,
         method: String,
@@ -96,7 +104,6 @@ final class NetworkManager {
         let todosResponse: [TodoItemResponseBody] = try await request(
             urlStr: "\(PlistFiles.cfApiBaseUrl)/api/todos",
             method: "GET",
-            requestData: Optional<EmptyRequest>.none,
             headers: headers
         )
         return todosResponse
@@ -125,7 +132,6 @@ final class NetworkManager {
         let markResponse: EmptyResponse = try await request(
             urlStr: "\(PlistFiles.cfApiBaseUrl)/api/todos/mark/\(todoId)",
             method: "PUT",
-            requestData: Optional<EmptyRequest>.none,
             headers: headers
         )
         return markResponse

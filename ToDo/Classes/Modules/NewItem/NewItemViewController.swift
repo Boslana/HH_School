@@ -42,8 +42,8 @@ final class NewItemViewController: ParentViewController {
     private func setupInitialView() {
         navigationItem.title = L10n.NewItem.title
         
-        whatToDoView.setup(titleText: L10n.Main.whatToDoViewTitle)
-        descriptionView.setup(titleText: L10n.Main.descriptionViewTitle)
+        whatToDoView.setup(titleText: L10n.NewItem.whatToDoViewTitle)
+        descriptionView.setup(titleText: L10n.NewItem.descriptionViewTitle)
         
         deadlineLabel.text = L10n.NewItem.deadlineTitle
         deadlineLabel.textColor = .Color.black
@@ -73,13 +73,27 @@ final class NewItemViewController: ParentViewController {
     }
     
     @IBAction private func didTapCreateButton() {
-        Task {
-            do {
-                _ = try await NetworkManager.shared.createNewTodo(title: whatToDoView.textTextView , description: descriptionView.textTextView, date: datePicker.date)
-                delegate?.didSelect(self)
-                navigationController?.popViewController(animated: true)
-            } catch {
-                showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
+        var isValid = true
+        
+        if whatToDoView.textTextView?.isEmpty ?? true {
+            whatToDoView.show(error: L10n.Validation.emptyTextField)
+            isValid = false
+        }
+        
+        if descriptionView.textTextView?.isEmpty ?? true {
+            descriptionView.show(error: L10n.Validation.emptyTextField)
+            isValid = false
+        }
+        
+        if isValid {
+            Task {
+                do {
+                    _ = try await NetworkManager.shared.createNewTodo(title: whatToDoView.textTextView ?? "", description: descriptionView.textTextView ?? "", date: datePicker.date)
+                    delegate?.didSelect(self)
+                    navigationController?.popViewController(animated: true)
+                } catch {
+                    showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
+                }
             }
         }
     }

@@ -46,7 +46,6 @@ final class MainItemCell: UICollectionViewCell {
     
     private func updateColor() {
         radioButtonView.backgroundColor = isSelected ? UIColor.Color.primary : UIColor.Color.ItemCell.radiobutton
-        checkmarkImageView.isHidden = !isSelected // возможен конфликт
     }
     
     private func setupRadioButtonView() {

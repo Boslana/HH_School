@@ -12,7 +12,7 @@ struct MainDataItem {
     let title: String
     let deadlineDate: Date
     var deadlineString: String {
-        "Дедлайн: \(DateFormatter.dateFormate.string(from: deadlineDate))"
+        "\(L10n.Main.deadlineDescription) \(DateFormatter.dateFormate.string(from: deadlineDate))"
     }
     let isCompleted: Bool
 }
@@ -79,16 +79,15 @@ final class MainViewController: ParentViewController {
                 }
             }
             emptyView.isHidden = false
-        } else {
+        } else if data.isEmpty {
             emptyVC?.state = .empty
             emptyVC?.action = { [weak self] in
                 self?.navigateToNewItem()
             }
-            emptyView.isHidden = !data.isEmpty
-            if !data.isEmpty {
-                collectionView.reloadData()
-                //collectionView.selectItem(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: [])
-            }
+            emptyView.isHidden = false
+        } else {
+            emptyView.isHidden = true
+            collectionView.reloadData()
         }
     }
     
@@ -139,9 +138,6 @@ extension MainViewController: UICollectionViewDelegate {
             do {
                 _ = try await NetworkManager.shared.markCompletion(todoId: selectedItem.id)
                 await loadToDos()
-                //                selectedItem.isCompleted.toggle()
-                //                collectionView.reloadData()
-                //                collectionView.reloadItems(at: [indexPath]) ??
             } catch {
                 DispatchQueue.main.async {
                     self.showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)

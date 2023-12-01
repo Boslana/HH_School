@@ -52,7 +52,7 @@ final class TextViewInput: UIView, UITextViewDelegate {
         return textView
     }()
     
-    var textTextView: String {
+    var textTextView: String? {
         return textView.text
     }
     
@@ -76,8 +76,8 @@ final class TextViewInput: UIView, UITextViewDelegate {
     
     func hideError() {
         errorLabel.isHidden = true
-        bottomConstraint.isActive = true
         errorLabelTopConstraint.isActive = false
+        bottomConstraint.isActive = true
         invalidateIntrinsicContentSize()
     }
     
