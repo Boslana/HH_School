@@ -81,7 +81,7 @@ final class NetworkManager {
             method: "POST",
             requestData: loginData
         )
-        UserDefaults.standard.set(authResponse.accessToken, forKey: "accessToken")
+        UserManager.shared.set(accessToken: authResponse.accessToken)
         return authResponse
     }
     
@@ -92,7 +92,7 @@ final class NetworkManager {
             method: "POST",
             requestData: registrationData
         )
-        UserDefaults.standard.set(authResponse.accessToken, forKey: "accessToken")
+        UserManager.shared.set(accessToken: authResponse.accessToken)
         return authResponse
     }
     

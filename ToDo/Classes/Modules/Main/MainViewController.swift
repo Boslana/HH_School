@@ -14,15 +14,12 @@ struct MainDataItem {
     var deadlineString: String {
         "\(L10n.Main.deadlineDescription) \(DateFormatter.dateFormate.string(from: deadlineDate))"
     }
-    let isCompleted: Bool // = true
+    let isCompleted: Bool
 }
 
 final class MainViewController: ParentViewController {
     private var data: [MainDataItem] = []
-    private var error: Error?
-    //    private weak var emptyVC: EmptyViewController?
     private var selectedItem: MainDataItem?
-    
     private var statefulView: StatefullView? {
         return view as? StatefullView
     }
@@ -61,66 +58,27 @@ final class MainViewController: ParentViewController {
         createButton.setup(mode: .large)
     }
     
-    private func loadToDos() async {
-        do {
-            let todosResponse = try await NetworkManager.shared.fetchTodoList()
-            self.data = todosResponse.map { MainDataItem(id: $0.id, title: $0.title, deadlineDate: $0.date, isCompleted: $0.isCompleted) }
-            error = nil
-        } catch let fetchError {
-            error = fetchError
-        }
-        DispatchQueue.main.async {
-            self.reload()
-        }
-    }
-    
-    //    private func reload() {
-    //        if let error = error {
-    //            statefulView?.state = .empty(error: error)
-    //            statefulView?.action =
-    //
-    //            emptyVC?.state = .error(customError)
-    //            emptyVC?.action = { [weak self] in
-    //                Task {
-    //                    await self?.loadToDos()
-    //                }
-    //            }
-    //            emptyView.isHidden = false
-    //        } else if data.isEmpty {
-    //            emptyVC?.state = .empty
-    //            emptyVC?.action = { [weak self] in
-    //                self?.navigateToNewItem()
-    //            }
-    //            emptyView.isHidden = false
-    //        } else {
-    //            emptyView.isHidden = true
-    //            collectionView.reloadData()
-    //        }
-    //    }
-    
-    private func reload() {
-        guard let statefulView = view as? StatefullView else { return }
-        
-        if let error = error {
-            statefulView.state = .empty(error: error)
-            statefulView.emptyVC?.action = { [weak self] in
-                Task {
-                    await self?.loadToDos()
-                }
-            }
-        } else if data.isEmpty {
-            statefulView.state = .empty()
-            statefulView.emptyVC?.action = { [weak self] in
-                self?.navigateToNewItem()
-            }
-        } else {
-            statefulView.state = .data
-            collectionView.reloadData()
-        }
-    }
+    @IBOutlet private var collectionView: UICollectionView!
+    @IBOutlet private var createButton: PrimaryButton!
     
     @IBAction func didTapCreateButton(_ sender: PrimaryButton) {
         navigateToNewItem()
+    }
+    
+    private func loadToDos() async {
+        statefulView?.state = .loading
+        do {
+            let todosResponse = try await NetworkManager.shared.fetchTodoList()
+            self.data = todosResponse.map { MainDataItem(id: $0.id, title: $0.title, deadlineDate: $0.date, isCompleted: $0.isCompleted) }
+            DispatchQueue.main.async {
+                self.statefulView?.state = self.data.isEmpty ? .empty() : .data
+                self.collectionView.reloadData()
+            }
+        } catch let fetchError {
+            DispatchQueue.main.async {
+                self.statefulView?.state = .empty(error: fetchError)
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -130,7 +88,6 @@ final class MainViewController: ParentViewController {
             destination.delegate = self
             destination.selectedItem = selectedItem
             selectedItem = nil
-            
         default:
             break
         }
@@ -138,19 +95,6 @@ final class MainViewController: ParentViewController {
     
     private func navigateToNewItem() {
         performSegue(withIdentifier: "new-item", sender: nil)
-    }
-    
-    @IBOutlet private var collectionView: UICollectionView!
-    @IBOutlet private var createButton: PrimaryButton!
-    
-    private func reloadData() {
-        (view as? StatefullView)?.state = .loading
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            (self?.view as? StatefullView)?.state = .empty()
-        }
-        if !data.isEmpty {
-            collectionView.reloadData()
-        }
     }
 }
 
@@ -186,7 +130,11 @@ extension MainViewController: NewItemViewControllerDelegate {
 }
 
 extension MainViewController: StatefullViewDelegate {
-    func statefullViewReloadData(_: StatefullView) {}
+    func statefullViewReloadData(_: StatefullView) {
+        Task {
+            await loadToDos()
+        }
+    }
     
     func statefullViewDidTapEmptyButton(_: StatefullView) {
         navigateToNewItem()

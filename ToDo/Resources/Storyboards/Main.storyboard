@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ODK-cO-qrS">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ODK-cO-qrS">
                                 <rect key="frame" x="0.0" y="103" width="393" height="643"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hfK-iI-FFC">
@@ -32,7 +32,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7N-sC-dBz" customClass="PrimaryButton" customModule="ToDo" customModuleProvider="target">
-                                <rect key="frame" x="16" y="746" width="75" height="56"/>
+                                <rect key="frame" x="16" y="746" width="361" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="n8p-ja-8sq"/>
                                 </constraints>
@@ -46,17 +46,19 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="u7N-sC-dBz" secondAttribute="trailing" constant="16" id="4Oe-Me-akt"/>
                             <constraint firstItem="ODK-cO-qrS" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="BDr-be-PQT"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="u7N-sC-dBz" secondAttribute="bottom" constant="16" id="Bbf-5k-H1q"/>
                             <constraint firstItem="u7N-sC-dBz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="D63-Nd-HF4"/>
                             <constraint firstItem="ODK-cO-qrS" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="JVB-53-hhP"/>
+                            <constraint firstItem="ODK-cO-qrS" firstAttribute="bottom" secondItem="u7N-sC-dBz" secondAttribute="top" id="TGv-Gk-EMM"/>
                             <constraint firstItem="ODK-cO-qrS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ysf-4j-RnG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="940-iG-hWz"/>
                     <connections>
-                        <outlet property="collectionView" destination="ODK-cO-qrS" id="4ff-pa-YE1"/>
-                        <outlet property="createButton" destination="u7N-sC-dBz" id="PRg-ct-mnc"/>
+                        <outlet property="collectionView" destination="ODK-cO-qrS" id="Ldx-A7-3uZ"/>
+                        <outlet property="createButton" destination="u7N-sC-dBz" id="BWH-1U-mJ5"/>
                         <segue destination="UYk-6l-zON" kind="show" identifier="new-item" id="TLj-kj-2Vv"/>
                     </connections>
                 </viewController>
@@ -77,7 +79,7 @@
         <!--Navigation Controller-->
         <scene sceneID="4gs-SO-qP0">
             <objects>
-                <navigationController storyboardIdentifier="NavMainVC" automaticallyAdjustsScrollViewInsets="NO" id="xqW-kh-Tsg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xqW-kh-Tsg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="S23-qu-JzK">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>

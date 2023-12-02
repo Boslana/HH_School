@@ -57,8 +57,7 @@ final class AuthViewController: ParentViewController {
                     let response = try await NetworkManager.shared.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
                     log.debug("\(response.accessToken)")
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
-                    view.window?.rootViewController = vc
+                    view.window?.rootViewController = storyboard.instantiateInitialViewController()
                 } catch {
                     showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
                 }

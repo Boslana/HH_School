@@ -56,7 +56,7 @@ class StatefullView: UIView {
 
     // MARK: Private
 
-    var emptyVC: EmptyViewController?
+    private var emptyVC: EmptyViewController?
     private var emptyView: UIView!
 
     private lazy var loader: LoadingIndicatorImageView = {

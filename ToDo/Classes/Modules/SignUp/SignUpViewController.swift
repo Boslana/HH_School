@@ -67,8 +67,7 @@ final class SignUpViewController: ParentViewController {
                     let response = try await NetworkManager.shared.signUp(name: name , email: email , password: password)
                     log.debug("\(response.accessToken)")
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "NavMainVC")
-                    view.window?.rootViewController = vc
+                    view.window?.rootViewController = storyboard.instantiateInitialViewController()
                 } catch {
                     showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
                 }
