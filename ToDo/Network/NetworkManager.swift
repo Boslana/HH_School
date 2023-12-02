@@ -27,12 +27,12 @@ final class NetworkManager {
     }()
     
     private func request<Response: Decodable>(
-            urlStr: String,
-            method: String,
-            headers: [String: String]? = nil
-        ) async throws -> Response {
-            try await request(urlStr: urlStr, method: method, requestData: Optional<EmptyRequest>.none, headers: headers)
-        }
+        urlStr: String,
+        method: String,
+        headers: [String: String]? = nil
+    ) async throws -> Response {
+        try await request(urlStr: urlStr, method: method, requestData: Optional<EmptyRequest>.none, headers: headers)
+    }
     
     private func request<Request: Encodable, Response: Decodable>(
         urlStr: String,
