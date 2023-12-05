@@ -180,6 +180,26 @@
 			path = NewItem;
 			sourceTree = "<group>";
 		};
+		933D82DF2B1E4A0200946C09 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				93E077152AFD2BB5009478CA /* MainButton.swift */,
+				93E077172AFD3242009478CA /* PrimaryButton.swift */,
+				93564BE82AFF537200C3631D /* TextButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		933D82E02B1E4A3200946C09 /* TextFieldAndTextView */ = {
+			isa = PBXGroup;
+			children = (
+				93CEFCB62B08A44C00D03833 /* TextViewInput.swift */,
+				93B02E382AF3F36600C8C6DA /* TextField.swift */,
+				93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */,
+			);
+			path = TextFieldAndTextView;
+			sourceTree = "<group>";
+		};
 		935FB99C2AEAB8E1004A841F = {
 			isa = PBXGroup;
 			children = (
@@ -249,8 +269,8 @@
 				93A2E9402B13B41600305B56 /* ToDoRequestBody.swift */,
 			);
 			path = Request;
-            sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		93A2E9442B164F6A00305B56 /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,12 +320,8 @@
 		93B02E372AF3F33100C8C6DA /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				93CEFCB62B08A44C00D03833 /* TextViewInput.swift */,
-				93B02E382AF3F36600C8C6DA /* TextField.swift */,
-				93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */,
-				93E077152AFD2BB5009478CA /* MainButton.swift */,
-				93E077172AFD3242009478CA /* PrimaryButton.swift */,
-				93564BE82AFF537200C3631D /* TextButton.swift */,
+				933D82E02B1E4A3200946C09 /* TextFieldAndTextView */,
+				933D82DF2B1E4A0200946C09 /* Button */,
 				93A2E94E2B18E60600305B56 /* LoadingIndicatorImageView.swift */,
 				93A2E9502B18E62C00305B56 /* StatefullView.swift */,
 			);

@@ -60,7 +60,7 @@
                         <constraints>
                             <constraint firstItem="cWv-V9-hOf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="T2t-aq-cNB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cWv-V9-hOf" secondAttribute="trailing" id="ZQe-Bb-Gkc"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="cWv-V9-hOf" secondAttribute="bottom" id="fTD-wy-mTA"/>
+                            <constraint firstItem="cWv-V9-hOf" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="fTD-wy-mTA"/>
                             <constraint firstItem="cWv-V9-hOf" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="jrM-AS-MdW"/>
                         </constraints>
                     </view>

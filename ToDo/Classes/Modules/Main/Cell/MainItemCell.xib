@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,24 +28,18 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="GWy-td-0OG">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAu-dl-hdb">
                                         <rect key="frame" x="296" y="0.0" width="24" height="24"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MYo-8O-bMX">
-                                                <rect key="frame" x="-0.20000000000004547" y="0.60000000000002274" width="24" height="24"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Color/ItemCell/checkmarkImageView" translatesAutoresizingMaskIntoConstraints="NO" id="h4s-b2-O21">
-                                                <rect key="frame" x="-0.20000000000004547" y="0.0" width="24" height="24"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="2k5-63-L73"/>
-                                            <constraint firstAttribute="height" constant="24" id="gTx-Oi-5iO"/>
+                                            <constraint firstAttribute="height" constant="24" id="O8S-mb-GBs"/>
+                                            <constraint firstAttribute="width" constant="24" id="OFf-Nj-56j"/>
                                         </constraints>
-                                    </view>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <connections>
+                                            <action selector="didTapRadioButton" destination="noK-5B-O16" eventType="touchUpInside" id="20w-SK-5Vd"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lN-uZ-R00">
@@ -68,19 +61,11 @@
             </collectionViewCellContentView>
             <size key="customSize" width="352" height="142"/>
             <connections>
-                <outlet property="checkmarkImageView" destination="h4s-b2-O21" id="yfg-fe-nTL"/>
                 <outlet property="deadlineLabel" destination="3lN-uZ-R00" id="fbu-Yp-Xa6"/>
-                <outlet property="iconView" destination="MYo-8O-bMX" id="fak-8g-gYn"/>
-                <outlet property="radioButtonView" destination="GWy-td-0OG" id="7u5-Q7-yuy"/>
+                <outlet property="radioButton" destination="hAu-dl-hdb" id="xmT-sd-ncq"/>
                 <outlet property="titleLabel" destination="nkA-pn-sty" id="KiC-Ns-2dV"/>
             </connections>
             <point key="canvasLocation" x="337.40458015267177" y="19.718309859154932"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="Color/ItemCell/checkmarkImageView" width="24" height="24"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

@@ -8,13 +8,14 @@
 import UIKit
 
 struct MainDataItem {
-    let id: String
+    var id: String
     let title: String
+    let description: String
     let deadlineDate: Date
     var deadlineString: String {
         "\(L10n.Main.deadlineDescription) \(DateFormatter.dateFormate.string(from: deadlineDate))"
     }
-    let isCompleted: Bool
+    var isCompleted: Bool
 }
 
 final class MainViewController: ParentViewController {
@@ -69,14 +70,16 @@ final class MainViewController: ParentViewController {
         statefulView?.state = .loading
         do {
             let todosResponse = try await NetworkManager.shared.fetchTodoList()
-            self.data = todosResponse.map { MainDataItem(id: $0.id, title: $0.title, deadlineDate: $0.date, isCompleted: $0.isCompleted) }
-            DispatchQueue.main.async {
+            self.data = todosResponse.map { MainDataItem(id: $0.id, title: $0.title, description: $0.description, deadlineDate: $0.date, isCompleted: $0.isCompleted) }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                guard let self = self else { return }
                 self.statefulView?.state = self.data.isEmpty ? .empty() : .data
                 self.collectionView.reloadData()
             }
-        } catch let fetchError {
-            DispatchQueue.main.async {
-                self.statefulView?.state = .empty(error: fetchError)
+        } catch {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                guard let self = self else { return }
+                self.statefulView?.state = .empty(error: error)
             }
         }
     }
@@ -106,6 +109,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainItemCell.reuseID, for: indexPath) as? MainItemCell {
             cell.setup(item: data[indexPath.row])
+            cell.delegate = self
             return cell
         }
         fatalError("\(#function)error in cell creation")
@@ -125,6 +129,27 @@ extension MainViewController: NewItemViewControllerDelegate {
     func didSelect(_ vc: NewItemViewController) {
         Task {
             await loadToDos()
+        }
+    }
+}
+
+extension MainViewController: MainItemCellDelegate {
+    func didTapRadioButton(on cell: MainItemCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else {
+            return
+        }
+        var selectedItem = data[indexPath.row]
+        Task {
+            do {
+                _ = try await NetworkManager.shared.markCompletion(todoId: selectedItem.id)
+                selectedItem.isCompleted.toggle()
+                data[indexPath.row] = selectedItem
+                collectionView.reloadItems(at: [indexPath])
+            } catch {
+                DispatchQueue.main.async {
+                    self.showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
+                }
+            }
         }
     }
 }

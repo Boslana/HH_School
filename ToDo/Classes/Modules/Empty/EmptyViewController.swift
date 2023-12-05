@@ -35,7 +35,7 @@ final class EmptyViewController: ParentViewController {
         case .empty:
             firstSV.alignment = .fill
             secondSV.alignment = .fill
-            lastSV.alignment = .fill
+            lastSV.alignment = .center
             lastSV.spacing = 16
             
             emptyImageView.image = UIImage.Main.empty

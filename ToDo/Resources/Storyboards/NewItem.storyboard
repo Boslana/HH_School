@@ -93,6 +93,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NCQ-Go-nl1" firstAttribute="top" secondItem="3hU-Om-glz" secondAttribute="bottom" id="2kD-t4-plW"/>
+                            <constraint firstItem="3hU-Om-glz" firstAttribute="bottom" secondItem="oVP-6b-273" secondAttribute="top" id="53W-LU-6i9"/>
                             <constraint firstItem="3hU-Om-glz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Nq7-WY-B1l"/>
                             <constraint firstItem="oVP-6b-273" firstAttribute="top" secondItem="NCQ-Go-nl1" secondAttribute="bottom" constant="16" id="adN-73-0V5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NCQ-Go-nl1" secondAttribute="trailing" constant="16" id="b05-uO-UyI"/>
@@ -101,13 +102,21 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3hU-Om-glz" secondAttribute="trailing" id="tGo-C9-D35"/>
                             <constraint firstItem="3hU-Om-glz" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="tlK-94-4pB"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="53W-LU-6i9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="buttonBottomConstraint" destination="2kD-t4-plW" id="hKu-PC-pQ2"/>
                         <outlet property="createButton" destination="NCQ-Go-nl1" id="lxE-gw-w87"/>
                         <outlet property="datePicker" destination="heU-CK-i8S" id="yI7-l4-WgC"/>
                         <outlet property="datePickerContainer" destination="P3n-bj-J1M" id="vaH-ZK-3ht"/>
                         <outlet property="deadlineLabel" destination="u9k-s9-EmB" id="lwB-WN-3bK"/>
                         <outlet property="descriptionView" destination="ETp-qE-5d4" id="r1w-PI-kTE"/>
+                        <outlet property="keyboardButtonConstraint" destination="adN-73-0V5" id="e8S-R4-xfk"/>
+                        <outlet property="keyboardScrollViewConstraint" destination="53W-LU-6i9" id="yaz-wP-R7Q"/>
                         <outlet property="whatToDoView" destination="RiL-vy-otw" id="Ouh-zC-Vj9"/>
                     </connections>
                 </viewController>

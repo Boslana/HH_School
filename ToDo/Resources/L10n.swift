@@ -37,6 +37,11 @@ enum L10n {
         static let createButton = NSLocalizedString("new-item.create-button", comment: "")
     }
     
+    enum EditItem {
+        static let title = NSLocalizedString("edit-item.title", comment: "")
+        static let deleteButton = NSLocalizedString("edit-item.delete-button", comment: "")
+    }
+    
     enum Validation {
         static let emptyTextField = NSLocalizedString("validation.empty-text-field", comment: "")
         static let emailTextField = NSLocalizedString("validation.email-text-field", comment: "")
