@@ -7,19 +7,13 @@
 
 import UIKit
 
-struct NewItemData {
-    let title: String
-    let description: String
-    let deadline: Date
-}
-
 protocol NewItemViewControllerDelegate: AnyObject {
     func didSelect(_ vc: NewItemViewController)
 }
 
 final class NewItemViewController: ParentViewController {
     weak var delegate: NewItemViewControllerDelegate?
-    var selectedItem: MainDataItem?
+    var selectedItem: TodoItemResponseBody?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +63,7 @@ final class NewItemViewController: ParentViewController {
             
             whatToDoView.set(text: selectedItem.title)
             descriptionView.set(text: selectedItem.description)
-            datePicker.date = selectedItem.deadlineDate
+            datePicker.date = selectedItem.date
             
             createButton.isHidden = true
             

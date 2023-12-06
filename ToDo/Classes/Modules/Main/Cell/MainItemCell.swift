@@ -37,11 +37,10 @@ final class MainItemCell: UICollectionViewCell {
         }
     }
     
-    func setup(item: MainDataItem) {
+    func setup(item: TodoItemResponseBody) {
         titleLabel.text = item.title
-        deadlineLabel.text = item.deadlineString
-        
-        deadlineLabel.textColor = Date() > item.deadlineDate ? UIColor.Color.red : UIColor.Color.black
+        deadlineLabel.text = "\(L10n.Main.deadlineDescription) \(DateFormatter.dateFormate.string(from: item.date))"
+        deadlineLabel.textColor = Date() > item.date ? UIColor.Color.red : UIColor.Color.black
         
         if item.isCompleted {
             radioButton.setImage(UIImage.Main.radiobuttonCheckmark, for: .normal)

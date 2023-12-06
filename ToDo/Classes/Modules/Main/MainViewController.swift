@@ -7,20 +7,9 @@
 
 import UIKit
 
-struct MainDataItem {
-    let id: String
-    let title: String
-    let description: String
-    let deadlineDate: Date
-    var deadlineString: String {
-        "\(L10n.Main.deadlineDescription) \(DateFormatter.dateFormate.string(from: deadlineDate))"
-    }
-    var isCompleted: Bool
-}
-
 final class MainViewController: ParentViewController {
-    private var data: [MainDataItem] = []
-    private var selectedItem: MainDataItem?
+    private var data: [TodoItemResponseBody] = []
+    private var selectedItem: TodoItemResponseBody?
     private var statefulView: StatefullView? {
         return view as? StatefullView
     }
@@ -29,10 +18,7 @@ final class MainViewController: ParentViewController {
         super.viewDidLoad()
         
         setupUI()
-        
-        Task {
-            await loadToDos()
-        }
+        loadToDos()
     }
     
     private func setupUI() {
@@ -66,19 +52,14 @@ final class MainViewController: ParentViewController {
         navigateToNewItem()
     }
     
-    private func loadToDos() async {
-        statefulView?.state = .loading
-        do {
-            let todosResponse = try await NetworkManager.shared.fetchTodoList()
-            self.data = todosResponse.map { MainDataItem(id: $0.id, title: $0.title, description: $0.description, deadlineDate: $0.date, isCompleted: $0.isCompleted) }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+    private func loadToDos() {
+        Task {
+            statefulView?.state = .loading
+            do {
+                self.data = try await NetworkManager.shared.fetchTodoList()
                 self.statefulView?.state = self.data.isEmpty ? .empty() : .data
                 self.collectionView.reloadData()
-            }
-        } catch {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+            } catch {
                 self.statefulView?.state = .empty(error: error)
             }
         }
@@ -118,7 +99,6 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         collectionView.deselectItem(at: indexPath, animated: true)
         selectedItem = data[indexPath.row]
         navigateToNewItem()
@@ -127,9 +107,7 @@ extension MainViewController: UICollectionViewDelegate {
 
 extension MainViewController: NewItemViewControllerDelegate {
     func didSelect(_ vc: NewItemViewController) {
-        Task {
-            await loadToDos()
-        }
+        loadToDos()
     }
 }
 
@@ -156,9 +134,7 @@ extension MainViewController: MainItemCellDelegate {
 
 extension MainViewController: StatefullViewDelegate {
     func statefullViewReloadData(_: StatefullView) {
-        Task {
-            await loadToDos()
-        }
+        loadToDos()
     }
     
     func statefullViewDidTapEmptyButton(_: StatefullView) {
