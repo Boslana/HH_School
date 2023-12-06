@@ -43,9 +43,10 @@ final class MainItemCell: UICollectionViewCell {
         
         deadlineLabel.textColor = Date() > item.deadlineDate ? UIColor.Color.red : UIColor.Color.black
         
-        radioButton.setImage(UIImage.Main.radiobuttonDefault, for: .normal)
         if item.isCompleted {
             radioButton.setImage(UIImage.Main.radiobuttonCheckmark, for: .normal)
+        } else {
+            radioButton.setImage(UIImage.Main.radiobuttonDefault, for: .normal)
         }
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 
 struct MainDataItem {
-    var id: String
+    let id: String
     let title: String
     let description: String
     let deadlineDate: Date
@@ -71,13 +71,13 @@ final class MainViewController: ParentViewController {
         do {
             let todosResponse = try await NetworkManager.shared.fetchTodoList()
             self.data = todosResponse.map { MainDataItem(id: $0.id, title: $0.title, description: $0.description, deadlineDate: $0.date, isCompleted: $0.isCompleted) }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.statefulView?.state = self.data.isEmpty ? .empty() : .data
                 self.collectionView.reloadData()
             }
         } catch {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.statefulView?.state = .empty(error: error)
             }

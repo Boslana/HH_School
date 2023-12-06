@@ -78,7 +78,6 @@ final class NewItemViewController: ParentViewController {
             keyboardScrollViewConstraint.isActive = true
         } else {
             navigationItem.title = L10n.NewItem.title
-            navigationItem.rightBarButtonItem = nil
             
             createButton.setTitle(L10n.NewItem.createButton, for: .normal)
             createButton.setup(mode: .large)
