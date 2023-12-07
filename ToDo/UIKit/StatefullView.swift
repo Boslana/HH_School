@@ -91,6 +91,7 @@ class StatefullView: UIView {
         emptyVC = controller as? EmptyViewController
         emptyView = emptyVC?.view
         emptyVC?.view.translatesAutoresizingMaskIntoConstraints = false
+        emptyView.isHidden = true
         
         delegate?.statefullView(self, addChild: controller)
         addSubview(emptyView)
