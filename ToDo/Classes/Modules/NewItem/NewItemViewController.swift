@@ -7,20 +7,13 @@
 
 import UIKit
 
-struct NewItemData {
-    let title: String
-    let description: String
-    let deadline: Date
-}
-
 protocol NewItemViewControllerDelegate: AnyObject {
     func didSelect(_ vc: NewItemViewController)
 }
 
 final class NewItemViewController: ParentViewController {
     weak var delegate: NewItemViewControllerDelegate?
-    
-    var selectedItem: MainDataItem?
+    var selectedItem: TodoItemResponseBody?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +27,11 @@ final class NewItemViewController: ParentViewController {
         setupDatePickerAppearance()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(false)
+    }
+    
     @IBOutlet private var whatToDoView: TextViewInput!
     @IBOutlet private var descriptionView: TextViewInput!
     @IBOutlet private var deadlineLabel: UILabel!
@@ -41,9 +39,11 @@ final class NewItemViewController: ParentViewController {
     @IBOutlet private var datePicker: UIDatePicker!
     @IBOutlet private var createButton: PrimaryButton!
     
+    @IBOutlet private var buttonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private var keyboardButtonConstraint: NSLayoutConstraint!
+    @IBOutlet private var keyboardScrollViewConstraint: NSLayoutConstraint!
+    
     private func setupInitialView() {
-        navigationItem.title = L10n.NewItem.title
-        
         whatToDoView.setup(titleText: L10n.NewItem.whatToDoViewTitle)
         descriptionView.setup(titleText: L10n.NewItem.descriptionViewTitle)
         
@@ -51,18 +51,39 @@ final class NewItemViewController: ParentViewController {
         deadlineLabel.textColor = .Color.black
         deadlineLabel.font = UIFont.systemFont(ofSize: 14)
         
-        createButton.setTitle(L10n.NewItem.createButton, for: .normal)
-        createButton.setup(mode: .large)
-        
         datePicker.tintColor = .Color.datePicker
         datePicker.backgroundColor = .white
         datePicker.layer.masksToBounds = false
         
-        addTapToHideKeyboardGesture()
-        
         if let selectedItem {
+            navigationItem.title = L10n.EditItem.title
+            let deleteButton = UIBarButtonItem(title: L10n.EditItem.deleteButton, style: .plain, target: self, action: #selector(didTapDeleteButton))
+            navigationItem.rightBarButtonItem = deleteButton
+            deleteButton.tintColor = UIColor.Color.error
+            
             whatToDoView.set(text: selectedItem.title)
+            descriptionView.set(text: selectedItem.description)
+            datePicker.date = selectedItem.date
+            
+            createButton.isHidden = true
+            
+            keyboardButtonConstraint.isActive = false
+            buttonBottomConstraint.isActive = false
+            keyboardScrollViewConstraint.isActive = true
+        } else {
+            navigationItem.title = L10n.NewItem.title
+            
+            createButton.setTitle(L10n.NewItem.createButton, for: .normal)
+            createButton.setup(mode: .large)
+            createButton.isHidden = false
+            
+            keyboardScrollViewConstraint.isActive = false
+            buttonBottomConstraint.isActive = true
+            keyboardButtonConstraint.isActive = true
         }
+        view.layoutIfNeeded()
+        
+        addTapToHideKeyboardGesture()
     }
     
     private func setupDatePickerAppearance() {
@@ -98,7 +119,23 @@ final class NewItemViewController: ParentViewController {
                     delegate?.didSelect(self)
                     navigationController?.popViewController(animated: true)
                 } catch {
-                    showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc private func didTapDeleteButton() {
+        Task {
+            do {
+                _ = try await NetworkManager.shared.deleteTodo(todoId: selectedItem?.id ?? "")
+                delegate?.didSelect(self)
+                navigationController?.popViewController(animated: true)
+            } catch {
+                DispatchQueue.main.async {
+                    self.showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
                 }
             }
         }

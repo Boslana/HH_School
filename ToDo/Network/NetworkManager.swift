@@ -97,7 +97,7 @@ final class NetworkManager {
     }
     
     func fetchTodoList() async throws -> [TodoItemResponseBody] {
-        guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else {
+        guard let accessToken = UserManager.shared.accessToken else {
             throw NetworkError.wrongResponse
         }
         let headers = ["Authorization": "Bearer \(accessToken)"]
@@ -110,7 +110,7 @@ final class NetworkManager {
     }
     
     func createNewTodo(title: String, description: String, date: Date) async throws -> TodoItemResponseBody {
-        guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else {
+        guard let accessToken = UserManager.shared.accessToken else {
             throw NetworkError.wrongResponse
         }
         let headers = ["Authorization": "Bearer \(accessToken)"]
@@ -125,7 +125,7 @@ final class NetworkManager {
     }
     
     func markCompletion(todoId: String) async throws -> EmptyResponse {
-        guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else {
+        guard let accessToken = UserManager.shared.accessToken else {
             throw NetworkError.wrongResponse
         }
         let headers = ["Authorization": "Bearer \(accessToken)"]
@@ -135,5 +135,18 @@ final class NetworkManager {
             headers: headers
         )
         return markResponse
+    }
+    
+    func deleteTodo(todoId: String) async throws -> EmptyResponse {
+        guard let accessToken = UserManager.shared.accessToken else {
+            throw NetworkError.wrongResponse
+        }
+        let headers = ["Authorization": "Bearer \(accessToken)"]
+        let deleteResponse: EmptyResponse = try await request(
+            urlStr: "\(PlistFiles.cfApiBaseUrl)/api/todos/\(todoId)",
+            method: "DELETE",
+            headers: headers
+        )
+        return deleteResponse
     }
 }

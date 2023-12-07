@@ -10,7 +10,7 @@ import Foundation
 struct TodoItemResponseBody: Decodable {
     let id: String
     let title: String
+    let description: String
     let date: Date
-    let isCompleted: Bool
+    var isCompleted: Bool
 }
-

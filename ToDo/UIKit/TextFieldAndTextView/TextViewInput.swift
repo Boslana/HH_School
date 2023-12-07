@@ -36,6 +36,7 @@ final class TextViewInput: UIView, UITextViewDelegate {
     
     func set(text: String?) {
         textView.text = text
+        textViewDidChange(textView)
     }
     
     private lazy var textView: UITextView = {

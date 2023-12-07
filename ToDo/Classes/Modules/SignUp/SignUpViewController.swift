@@ -69,7 +69,9 @@ final class SignUpViewController: ParentViewController {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     view.window?.rootViewController = storyboard.instantiateInitialViewController()
                 } catch {
-                    showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
+                    }
                 }
             }
         }

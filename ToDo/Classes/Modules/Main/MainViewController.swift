@@ -7,19 +7,9 @@
 
 import UIKit
 
-struct MainDataItem {
-    let id: String
-    let title: String
-    let deadlineDate: Date
-    var deadlineString: String {
-        "\(L10n.Main.deadlineDescription) \(DateFormatter.dateFormate.string(from: deadlineDate))"
-    }
-    let isCompleted: Bool
-}
-
 final class MainViewController: ParentViewController {
-    private var data: [MainDataItem] = []
-    private var selectedItem: MainDataItem?
+    private var data: [TodoItemResponseBody] = []
+    private var selectedItem: TodoItemResponseBody?
     private var statefulView: StatefullView? {
         return view as? StatefullView
     }
@@ -28,10 +18,7 @@ final class MainViewController: ParentViewController {
         super.viewDidLoad()
         
         setupUI()
-        
-        Task {
-            await loadToDos()
-        }
+        loadToDos()
     }
     
     private func setupUI() {
@@ -65,18 +52,15 @@ final class MainViewController: ParentViewController {
         navigateToNewItem()
     }
     
-    private func loadToDos() async {
-        statefulView?.state = .loading
-        do {
-            let todosResponse = try await NetworkManager.shared.fetchTodoList()
-            self.data = todosResponse.map { MainDataItem(id: $0.id, title: $0.title, deadlineDate: $0.date, isCompleted: $0.isCompleted) }
-            DispatchQueue.main.async {
+    private func loadToDos() {
+        Task {
+            statefulView?.state = .loading
+            do {
+                self.data = try await NetworkManager.shared.fetchTodoList()
                 self.statefulView?.state = self.data.isEmpty ? .empty() : .data
                 self.collectionView.reloadData()
-            }
-        } catch let fetchError {
-            DispatchQueue.main.async {
-                self.statefulView?.state = .empty(error: fetchError)
+            } catch {
+                self.statefulView?.state = .empty(error: error)
             }
         }
     }
@@ -106,6 +90,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainItemCell.reuseID, for: indexPath) as? MainItemCell {
             cell.setup(item: data[indexPath.row])
+            cell.delegate = self
             return cell
         }
         fatalError("\(#function)error in cell creation")
@@ -114,7 +99,6 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         collectionView.deselectItem(at: indexPath, animated: true)
         selectedItem = data[indexPath.row]
         navigateToNewItem()
@@ -123,17 +107,34 @@ extension MainViewController: UICollectionViewDelegate {
 
 extension MainViewController: NewItemViewControllerDelegate {
     func didSelect(_ vc: NewItemViewController) {
+        loadToDos()
+    }
+}
+
+extension MainViewController: MainItemCellDelegate {
+    func didTapRadioButton(on cell: MainItemCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else {
+            return
+        }
+        var selectedItem = data[indexPath.row]
         Task {
-            await loadToDos()
+            do {
+                _ = try await NetworkManager.shared.markCompletion(todoId: selectedItem.id)
+                selectedItem.isCompleted.toggle()
+                data[indexPath.row] = selectedItem
+                collectionView.reloadItems(at: [indexPath])
+            } catch {
+                DispatchQueue.main.async {
+                    self.showAlert(title: L10n.NetworkErrorDescription.alertTitle, massage: error.localizedDescription)
+                }
+            }
         }
     }
 }
 
 extension MainViewController: StatefullViewDelegate {
     func statefullViewReloadData(_: StatefullView) {
-        Task {
-            await loadToDos()
-        }
+        loadToDos()
     }
     
     func statefullViewDidTapEmptyButton(_: StatefullView) {

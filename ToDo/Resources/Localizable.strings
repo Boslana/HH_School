@@ -26,6 +26,9 @@
 "new-item.create-button" = "Cоздать";
 "new-item.deadline-title" = "Дедлайн";
 
+"edit-item.title" = "Запись";
+"edit-item.delete-button" = "Удалить";
+
 "validation.empty-text-field" = "Поле должно быть заполнено";
 "validation.email-text-field" = "Введите корректный email";
 "validation.symbols-count-user-name-text-field" = "Имя должно быть до 70 символов длиной";
@@ -36,4 +39,3 @@
 "network-error.wrong-url" = "Невозможно установить соединение. Проверьте ваш запрос и повторите попытку.";
 "network-error.alert-title" = "Ошибка!";
 "network-error.alert-button" = "Закрыть";
-

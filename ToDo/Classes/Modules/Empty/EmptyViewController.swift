@@ -23,8 +23,6 @@ final class EmptyViewController: ParentViewController {
     
     @IBOutlet private var firstSV: UIStackView!
     @IBOutlet private var secondSV: UIStackView!
-    @IBOutlet private var thirdSV: UIStackView!
-    @IBOutlet private var lastSV: UIStackView!
     
     @IBOutlet private var emptyImageView: UIImageView!
     @IBOutlet private var emptyLabel: UILabel!
@@ -35,8 +33,6 @@ final class EmptyViewController: ParentViewController {
         case .empty:
             firstSV.alignment = .fill
             secondSV.alignment = .fill
-            lastSV.alignment = .fill
-            lastSV.spacing = 16
             
             emptyImageView.image = UIImage.Main.empty
             emptyLabel.text = L10n.Main.emptyLabel
@@ -51,8 +47,6 @@ final class EmptyViewController: ParentViewController {
             
             firstSV.alignment = .center
             secondSV.alignment = .center
-            lastSV.alignment = .center
-            lastSV.spacing = 16
             
             if (error as NSError).code == NSURLErrorNotConnectedToInternet {
                 emptyImageView.image = UIImage.Main.noConnection
