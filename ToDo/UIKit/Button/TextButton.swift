@@ -12,17 +12,17 @@ final class TextButton: MainButton {
         super.init(frame: frame)
         setup(mode: Mode.normal)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup(mode: Mode.normal)
     }
-    
+
     enum Mode {
         case normal
         case destructive
     }
-    
+
     func setup(mode: Mode) {
         if mode == Mode.normal {
             style = Style(

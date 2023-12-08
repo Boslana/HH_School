@@ -12,17 +12,17 @@ final class PrimaryButton: MainButton {
         super.init(frame: frame)
         setup(mode: Mode.large)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup(mode: Mode.large)
     }
-    
+
     enum Mode {
         case large
         case small
     }
-    
+
     func setup(mode: Mode) {
         if mode == Mode.large {
             style = Style(

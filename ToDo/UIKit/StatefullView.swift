@@ -9,30 +9,30 @@ protocol StatefullViewDelegate: AnyObject {
 
 class StatefullView: UIView {
     // MARK: Lifecycle
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     deinit {
         log.debug("StatefullView released 🙌")
     }
-    
+
     // MARK: Internal
-    
+
     enum State {
         case data
         case empty(error: Error? = nil)
         case loading
     }
-    
+
     weak var delegate: StatefullViewDelegate?
-    
+
     var loaderColor: UIColor? {
         didSet {
             if let loaderColor {
@@ -42,23 +42,23 @@ class StatefullView: UIView {
             }
         }
     }
-    
+
     var state: State = .loading {
         didSet {
             updateState()
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
     }
-    
+
     // MARK: Private
-    
+
     private var emptyVC: EmptyViewController?
     private var emptyView: UIView!
-    
+
     private lazy var loader: LoadingIndicatorImageView = {
         let loader = LoadingIndicatorImageView(image: UIImage.Common.loaderLarge)
         loader.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +68,7 @@ class StatefullView: UIView {
         ])
         return loader
     }()
-    
+
     private lazy var loaderView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -81,24 +81,24 @@ class StatefullView: UIView {
         ])
         return view
     }()
-    
+
     private func setup() {
         let storyboard = UIStoryboard(name: "Empty", bundle: nil)
         guard let controller = storyboard.instantiateInitialViewController() else {
             return
         }
-        
+
         emptyVC = controller as? EmptyViewController
         emptyView = emptyVC?.view
         emptyVC?.view.translatesAutoresizingMaskIntoConstraints = false
         emptyView.isHidden = true
-        
+
         delegate?.statefullView(self, addChild: controller)
         addSubview(emptyView)
         delegate?.statefullView(self, didMoveToParent: controller)
-        
+
         addSubview(loaderView)
-        
+
         [emptyView, loaderView].forEach { subview in
             NSLayoutConstraint.activate([
                 subview.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -108,7 +108,7 @@ class StatefullView: UIView {
             ])
         }
     }
-    
+
     private func updateState() {
         switch state {
         case .data:
@@ -136,4 +136,3 @@ class StatefullView: UIView {
         }
     }
 }
-

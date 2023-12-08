@@ -9,15 +9,15 @@ import Foundation
 
 enum NetworkError: LocalizedError {
     case wrongStatusCode, wrongURL, wrongResponse
-    
+
     var errorDescription: String? {
         switch self {
         case .wrongStatusCode:
-            return L10n.NetworkErrorDescription.wrongStatusCodeDescription
+            return L10n.NetworkError.wrongStatusCode
         case .wrongResponse:
-            return L10n.NetworkErrorDescription.wrongResponseDescription
+            return L10n.NetworkError.wrongResponse
         case .wrongURL:
-            return L10n.NetworkErrorDescription.wrongURLDescription
+            return L10n.NetworkError.wrongUrl
         }
     }
 }
