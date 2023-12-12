@@ -33,7 +33,7 @@ final class MainViewController: ParentViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = L10n.Main.title
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: L10n.Main.profileButton, style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: L10n.Main.profileButton, style: .plain, target: self, action: #selector(didTapProfileButton))
 
         collectionView.register(MainDateCell.self, forCellWithReuseIdentifier: MainDateCell.reuseID)
         collectionView.register(UINib(nibName: "MainItemCell", bundle: nil), forCellWithReuseIdentifier: MainItemCell.reuseID)
@@ -56,6 +56,8 @@ final class MainViewController: ParentViewController {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
+                section.interGroupSpacing = 16
+                section.contentInsets = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
                 return section
             }
         })
@@ -88,8 +90,17 @@ final class MainViewController: ParentViewController {
 
                 self.statefulView?.state = self.data.isEmpty ? .empty() : .data
                 self.collectionView.reloadData()
-            } catch {
-                self.statefulView?.state = .empty(error: error)
+
+                if let selectedDate = selectedDate, let selectedDateIndex = sections.firstIndex(where: { $0.date == selectedDate }) {
+                    let dateIndexPath = IndexPath(row: selectedDateIndex, section: 0)
+                    collectionView.selectItem(at: dateIndexPath, animated: false, scrollPosition: [])
+                }
+            } catch let error as NetworkError {
+                if error == .unauthorized {
+                    navigateToAuth()
+                } else {
+                    self.statefulView?.state = .empty(error: error)
+                }
             }
         }
     }
@@ -108,6 +119,28 @@ final class MainViewController: ParentViewController {
 
     private func navigateToNewItem() {
         performSegue(withIdentifier: "new-item", sender: nil)
+    }
+
+    @objc
+    private func didTapProfileButton() {
+        Task {
+            do {
+                let response = try await NetworkManager.shared.profile()
+                let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+                if let profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as? ProfileViewController {
+                    profileViewController.profile = response
+                    navigationController?.pushViewController(profileViewController, animated: true)
+                }
+            } catch let error as NetworkError {
+                if error == .unauthorized {
+                    navigateToAuth()
+                } else {
+                    DispatchQueue.main.async {
+                        self.showSnackbar(message: error.localizedDescription)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -132,7 +165,11 @@ extension MainViewController: UICollectionViewDataSource {
         switch indexPath.section {
         case 0:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainDateCell.reuseID, for: indexPath) as? MainDateCell {
-                cell.setup(title: DateFormatter.dMMM.string(from: sections[indexPath.row].date))
+                let yearOfDate = Calendar.current.component(.year, from: sections[indexPath.row].date)
+                let currentYear = Calendar.current.component(.year, from: Date())
+
+                let dateFormatter = yearOfDate == currentYear ? DateFormatter.dMMM : DateFormatter.dMMMyyyy
+                cell.setup(title: dateFormatter.string(from: sections[indexPath.row].date))
                 return cell
             }
         default:
@@ -194,16 +231,28 @@ extension MainViewController: MainItemCellDelegate {
         guard let indexPath = collectionView.indexPath(for: cell) else {
             return
         }
-        var selectedItem = data[indexPath.row]
+
+        if let selectedDate {
+            selectedItem = sections.first(where: { $0.date == selectedDate })?.items[indexPath.row]
+        } else {
+            selectedItem = data[indexPath.row]
+        }
+
+        guard let selectedItem = selectedItem else {
+            return
+        }
+
         Task {
             do {
                 _ = try await NetworkManager.shared.markCompletion(todoId: selectedItem.id)
-                selectedItem.isCompleted.toggle()
-                data[indexPath.row] = selectedItem
-                collectionView.reloadItems(at: [indexPath])
-            } catch {
-                DispatchQueue.main.async {
-                    self.showAlert(title: L10n.NetworkError.alertTitle, massage: error.localizedDescription)
+                loadToDos()
+            } catch let error as NetworkError {
+                if error == .unauthorized {
+                    navigateToAuth()
+                } else {
+                    DispatchQueue.main.async {
+                        self.showSnackbar(message: error.localizedDescription)
+                    }
                 }
             }
         }

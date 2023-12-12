@@ -8,10 +8,12 @@
 import Foundation
 
 enum NetworkError: LocalizedError {
-    case wrongStatusCode, wrongURL, wrongResponse
+    case unauthorized, wrongStatusCode, wrongURL, wrongResponse
 
     var errorDescription: String? {
         switch self {
+        case .unauthorized:
+            return nil
         case .wrongStatusCode:
             return L10n.NetworkError.wrongStatusCode
         case .wrongResponse:
