@@ -32,7 +32,7 @@ final class MainDateCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             contentView.backgroundColor = isSelected ? UIColor.Color.primary : UIColor.Color.BackgroungAndSurfaces.surfaceSecondary
-            titleLabel.textColor = isSelected ? UIColor.white : UIColor.black
+            titleLabel.textColor = isSelected ? UIColor.Color.white : UIColor.Color.black
         }
     }
 

@@ -8,6 +8,8 @@
 import UIKit
 
 class ParentViewController: UIViewController {
+    var window: UIWindow? { UIApplication.shared.connectedScenes.compactMap { ($0 as? UIWindowScene)?.keyWindow }.last }
+
     deinit {
         print("\(String(describing: type(of: self))) released")
     }
@@ -18,12 +20,10 @@ class ParentViewController: UIViewController {
         navigationItem.backButtonDisplayMode = .minimal
     }
 
-    func navigateToAuth() {
-        UserManager.shared.set(accessToken: nil)
+    static func navigateToAuth() {
+        UserManager.shared.reset()
         let storyboard = UIStoryboard(name: "Auth", bundle: nil)
-        DispatchQueue.main.async {
-            self.view.window?.rootViewController = storyboard.instantiateInitialViewController()
-        }
+        UIApplication.shared.connectedScenes.compactMap { ($0 as? UIWindowScene)?.keyWindow }.last?.rootViewController = storyboard.instantiateInitialViewController()
     }
 
     func showSnackbar(message: String, duration: TimeInterval = 3.0) {
@@ -40,21 +40,23 @@ class ParentViewController: UIViewController {
         snackbarContainer.alpha = 0
         snackbarContainer.translatesAutoresizingMaskIntoConstraints = false
 
-        view.window?.addSubview(snackbarContainer)
+        window?.addSubview(snackbarContainer)
         snackbarContainer.addSubview(snackbarLabel)
 
-        NSLayoutConstraint.activate([
-            snackbarContainer.topAnchor.constraint(equalTo: view.topAnchor),
-            snackbarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            snackbarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height
+        {
+            NSLayoutConstraint.activate([
+                snackbarContainer.topAnchor.constraint(equalTo: view.topAnchor),
+                snackbarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                snackbarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-        NSLayoutConstraint.activate([
-            snackbarLabel.topAnchor.constraint(equalTo: snackbarContainer.topAnchor, constant: 54),
-            snackbarLabel.leadingAnchor.constraint(equalTo: snackbarContainer.leadingAnchor, constant: 16),
-            snackbarContainer.trailingAnchor.constraint(equalTo: snackbarLabel.trailingAnchor, constant: 16),
-            snackbarContainer.bottomAnchor.constraint(equalTo: snackbarLabel.bottomAnchor, constant: 20),
-        ])
+                snackbarLabel.topAnchor.constraint(equalTo: snackbarContainer.topAnchor, constant: statusBarHeight + 8),
+                snackbarLabel.leadingAnchor.constraint(equalTo: snackbarContainer.leadingAnchor, constant: 16),
+                snackbarContainer.trailingAnchor.constraint(equalTo: snackbarLabel.trailingAnchor, constant: 16),
+                snackbarContainer.bottomAnchor.constraint(equalTo: snackbarLabel.bottomAnchor, constant: 20),
+            ])
+        }
 
         UIView.animate(withDuration: 0.3, animations: {
             snackbarContainer.alpha = 1

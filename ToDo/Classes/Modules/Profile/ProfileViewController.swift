@@ -8,7 +8,10 @@
 import UIKit
 
 final class ProfileViewController: ParentViewController {
-    var profile: ProfileResponse?
+    private var profile: ProfileResponse?
+    private var statefulView: StatefullView? {
+        view as? StatefullView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,23 +25,34 @@ final class ProfileViewController: ParentViewController {
         nameLabel.textColor = .black
         nameLabel.numberOfLines = 2
 
-        if let profileName = profile?.name {
-            nameLabel.text = profileName
-        }
-
         exitButton.setup(mode: .destructive)
         exitButton.setTitle(L10n.Profile.exitButton, for: .normal)
+
+        getProfileData()
     }
 
     @IBOutlet private var avatarImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var exitButton: TextButton!
 
+    private func getProfileData() {
+        Task {
+            do {
+                profile = try await NetworkManager.shared.profile()
+                nameLabel.text = profile?.name
+            } catch {
+                DispatchQueue.main.async {
+                    self.showSnackbar(message: error.localizedDescription)
+                }
+            }
+        }
+    }
+
     @IBAction private func didTapExitButton(_: Any) {
         let alert = UIAlertController(title: L10n.Profile.alertTitle, message: nil, preferredStyle: .actionSheet)
 
-        let exitAction = UIAlertAction(title: L10n.Profile.alertExitButton, style: .destructive) { [weak self] _ in
-            self?.navigateToAuth()
+        let exitAction = UIAlertAction(title: L10n.Profile.alertExitButton, style: .destructive) { _ in
+            ProfileViewController.navigateToAuth()
         }
         alert.addAction(exitAction)
 

@@ -21,7 +21,7 @@
                                 <rect key="frame" x="16" y="101" width="361" height="717"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Rz0-eW-znG">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="175.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="205"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Har-7o-85a">
                                                 <rect key="frame" x="111" y="0.0" width="139" height="139"/>
@@ -31,8 +31,8 @@
                                                     <constraint firstAttribute="width" constant="139" id="qaj-94-nH1"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnI-yy-ip8">
-                                                <rect key="frame" x="160" y="155" width="41.333333333333343" height="20.333333333333343"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnI-yy-ip8">
+                                                <rect key="frame" x="155.66666666666666" y="155" width="50" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>

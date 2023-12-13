@@ -118,13 +118,9 @@ final class NewItemViewController: ParentViewController {
                     _ = try await NetworkManager.shared.createNewTodo(title: whatToDoView.textTextView ?? "", description: descriptionView.textTextView ?? "", date: datePicker.date)
                     delegate?.didSelect(self)
                     navigationController?.popViewController(animated: true)
-                } catch let error as NetworkError {
-                    if error == .unauthorized {
-                        navigateToAuth()
-                    } else {
-                        DispatchQueue.main.async {
-                            self.showSnackbar(message: error.localizedDescription)
-                        }
+                } catch {
+                    DispatchQueue.main.async {
+                        self.showSnackbar(message: error.localizedDescription)
                     }
                 }
             }
@@ -138,13 +134,9 @@ final class NewItemViewController: ParentViewController {
                 _ = try await NetworkManager.shared.deleteTodo(todoId: selectedItem?.id ?? "")
                 delegate?.didSelect(self)
                 navigationController?.popViewController(animated: true)
-            } catch let error as NetworkError {
-                if error == .unauthorized {
-                    navigateToAuth()
-                } else {
-                    DispatchQueue.main.async {
-                        self.showSnackbar(message: error.localizedDescription)
-                    }
+            } catch {
+                DispatchQueue.main.async {
+                    self.showSnackbar(message: error.localizedDescription)
                 }
             }
         }

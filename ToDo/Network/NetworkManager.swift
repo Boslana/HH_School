@@ -67,6 +67,7 @@ final class NetworkManager {
                 }
                 return try decoder.decode(DataResponse<Response>.self, from: data).data
             case 401:
+                await ParentViewController.navigateToAuth()
                 throw NetworkError.unauthorized
             default:
                 throw NetworkError.wrongStatusCode

@@ -8,12 +8,13 @@
 import UIKit
 
 protocol MainItemCellDelegate: AnyObject {
-    func didTapRadioButton(on cell: MainItemCell)
+    func didTapRadioButton(on id: String)
 }
 
 final class MainItemCell: UICollectionViewCell {
     weak var delegate: MainItemCellDelegate?
     static let reuseID = String(describing: MainItemCell.self)
+    private var itemId: String?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,6 +41,7 @@ final class MainItemCell: UICollectionViewCell {
     private let currentDate = Date()
 
     func setup(item: TodoItemResponseBody) {
+        itemId = item.id
         titleLabel.text = item.title
         deadlineLabel.text = "\(L10n.Main.deadline) \(DateFormatter.dateFormate.string(from: item.date))"
         deadlineLabel.textColor = currentDate > item.date ? UIColor.Color.red : UIColor.Color.black
@@ -56,6 +58,8 @@ final class MainItemCell: UICollectionViewCell {
     @IBOutlet private var deadlineLabel: UILabel!
 
     @IBAction private func didTapRadioButton() {
-        delegate?.didTapRadioButton(on: self)
+        if let itemId = itemId {
+            delegate?.didTapRadioButton(on: itemId)
+        }
     }
 }
