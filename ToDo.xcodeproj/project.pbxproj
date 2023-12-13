@@ -46,6 +46,8 @@
 		93A5E95D2B0FA6B700B0BAB2 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A5E95C2B0FA6B700B0BAB2 /* EmptyResponse.swift */; };
 		93A5E95F2B0FA6F300B0BAB2 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A5E95E2B0FA6F300B0BAB2 /* AuthResponse.swift */; };
 		93A5E9612B0FA72B00B0BAB2 /* DataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A5E9602B0FA72B00B0BAB2 /* DataResponse.swift */; };
+		93ACC3762B28C54C003A2DDB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 93ACC3752B28C54C003A2DDB /* Kingfisher */; };
+		93ACC3782B28CA3E003A2DDB /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ACC3772B28CA3E003A2DDB /* LargeButton.swift */; };
 		93B02E362AF3F28600C8C6DA /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B02E352AF3F28600C8C6DA /* ParentViewController.swift */; };
 		93B02E392AF3F36600C8C6DA /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B02E382AF3F36600C8C6DA /* TextField.swift */; };
 		93B02E3B2AF3FE4200C8C6DA /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */; };
@@ -121,6 +123,7 @@
 		93A5E95C2B0FA6B700B0BAB2 /* EmptyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
 		93A5E95E2B0FA6F300B0BAB2 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		93A5E9602B0FA72B00B0BAB2 /* DataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResponse.swift; sourceTree = "<group>"; };
+		93ACC3772B28CA3E003A2DDB /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
 		93B02E352AF3F28600C8C6DA /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		93B02E382AF3F36600C8C6DA /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		93B02E3A2AF3FE4200C8C6DA /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
@@ -139,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93ACC3762B28C54C003A2DDB /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +194,7 @@
 				93E077152AFD2BB5009478CA /* MainButton.swift */,
 				93E077172AFD3242009478CA /* PrimaryButton.swift */,
 				93564BE82AFF537200C3631D /* TextButton.swift */,
+				93ACC3772B28CA3E003A2DDB /* LargeButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -454,6 +459,9 @@
 			dependencies = (
 			);
 			name = ToDo;
+			packageProductDependencies = (
+				93ACC3752B28C54C003A2DDB /* Kingfisher */,
+			);
 			productName = ToDo;
 			productReference = 935FB9A52AEAB8E1004A841F /* ToDo.app */;
 			productType = "com.apple.product-type.application";
@@ -526,6 +534,9 @@
 				Base,
 			);
 			mainGroup = 935FB99C2AEAB8E1004A841F;
+			packageReferences = (
+				93ACC3742B28C54C003A2DDB /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 935FB9A62AEAB8E1004A841F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -626,6 +637,7 @@
 				93A5E9592B0FA27500B0BAB2 /* NetworkManager.swift in Sources */,
 				93E077182AFD3242009478CA /* PrimaryButton.swift in Sources */,
 				93CEFCB72B08A44C00D03833 /* TextViewInput.swift in Sources */,
+				93ACC3782B28CA3E003A2DDB /* LargeButton.swift in Sources */,
 				93971FBE2B11180D00432A47 /* DateFormatter.swift in Sources */,
 				935FB9AD2AEAB8E1004A841F /* AuthViewController.swift in Sources */,
 				933F9B0A2B221BCD00680327 /* Strings.swift in Sources */,
@@ -1005,6 +1017,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		93ACC3742B28C54C003A2DDB /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		93ACC3752B28C54C003A2DDB /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93ACC3742B28C54C003A2DDB /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 935FB99D2AEAB8E1004A841F /* Project object */;
 }

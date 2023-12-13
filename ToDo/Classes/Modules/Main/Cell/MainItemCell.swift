@@ -18,6 +18,8 @@ final class MainItemCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        radioButton.setImage(UIImage.checkmark, for: .highlighted)
+
         layer.cornerRadius = 16
         layer.masksToBounds = true
 
@@ -52,7 +54,7 @@ final class MainItemCell: UICollectionViewCell {
     }
 
     @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet private var radioButton: UIButton!
+    @IBOutlet private var radioButton: LargeButton!
     @IBOutlet private var deadlineLabel: UILabel!
 
     @IBAction private func didTapRadioButton() {
