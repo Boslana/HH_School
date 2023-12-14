@@ -43,20 +43,18 @@ class ParentViewController: UIViewController {
         window?.addSubview(snackbarContainer)
         snackbarContainer.addSubview(snackbarLabel)
 
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height
-        {
-            NSLayoutConstraint.activate([
-                snackbarContainer.topAnchor.constraint(equalTo: view.topAnchor),
-                snackbarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                snackbarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        let statusBarHeight = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.statusBarManager?.statusBarFrame.height ?? 54
 
-                snackbarLabel.topAnchor.constraint(equalTo: snackbarContainer.topAnchor, constant: statusBarHeight + 8),
-                snackbarLabel.leadingAnchor.constraint(equalTo: snackbarContainer.leadingAnchor, constant: 16),
-                snackbarContainer.trailingAnchor.constraint(equalTo: snackbarLabel.trailingAnchor, constant: 16),
-                snackbarContainer.bottomAnchor.constraint(equalTo: snackbarLabel.bottomAnchor, constant: 20),
-            ])
-        }
+        NSLayoutConstraint.activate([
+            snackbarContainer.topAnchor.constraint(equalTo: view.topAnchor),
+            snackbarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            snackbarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+
+            snackbarLabel.topAnchor.constraint(equalTo: snackbarContainer.topAnchor, constant: statusBarHeight + 8),
+            snackbarLabel.leadingAnchor.constraint(equalTo: snackbarContainer.leadingAnchor, constant: 16),
+            snackbarContainer.trailingAnchor.constraint(equalTo: snackbarLabel.trailingAnchor, constant: 16),
+            snackbarContainer.bottomAnchor.constraint(equalTo: snackbarLabel.bottomAnchor, constant: 20),
+        ])
 
         UIView.animate(withDuration: 0.3, animations: {
             snackbarContainer.alpha = 1
