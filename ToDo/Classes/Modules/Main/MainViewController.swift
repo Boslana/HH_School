@@ -13,7 +13,8 @@ final class MainViewController: ParentViewController {
     private var selectedItem: TodoItemResponseBody?
     private var selectedDate: Date? {
         didSet {
-            collectionView.reloadSections(IndexSet(integer: 1))
+            collectionView.reloadData()
+            restoreSelectedDate()
         }
     }
 
@@ -33,7 +34,7 @@ final class MainViewController: ParentViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = L10n.Main.title
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: L10n.Main.profileButton, style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: L10n.Main.profileButton, style: .plain, target: self, action: #selector(didTapProfileButton))
 
         collectionView.register(MainDateCell.self, forCellWithReuseIdentifier: MainDateCell.reuseID)
         collectionView.register(UINib(nibName: "MainItemCell", bundle: nil), forCellWithReuseIdentifier: MainItemCell.reuseID)
@@ -56,6 +57,8 @@ final class MainViewController: ParentViewController {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
+                section.interGroupSpacing = 16
+                section.contentInsets = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
                 return section
             }
         })
@@ -86,11 +89,23 @@ final class MainViewController: ParentViewController {
                     }
                     .sorted(by: { $0.date <= $1.date })
 
+                if let selectedDate = selectedDate, !sections.contains(where: { $0.date == selectedDate }) {
+                    self.selectedDate = nil
+                }
+
                 self.statefulView?.state = self.data.isEmpty ? .empty() : .data
                 self.collectionView.reloadData()
+                restoreSelectedDate()
             } catch {
                 self.statefulView?.state = .empty(error: error)
             }
+        }
+    }
+
+    private func restoreSelectedDate() {
+        if let selectedDate, let selectedDateIndex = sections.firstIndex(where: { $0.date == selectedDate }) {
+            let dateIndexPath = IndexPath(row: selectedDateIndex, section: 0)
+            collectionView.selectItem(at: dateIndexPath, animated: true, scrollPosition: .centeredHorizontally)
         }
     }
 
@@ -108,6 +123,11 @@ final class MainViewController: ParentViewController {
 
     private func navigateToNewItem() {
         performSegue(withIdentifier: "new-item", sender: nil)
+    }
+
+    @objc
+    private func didTapProfileButton() {
+        performSegue(withIdentifier: "profile", sender: nil)
     }
 }
 
@@ -132,7 +152,11 @@ extension MainViewController: UICollectionViewDataSource {
         switch indexPath.section {
         case 0:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainDateCell.reuseID, for: indexPath) as? MainDateCell {
-                cell.setup(title: DateFormatter.dMMM.string(from: sections[indexPath.row].date))
+                let yearOfDate = sections[indexPath.row].date
+                let isCurrentYear = Calendar.current.isDate(yearOfDate, equalTo: Date(), toGranularity: .year)
+                let dateFormatter = isCurrentYear ? DateFormatter.dMMM : DateFormatter.dMMMyyyy
+
+                cell.setup(title: dateFormatter.string(from: sections[indexPath.row].date))
                 return cell
             }
         default:
@@ -168,7 +192,11 @@ extension MainViewController: UICollectionViewDelegate {
             selectedDate = sections[indexPath.row].date
         default:
             collectionView.deselectItem(at: indexPath, animated: true)
-            selectedItem = data[indexPath.row]
+            if let selectedDate {
+                selectedItem = sections.first(where: { $0.date == selectedDate })?.items[indexPath.row]
+            } else {
+                selectedItem = data[indexPath.row]
+            }
             navigateToNewItem()
         }
     }
@@ -190,20 +218,33 @@ extension MainViewController: NewItemViewControllerDelegate {
 }
 
 extension MainViewController: MainItemCellDelegate {
-    func didTapRadioButton(on cell: MainItemCell) {
-        guard let indexPath = collectionView.indexPath(for: cell) else {
+    func didTapRadioButton(on id: String) {
+        guard let index = data.firstIndex(where: { $0.id == id }) else {
             return
         }
-        var selectedItem = data[indexPath.row]
+
+        let isCompleted = data[index].isCompleted
+
         Task {
             do {
-                _ = try await NetworkManager.shared.markCompletion(todoId: selectedItem.id)
-                selectedItem.isCompleted.toggle()
-                data[indexPath.row] = selectedItem
-                collectionView.reloadItems(at: [indexPath])
+                _ = try await NetworkManager.shared.markCompletion(todoId: id)
+                if let newIndex = data.firstIndex(where: { $0.id == id }) {
+                    data[newIndex].isCompleted = !isCompleted
+                    if selectedDate == nil {
+                        collectionView.reloadItems(at: [IndexPath(row: newIndex, section: 1)])
+                    }
+                }
+                for (index, section) in sections.enumerated() {
+                    if let newIndex = section.items.firstIndex(where: { $0.id == id }) {
+                        sections[index].items[newIndex].isCompleted = !isCompleted
+                        if selectedDate != nil {
+                            collectionView.reloadItems(at: [IndexPath(row: newIndex, section: 1)])
+                        }
+                    }
+                }
             } catch {
                 DispatchQueue.main.async {
-                    self.showAlert(title: L10n.NetworkError.alertTitle, massage: error.localizedDescription)
+                    self.showSnackbar(message: error.localizedDescription)
                 }
             }
         }

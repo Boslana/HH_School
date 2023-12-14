@@ -34,8 +34,12 @@
 "validation.symbols-count-user-name-text-field" = "Имя должно быть до 70 символов длиной";
 "validation.symbols-count-password-text-field" = "Пароль должен быть до 256 символов";
 
-"network-error.wrong-status-code" = "Упс! Что-то пошло не так. Попробуйте обновить страницу или зайдите позже.";
-"network-error.wrong-response" = "Ой! Мы не смогли обработать полученные данные. Попробуйте перезапустить приложение.";
-"network-error.wrong-url" = "Невозможно установить соединение. Проверьте ваш запрос и повторите попытку.";
-"network-error.alert-title" = "Ошибка!";
-"network-error.alert-button" = "Закрыть";
+"network-error.wrong-status-code" = "Упс! Что-то пошло не так.";
+"network-error.wrong-response" = "Ой! Мы не смогли обработать полученные данные.";
+"network-error.wrong-url" = "Невозможно установить соединение.";
+
+"profile.title" = "Профиль";
+"profile.exit-button" = "Выход";
+"profile.alert-title" = "Выйти из профиля?";
+"profile.alert-exit-button" = "Выйти";
+"profile.alert-cancel-button" = "Отменить";

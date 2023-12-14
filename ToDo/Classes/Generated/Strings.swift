@@ -53,16 +53,12 @@ enum L10n {
     }
 
     enum NetworkError {
-        /// Закрыть
-        static let alertButton = L10n.tr("Localizable", "network-error.alert-button", fallback: "Закрыть")
-        /// Ошибка!
-        static let alertTitle = L10n.tr("Localizable", "network-error.alert-title", fallback: "Ошибка!")
-        /// Ой! Мы не смогли обработать полученные данные. Попробуйте перезапустить приложение.
-        static let wrongResponse = L10n.tr("Localizable", "network-error.wrong-response", fallback: "Ой! Мы не смогли обработать полученные данные. Попробуйте перезапустить приложение.")
-        /// Упс! Что-то пошло не так. Попробуйте обновить страницу или зайдите позже.
-        static let wrongStatusCode = L10n.tr("Localizable", "network-error.wrong-status-code", fallback: "Упс! Что-то пошло не так. Попробуйте обновить страницу или зайдите позже.")
-        /// Невозможно установить соединение. Проверьте ваш запрос и повторите попытку.
-        static let wrongUrl = L10n.tr("Localizable", "network-error.wrong-url", fallback: "Невозможно установить соединение. Проверьте ваш запрос и повторите попытку.")
+        /// Ой! Мы не смогли обработать полученные данные.
+        static let wrongResponse = L10n.tr("Localizable", "network-error.wrong-response", fallback: "Ой! Мы не смогли обработать полученные данные.")
+        /// Упс! Что-то пошло не так.
+        static let wrongStatusCode = L10n.tr("Localizable", "network-error.wrong-status-code", fallback: "Упс! Что-то пошло не так.")
+        /// Невозможно установить соединение.
+        static let wrongUrl = L10n.tr("Localizable", "network-error.wrong-url", fallback: "Невозможно установить соединение.")
     }
 
     enum NewItem {
@@ -76,6 +72,19 @@ enum L10n {
         static let title = L10n.tr("Localizable", "new-item.title", fallback: "Новая запись")
         /// Что нужно сделать
         static let whatToDoViewTitle = L10n.tr("Localizable", "new-item.what-to-do-view-title", fallback: "Что нужно сделать")
+    }
+
+    enum Profile {
+        /// Отменить
+        static let alertCancelButton = L10n.tr("Localizable", "profile.alert-cancel-button", fallback: "Отменить")
+        /// Выйти
+        static let alertExitButton = L10n.tr("Localizable", "profile.alert-exit-button", fallback: "Выйти")
+        /// Выйти из профиля?
+        static let alertTitle = L10n.tr("Localizable", "profile.alert-title", fallback: "Выйти из профиля?")
+        /// Выход
+        static let exitButton = L10n.tr("Localizable", "profile.exit-button", fallback: "Выход")
+        /// Профиль
+        static let title = L10n.tr("Localizable", "profile.title", fallback: "Профиль")
     }
 
     enum SignUp {

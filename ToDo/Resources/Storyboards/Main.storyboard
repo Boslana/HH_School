@@ -60,11 +60,22 @@
                         <outlet property="collectionView" destination="ODK-cO-qrS" id="Ldx-A7-3uZ"/>
                         <outlet property="createButton" destination="u7N-sC-dBz" id="BWH-1U-mJ5"/>
                         <segue destination="UYk-6l-zON" kind="show" identifier="new-item" id="TLj-kj-2Vv"/>
+                        <segue destination="cpC-ad-ZhY" kind="show" identifier="profile" id="kHV-Mb-CBC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1046.5648854961833" y="-28.169014084507044"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="hhb-4w-Kf7">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="cpC-ad-ZhY" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="w08-q6-R3M"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WEc-pe-Otz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1640" y="-92"/>
         </scene>
         <!--NewItem-->
         <scene sceneID="ePB-Ml-MCA">
@@ -74,7 +85,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNI-vr-8ts" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1640" y="-28"/>
+            <point key="canvasLocation" x="1629" y="15"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4gs-SO-qP0">

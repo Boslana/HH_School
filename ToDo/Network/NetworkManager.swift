@@ -66,6 +66,9 @@ final class NetworkManager {
                     return try decoder.decode(Response.self, from: emptyData)
                 }
                 return try decoder.decode(DataResponse<Response>.self, from: data).data
+            case 401:
+                await ParentViewController.navigateToAuth()
+                throw NetworkError.unauthorized
             default:
                 throw NetworkError.wrongStatusCode
             }
@@ -148,5 +151,18 @@ final class NetworkManager {
             headers: headers
         )
         return deleteResponse
+    }
+
+    func profile() async throws -> ProfileResponse {
+        guard let accessToken = UserManager.shared.accessToken else {
+            throw NetworkError.wrongResponse
+        }
+        let headers = ["Authorization": "Bearer \(accessToken)"]
+        let profileResponse: ProfileResponse = try await request(
+            urlStr: "\(PlistFiles.apiBaseUrl)/api/user",
+            method: "GET",
+            headers: headers
+        )
+        return profileResponse
     }
 }

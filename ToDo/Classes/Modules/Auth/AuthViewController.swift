@@ -60,7 +60,7 @@ final class AuthViewController: ParentViewController {
                     view.window?.rootViewController = storyboard.instantiateInitialViewController()
                 } catch {
                     DispatchQueue.main.async {
-                        self.showAlert(title: L10n.NetworkError.alertTitle, massage: error.localizedDescription)
+                        self.showSnackbar(message: error.localizedDescription)
                     }
                 }
             }

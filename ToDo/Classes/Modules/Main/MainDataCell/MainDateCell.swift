@@ -14,7 +14,7 @@ final class MainDateCell: UICollectionViewCell {
         super.init(frame: frame)
 
         contentView.backgroundColor = UIColor.Color.BackgroungAndSurfaces.surfaceSecondary
-        contentView.layer.cornerRadius = 4
+        contentView.layer.cornerRadius = 10
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
@@ -31,7 +31,8 @@ final class MainDateCell: UICollectionViewCell {
 
     override var isSelected: Bool {
         didSet {
-            contentView.backgroundColor = isSelected ? UIColor.Color.Text.textSecondary : UIColor.Color.BackgroungAndSurfaces.surfaceSecondary
+            contentView.backgroundColor = isSelected ? UIColor.Color.primary : UIColor.Color.BackgroungAndSurfaces.surfaceSecondary
+            titleLabel.textColor = isSelected ? UIColor.Color.white : UIColor.Color.black
         }
     }
 
