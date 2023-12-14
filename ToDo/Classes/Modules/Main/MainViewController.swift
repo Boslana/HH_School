@@ -105,7 +105,7 @@ final class MainViewController: ParentViewController {
     private func restoreSelectedDate() {
         if let selectedDate, let selectedDateIndex = sections.firstIndex(where: { $0.date == selectedDate }) {
             let dateIndexPath = IndexPath(row: selectedDateIndex, section: 0)
-            collectionView.selectItem(at: dateIndexPath, animated: false, scrollPosition: [])
+            collectionView.selectItem(at: dateIndexPath, animated: true, scrollPosition: .centeredHorizontally)
         }
     }
 
