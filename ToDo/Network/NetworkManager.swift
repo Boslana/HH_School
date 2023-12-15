@@ -9,22 +9,24 @@ import Combine
 import Foundation
 
 final class NetworkManager {
-    static var shared = NetworkManager()
+    private let decoder: JSONDecoder
+    private let encoder: JSONEncoder
 
-    private init() {}
-
-    private lazy var decoder: JSONDecoder = {
+    static var shared = NetworkManager(decoder: {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .secondsSince1970
         return decoder
-    }()
-
-    private lazy var encoder: JSONEncoder = {
+    }(), encoder: {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .secondsSince1970
         return encoder
-    }()
+    }())
+
+    init(decoder: JSONDecoder, encoder: JSONEncoder) {
+        self.decoder = decoder
+        self.encoder = encoder
+    }
 
     private func request<Response: Decodable>(
         urlStr: String,
@@ -34,7 +36,7 @@ final class NetworkManager {
         try await request(urlStr: urlStr, method: method, requestData: EmptyRequest?.none, headers: headers)
     }
 
-    private func request<Request: Encodable, Response: Decodable>(
+    func request<Request: Encodable, Response: Decodable>(
         urlStr: String,
         method: String,
         requestData: Request? = nil,
@@ -77,16 +79,16 @@ final class NetworkManager {
         }
     }
 
-    func signIn(email: String, password: String) async throws -> AuthResponse {
-        let loginData = SignInRequestBody(email: email, password: password)
-        let authResponse: AuthResponse = try await request(
-            urlStr: "\(PlistFiles.apiBaseUrl)/api/auth/login",
-            method: "POST",
-            requestData: loginData
-        )
-        UserManager.shared.set(accessToken: authResponse.accessToken)
-        return authResponse
-    }
+    //    func signIn(email: String, password: String) async throws -> AuthResponse {
+    //        let loginData = SignInRequestBody(email: email, password: password)
+    //        let authResponse: AuthResponse = try await request(
+    //            urlStr: "\(PlistFiles.apiBaseUrl)/api/auth/login",
+    //            method: "POST",
+    //            requestData: loginData
+    //        )
+    //        UserManager.shared.set(accessToken: authResponse.accessToken)
+    //        return authResponse
+    //    }
 
     func signUp(name: String, email: String, password: String) async throws -> AuthResponse {
         let registrationData = SignUpRequestBody(name: name, email: email, password: password)

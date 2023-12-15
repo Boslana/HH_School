@@ -59,6 +59,10 @@
 		93CA2C0A2B23B37400A79746 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93CA2C092B23B37400A79746 /* Profile.storyboard */; };
 		93CA2C0C2B24C4E400A79746 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CA2C0B2B24C4E400A79746 /* ProfileResponse.swift */; };
 		93CEFCB72B08A44C00D03833 /* TextViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CEFCB62B08A44C00D03833 /* TextViewInput.swift */; };
+		93D286A62B2B511200E71E2B /* Dip in Frameworks */ = {isa = PBXBuildFile; productRef = 93D286A52B2B511200E71E2B /* Dip */; };
+		93D286AA2B2B51BB00E71E2B /* ManagersAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D286A82B2B51BB00E71E2B /* ManagersAssembly.swift */; };
+		93D286AB2B2B51BB00E71E2B /* VCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D286A92B2B51BB00E71E2B /* VCAssembly.swift */; };
+		93D286AD2B2B51E000E71E2B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D286AC2B2B51E000E71E2B /* AuthManager.swift */; };
 		93E077162AFD2BB5009478CA /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E077152AFD2BB5009478CA /* MainButton.swift */; };
 		93E077182AFD3242009478CA /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E077172AFD3242009478CA /* PrimaryButton.swift */; };
 		93E0771B2AFD357A009478CA /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E0771A2AFD357A009478CA /* ValidationManager.swift */; };
@@ -138,6 +142,9 @@
 		93CA2C092B23B37400A79746 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		93CA2C0B2B24C4E400A79746 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		93CEFCB62B08A44C00D03833 /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
+		93D286A82B2B51BB00E71E2B /* ManagersAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagersAssembly.swift; sourceTree = "<group>"; };
+		93D286A92B2B51BB00E71E2B /* VCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCAssembly.swift; sourceTree = "<group>"; };
+		93D286AC2B2B51E000E71E2B /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		93E077152AFD2BB5009478CA /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		93E077172AFD3242009478CA /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		93E0771A2AFD357A009478CA /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
@@ -148,6 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D286A62B2B511200E71E2B /* Dip in Frameworks */,
 				93ACC3762B28C54C003A2DDB /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				93A5E9552B0FA21900B0BAB2 /* OSLog.swift */,
+				93D286AC2B2B51E000E71E2B /* AuthManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -449,9 +458,19 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		93D286A72B2B519000E71E2B /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				93D286A82B2B51BB00E71E2B /* ManagersAssembly.swift */,
+				93D286A92B2B51BB00E71E2B /* VCAssembly.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
 		93E077192AFD3558009478CA /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				93D286A72B2B519000E71E2B /* Factories */,
 				93E0771A2AFD357A009478CA /* ValidationManager.swift */,
 				93A2E9472B164FCB00305B56 /* UserManager.swift */,
 			);
@@ -478,6 +497,7 @@
 			name = ToDo;
 			packageProductDependencies = (
 				93ACC3752B28C54C003A2DDB /* Kingfisher */,
+				93D286A52B2B511200E71E2B /* Dip */,
 			);
 			productName = ToDo;
 			productReference = 935FB9A52AEAB8E1004A841F /* ToDo.app */;
@@ -553,6 +573,7 @@
 			mainGroup = 935FB99C2AEAB8E1004A841F;
 			packageReferences = (
 				93ACC3742B28C54C003A2DDB /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				93D286A42B2B511200E71E2B /* XCRemoteSwiftPackageReference "Dip" */,
 			);
 			productRefGroup = 935FB9A62AEAB8E1004A841F /* Products */;
 			projectDirPath = "";
@@ -648,6 +669,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D286AB2B2B51BB00E71E2B /* VCAssembly.swift in Sources */,
 				93E0771B2AFD357A009478CA /* ValidationManager.swift in Sources */,
 				93A2E93B2B13B03E00305B56 /* SignInRequestBody.swift in Sources */,
 				93564BE92AFF537200C3631D /* TextButton.swift in Sources */,
@@ -664,9 +686,11 @@
 				93B02E392AF3F36600C8C6DA /* TextField.swift in Sources */,
 				93A2E9362B13479700305B56 /* TodoItemResponseBody.swift in Sources */,
 				93CA2C0C2B24C4E400A79746 /* ProfileResponse.swift in Sources */,
+				93D286AA2B2B51BB00E71E2B /* ManagersAssembly.swift in Sources */,
 				93E077162AFD2BB5009478CA /* MainButton.swift in Sources */,
 				9317F5302B03DDD100B00A48 /* MainItemCell.swift in Sources */,
 				93812E712AF5399300A18BD2 /* SignUpViewController.swift in Sources */,
+				93D286AD2B2B51E000E71E2B /* AuthManager.swift in Sources */,
 				934D68E02AF50ACD00924492 /* UIViewController+Keyboard.swift in Sources */,
 				935FB9A92AEAB8E1004A841F /* AppDelegate.swift in Sources */,
 				93A2E9512B18E62C00305B56 /* StatefullView.swift in Sources */,
@@ -1047,6 +1071,14 @@
 				minimumVersion = 7.10.1;
 			};
 		};
+		93D286A42B2B511200E71E2B /* XCRemoteSwiftPackageReference "Dip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/Dip";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1054,6 +1086,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 93ACC3742B28C54C003A2DDB /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		93D286A52B2B511200E71E2B /* Dip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93D286A42B2B511200E71E2B /* XCRemoteSwiftPackageReference "Dip" */;
+			productName = Dip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

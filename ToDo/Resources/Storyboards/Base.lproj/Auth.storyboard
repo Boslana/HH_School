@@ -71,6 +71,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HaB-cJ-lX7"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="nil" keyPath="dipTag"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="emailTextField" destination="pIk-An-0HE" id="uBh-ab-r2A"/>
                         <outlet property="passwordTextField" destination="Mcc-Rv-tPb" id="v0s-yo-ijH"/>
@@ -90,7 +93,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbC-PR-C6H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2636" y="-19"/>
+            <point key="canvasLocation" x="2591" y="4"/>
         </scene>
         <!--Item-->
         <scene sceneID="6xK-Ed-Neg">

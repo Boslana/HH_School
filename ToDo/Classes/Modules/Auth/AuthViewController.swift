@@ -6,9 +6,12 @@
 //
 
 import Combine
+import Dip
 import UIKit
 
 final class AuthViewController: ParentViewController {
+    @Injected private var networkManager: AuthManager!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,7 +57,7 @@ final class AuthViewController: ParentViewController {
         if isValid {
             Task {
                 do {
-                    let response = try await NetworkManager.shared.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
+                    let response = try await networkManager.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
                     log.debug("\(response.accessToken)")
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     view.window?.rootViewController = storyboard.instantiateInitialViewController()
