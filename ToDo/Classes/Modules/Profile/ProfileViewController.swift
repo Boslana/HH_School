@@ -18,6 +18,7 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        imagePicker.allowsEditing = true
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = L10n.Profile.title
@@ -86,7 +87,7 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let imageData = selectedImage.jpegData(compressionQuality: 1.0) {
+        if let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage, let imageData = selectedImage.jpegData(compressionQuality: 0.9) {
             let fileName = (info[UIImagePickerController.InfoKey.imageURL] as? URL)?.lastPathComponent ?? "profile_photo.jpg"
 
             Task {
