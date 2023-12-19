@@ -36,6 +36,7 @@ class ParentViewController: UIViewController {
         snackbarLabel.text = message
 
         let snackbarContainer = UIView()
+        snackbarContainer.isUserInteractionEnabled = true
         snackbarContainer.backgroundColor = UIColor.Color.snackbar
         snackbarContainer.alpha = 0
         snackbarContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -46,9 +47,9 @@ class ParentViewController: UIViewController {
         let statusBarHeight = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.statusBarManager?.statusBarFrame.height ?? 54
 
         NSLayoutConstraint.activate([
-            snackbarContainer.topAnchor.constraint(equalTo: view.topAnchor),
-            snackbarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            snackbarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            snackbarContainer.topAnchor.constraint(equalTo: window?.topAnchor ?? view.topAnchor),
+            snackbarContainer.leadingAnchor.constraint(equalTo: window?.leadingAnchor ?? view.leadingAnchor),
+            snackbarContainer.trailingAnchor.constraint(equalTo: window?.trailingAnchor ?? view.trailingAnchor),
 
             snackbarLabel.topAnchor.constraint(equalTo: snackbarContainer.topAnchor, constant: statusBarHeight + 8),
             snackbarLabel.leadingAnchor.constraint(equalTo: snackbarContainer.leadingAnchor, constant: 16),
@@ -56,14 +57,28 @@ class ParentViewController: UIViewController {
             snackbarContainer.bottomAnchor.constraint(equalTo: snackbarLabel.bottomAnchor, constant: 20),
         ])
 
-        UIView.animate(withDuration: 0.3, animations: {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideSnackbar(_:)))
+        snackbarContainer.addGestureRecognizer(tapGesture)
+
+        UIView.animate(withDuration: 0.3) {
             snackbarContainer.alpha = 1
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, delay: duration, options: [], animations: {
-                snackbarContainer.alpha = 0
-            }, completion: { _ in
-                snackbarContainer.removeFromSuperview()
-            })
-        })
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            if snackbarContainer.superview != nil {
+                UIView.animate(withDuration: 0.3, animations: {
+                    snackbarContainer.alpha = 0
+                }, completion: { _ in
+                    snackbarContainer.removeFromSuperview()
+                })
+            }
+        }
+    }
+
+    @objc
+    func hideSnackbar(_ sender: UITapGestureRecognizer) {
+        if let snackbarContainer = sender.view {
+            snackbarContainer.removeFromSuperview()
+        }
     }
 }

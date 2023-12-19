@@ -29,6 +29,8 @@ final class EmptyViewController: ParentViewController {
     @IBOutlet private var emptyButton: PrimaryButton!
 
     private func updateState() {
+        emptyButton.setLoading(false)
+
         switch state {
         case .empty:
             firstSV.alignment = .fill
@@ -60,6 +62,12 @@ final class EmptyViewController: ParentViewController {
     }
 
     @IBAction private func didTapEmptyButton() {
+        switch state {
+        case .error:
+            emptyButton.setLoading(true)
+        default:
+            emptyButton.setLoading(false)
+        }
         action?()
     }
 }

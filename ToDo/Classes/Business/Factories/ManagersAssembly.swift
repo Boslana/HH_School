@@ -29,9 +29,12 @@ enum ManagersAssembly {
             return encoder
         }
 
-        container.register {
-            NetworkManager(decoder: $0, encoder: $1) as AuthManager
-        }
+        container.register { NetworkManager(decoder: $0, encoder: $1) }
+            .implements(AuthManager.self)
+            .implements(SignUpManager.self)
+            .implements(MainManager.self)
+            .implements(ItemManager.self)
+            .implements(ProfileManager.self)
 
         return container
     }()

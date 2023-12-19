@@ -108,6 +108,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="nil" keyPath="dipTag"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="buttonBottomConstraint" destination="2kD-t4-plW" id="hKu-PC-pQ2"/>
                         <outlet property="createButton" destination="NCQ-Go-nl1" id="lxE-gw-w87"/>

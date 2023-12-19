@@ -5,18 +5,31 @@
 //  Created by Светлана Полоротова on 16.11.2023.
 //
 
+import Dip
 import UIKit
 
 protocol NewItemViewControllerDelegate: AnyObject {
-    func didSelect(_ vc: NewItemViewController)
+    func didSelect(_ vc: NewItemViewController, action: ItemAction, date: Date?)
+}
+
+enum ItemAction {
+    case add
+    case delete
 }
 
 final class NewItemViewController: ParentViewController {
+    @Injected private var networkManager: ItemManager!
+
     weak var delegate: NewItemViewControllerDelegate?
     var selectedItem: TodoItemResponseBody?
+    var selectedDate: Date?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if let selectedDate {
+            datePicker.date = selectedDate
+        }
 
         setupInitialView()
     }
@@ -113,12 +126,14 @@ final class NewItemViewController: ParentViewController {
         }
 
         if isValid {
+            createButton.setLoading(true)
             Task {
                 do {
-                    _ = try await NetworkManager.shared.createNewTodo(title: whatToDoView.textTextView ?? "", description: descriptionView.textTextView ?? "", date: datePicker.date)
-                    delegate?.didSelect(self)
+                    _ = try await networkManager.createNewTodo(title: whatToDoView.textTextView ?? "", description: descriptionView.textTextView ?? "", date: datePicker.date)
+                    delegate?.didSelect(self, action: .add, date: datePicker.date)
                     navigationController?.popViewController(animated: true)
                 } catch {
+                    createButton.setLoading(false)
                     DispatchQueue.main.async {
                         self.showSnackbar(message: error.localizedDescription)
                     }
@@ -131,8 +146,8 @@ final class NewItemViewController: ParentViewController {
     private func didTapDeleteButton() {
         Task {
             do {
-                _ = try await NetworkManager.shared.deleteTodo(todoId: selectedItem?.id ?? "")
-                delegate?.didSelect(self)
+                _ = try await networkManager.deleteTodo(todoId: selectedItem?.id ?? "")
+                delegate?.didSelect(self, action: .delete, date: nil)
                 navigationController?.popViewController(animated: true)
             } catch {
                 DispatchQueue.main.async {

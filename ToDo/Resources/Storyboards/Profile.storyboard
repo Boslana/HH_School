@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,14 +22,17 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Rz0-eW-znG">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="205"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Har-7o-85a">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2aa-bG-Rb5">
                                                 <rect key="frame" x="111" y="0.0" width="139" height="139"/>
-                                                <color key="backgroundColor" name="Color/Text/textSecondary"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="139" id="0lm-KM-LCz"/>
-                                                    <constraint firstAttribute="width" constant="139" id="qaj-94-nH1"/>
+                                                    <constraint firstAttribute="height" constant="139" id="HOe-4B-ATc"/>
+                                                    <constraint firstAttribute="width" constant="139" id="RLa-3a-q00"/>
                                                 </constraints>
-                                            </imageView>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="didTapAvatar:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="xhG-oC-saO"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnI-yy-ip8">
                                                 <rect key="frame" x="155.66666666666666" y="155" width="50" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -59,8 +61,11 @@
                             <constraint firstItem="eLp-Tf-HRv" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="ztF-h7-o11"/>
                         </constraints>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="nil" keyPath="dipTag"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
-                        <outlet property="avatarImageView" destination="Har-7o-85a" id="tFG-bG-dIQ"/>
+                        <outlet property="avatarImageButton" destination="2aa-bG-Rb5" id="KIY-Cg-e32"/>
                         <outlet property="exitButton" destination="cEh-a4-xHv" id="tPG-ku-Xh4"/>
                         <outlet property="nameLabel" destination="bnI-yy-ip8" id="WHi-h3-SSB"/>
                     </connections>
@@ -71,9 +76,6 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Color/Text/textSecondary">
-            <color red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

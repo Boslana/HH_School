@@ -23,6 +23,18 @@ final class PrimaryButton: MainButton {
         case small
     }
 
+    private lazy var buttonLoader: LoadingIndicatorImageView = {
+        let loader = LoadingIndicatorImageView()
+        loader.isHidden = true
+        loader.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(loader)
+        NSLayoutConstraint.activate([
+            loader.centerXAnchor.constraint(equalTo: centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: centerYAnchor),
+        ])
+        return loader
+    }()
+
     func setup(mode: Mode) {
         if mode == Mode.large {
             style = Style(
@@ -33,6 +45,7 @@ final class PrimaryButton: MainButton {
                 titleColor: .Color.white,
                 highlightedTitleColor: .Color.white
             )
+            buttonLoader.image = UIImage.Common.buttonMediumLoader
         } else if mode == Mode.small {
             style = Style(
                 cornerRadius: 8,
@@ -43,6 +56,13 @@ final class PrimaryButton: MainButton {
                 titleColor: .Color.white,
                 highlightedTitleColor: .Color.white
             )
+            buttonLoader.image = UIImage.Common.buttonSmallLoader
         }
+    }
+
+    func setLoading(_ isLoading: Bool) {
+        buttonLoader.isHidden = !isLoading
+        titleLabel?.alpha = isLoading ? 0 : 1
+        isUserInteractionEnabled = !isLoading
     }
 }
