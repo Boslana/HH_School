@@ -93,7 +93,7 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
             Task {
                 do {
                     _ = try await networkManager.uploadProfilePhoto(imageData: imageData, fileName: fileName)
-                    getProfileData()
+                    self.avatarImageButton.setImage(selectedImage, for: .normal)
                 } catch {
                     DispatchQueue.main.async {
                         self.showSnackbar(message: error.localizedDescription)
