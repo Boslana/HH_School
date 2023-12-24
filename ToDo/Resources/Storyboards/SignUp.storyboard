@@ -64,6 +64,9 @@
                             <constraint firstItem="wjY-SN-OGz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="qai-8F-9qp"/>
                         </constraints>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="nil" keyPath="dipTag"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="emailTextField" destination="ynF-o5-TvS" id="DPa-tA-CuS"/>
                         <outlet property="passwordTextField" destination="FTu-fE-Avr" id="LxR-l0-jz8"/>

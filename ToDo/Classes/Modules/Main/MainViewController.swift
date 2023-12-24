@@ -5,9 +5,13 @@
 //  Created by Светлана Полоротова on 31.10.2023.
 //
 
+import Dip
 import UIKit
 
 final class MainViewController: ParentViewController {
+    @Injected private var networkManager: MainManager!
+
+    private let refreshControl = UIRefreshControl()
     private var data: [TodoItemResponseBody] = []
     private var sections: [(date: Date, items: [TodoItemResponseBody])] = []
     private var selectedItem: TodoItemResponseBody?
@@ -24,6 +28,10 @@ final class MainViewController: ParentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh(_:)), for: .valueChanged)
+        collectionView.alwaysBounceVertical = true
+        collectionView.refreshControl = refreshControl
 
         setupUI()
         loadToDos()
@@ -74,11 +82,13 @@ final class MainViewController: ParentViewController {
         navigateToNewItem()
     }
 
-    private func loadToDos() {
+    private func loadToDos(shouldUpdateStatefulViewState: Bool = true, shouldEndRefreshing: Bool = false) {
         Task {
-            statefulView?.state = .loading
+            if shouldUpdateStatefulViewState {
+                statefulView?.state = .loading
+            }
             do {
-                self.data = try await NetworkManager.shared.fetchTodoList()
+                self.data = try await networkManager.fetchTodoList()
                 sections = data
                     .reduce(into: [(date: Date, items: [TodoItemResponseBody])]()) { partialResult, item in
                         if let index = partialResult.firstIndex(where: { $0.date.withoutTimeStamp == item.date.withoutTimeStamp }) {
@@ -89,7 +99,7 @@ final class MainViewController: ParentViewController {
                     }
                     .sorted(by: { $0.date <= $1.date })
 
-                if let selectedDate = selectedDate, !sections.contains(where: { $0.date == selectedDate }) {
+                if let selectedDate, !sections.contains(where: { $0.date == selectedDate }) {
                     self.selectedDate = nil
                 }
 
@@ -98,6 +108,12 @@ final class MainViewController: ParentViewController {
                 restoreSelectedDate()
             } catch {
                 self.statefulView?.state = .empty(error: error)
+            }
+
+            if shouldEndRefreshing {
+                DispatchQueue.main.async {
+                    self.refreshControl.endRefreshing()
+                }
             }
         }
     }
@@ -109,12 +125,24 @@ final class MainViewController: ParentViewController {
         }
     }
 
+    private func scrollToLastItem() {
+        let itemCount = collectionView.numberOfItems(inSection: 1)
+
+        guard itemCount > 0 else {
+            return
+        }
+
+        let lastItemIndex = IndexPath(item: itemCount - 1, section: 1)
+        collectionView.scrollToItem(at: lastItemIndex, at: .bottom, animated: true)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         switch segue.destination {
         case let destination as NewItemViewController:
             destination.delegate = self
             destination.selectedItem = selectedItem
+            destination.selectedDate = selectedDate
             selectedItem = nil
         default:
             break
@@ -128,6 +156,11 @@ final class MainViewController: ParentViewController {
     @objc
     private func didTapProfileButton() {
         performSegue(withIdentifier: "profile", sender: nil)
+    }
+
+    @objc
+    private func didPullToRefresh(_: Any) {
+        loadToDos(shouldUpdateStatefulViewState: false, shouldEndRefreshing: true)
     }
 }
 
@@ -168,7 +201,8 @@ extension MainViewController: UICollectionViewDataSource {
                     item = data[indexPath.row]
                 }
                 if let item {
-                    cell.setup(item: item)
+                    let cellData = MainItemCell.Data(from: item)
+                    cell.setup(data: cellData)
                 }
 
                 cell.delegate = self
@@ -212,8 +246,22 @@ extension MainViewController: UICollectionViewDelegate {
 }
 
 extension MainViewController: NewItemViewControllerDelegate {
-    func didSelect(_: NewItemViewController) {
+    func didSelect(_: NewItemViewController, action: ItemAction, date: Date?) {
         loadToDos()
+        switch action {
+        case .add:
+            if selectedDate == nil {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.scrollToLastItem()
+                }
+            } else if let newDate = date, let selectedDate, Calendar.current.isDate(selectedDate, inSameDayAs: newDate) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.scrollToLastItem()
+                }
+            }
+        case .delete:
+            break
+        }
     }
 }
 
@@ -227,7 +275,7 @@ extension MainViewController: MainItemCellDelegate {
 
         Task {
             do {
-                _ = try await NetworkManager.shared.markCompletion(todoId: id)
+                _ = try await networkManager.markCompletion(todoId: id)
                 if let newIndex = data.firstIndex(where: { $0.id == id }) {
                     data[newIndex].isCompleted = !isCompleted
                     if selectedDate == nil {
@@ -253,7 +301,7 @@ extension MainViewController: MainItemCellDelegate {
 
 extension MainViewController: StatefullViewDelegate {
     func statefullViewReloadData(_: StatefullView) {
-        loadToDos()
+        loadToDos(shouldUpdateStatefulViewState: false)
     }
 
     func statefullViewDidTapEmptyButton(_: StatefullView) {

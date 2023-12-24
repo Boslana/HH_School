@@ -6,9 +6,12 @@
 //
 
 import Combine
+import Dip
 import UIKit
 
 final class SignUpViewController: ParentViewController {
+    @Injected private var networkManager: SignUpManager!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,13 +65,15 @@ final class SignUpViewController: ParentViewController {
         }
 
         if isValid, let name = userNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text {
+            signUpButton.setLoading(true)
             Task {
                 do {
-                    let response = try await NetworkManager.shared.signUp(name: name, email: email, password: password)
+                    let response = try await networkManager.signUp(name: name, email: email, password: password)
                     log.debug("\(response.accessToken)")
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     view.window?.rootViewController = storyboard.instantiateInitialViewController()
                 } catch {
+                    signUpButton.setLoading(false)
                     DispatchQueue.main.async {
                         self.showSnackbar(message: error.localizedDescription)
                     }

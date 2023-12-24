@@ -55,6 +55,7 @@ final class AuthViewController: ParentViewController {
         }
 
         if isValid {
+            signInButton.setLoading(true)
             Task {
                 do {
                     let response = try await networkManager.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
@@ -62,6 +63,7 @@ final class AuthViewController: ParentViewController {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     view.window?.rootViewController = storyboard.instantiateInitialViewController()
                 } catch {
+                    signInButton.setLoading(false)
                     DispatchQueue.main.async {
                         self.showSnackbar(message: error.localizedDescription)
                     }

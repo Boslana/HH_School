@@ -12,34 +12,25 @@ final class NetworkManager {
     private let decoder: JSONDecoder
     private let encoder: JSONEncoder
 
-    static var shared = NetworkManager(decoder: {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .secondsSince1970
-        return decoder
-    }(), encoder: {
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .secondsSince1970
-        return encoder
-    }())
-
     init(decoder: JSONDecoder, encoder: JSONEncoder) {
         self.decoder = decoder
         self.encoder = encoder
     }
 
-    private func request<Response: Decodable>(
+    func request<Response: Decodable>(
         urlStr: String,
         method: String,
+        fileName: String? = nil,
         headers: [String: String]? = nil
     ) async throws -> Response {
-        try await request(urlStr: urlStr, method: method, requestData: EmptyRequest?.none, headers: headers)
+        try await request(urlStr: urlStr, method: method, requestData: EmptyRequest?.none, fileName: fileName, headers: headers)
     }
 
     func request<Request: Encodable, Response: Decodable>(
         urlStr: String,
         method: String,
         requestData: Request? = nil,
+        fileName: String? = nil,
         headers: [String: String]? = nil
     ) async throws -> Response {
         guard let url = URL(string: urlStr) else {
@@ -49,7 +40,18 @@ final class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = method
 
-        if let requestData, method != "GET" {
+        if let fileName, let formData = requestData as? Data {
+            let boundary = "Boundary-\(UUID().uuidString)"
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+            var body = Data()
+            body.append("--\(boundary)\r\n")
+            body.append("Content-Disposition: form-data; name=\"uploadedFile\"; filename=\"\(fileName)\"\r\n")
+            body.append("Content-Type: image/jpeg\r\n\r\n")
+            body.append(formData)
+            body.append("\r\n--\(boundary)--\r\n")
+            request.httpBody = body
+        } else if let requestData, method != "GET" {
             request.httpBody = try encoder.encode(requestData)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -59,9 +61,6 @@ final class NetworkManager {
 
         let (data, response) = try await URLSession.shared.data(for: request)
         if let httpResponse = response as? HTTPURLResponse {
-            let response = String(data: data, encoding: .utf8) ?? ""
-            log.debug("\(response)")
-
             switch httpResponse.statusCode {
             case 200 ..< 400:
                 if data.isEmpty, let emptyData = "{}".data(using: .utf8) {
@@ -77,94 +76,5 @@ final class NetworkManager {
         } else {
             throw NetworkError.wrongResponse
         }
-    }
-
-    //    func signIn(email: String, password: String) async throws -> AuthResponse {
-    //        let loginData = SignInRequestBody(email: email, password: password)
-    //        let authResponse: AuthResponse = try await request(
-    //            urlStr: "\(PlistFiles.apiBaseUrl)/api/auth/login",
-    //            method: "POST",
-    //            requestData: loginData
-    //        )
-    //        UserManager.shared.set(accessToken: authResponse.accessToken)
-    //        return authResponse
-    //    }
-
-    func signUp(name: String, email: String, password: String) async throws -> AuthResponse {
-        let registrationData = SignUpRequestBody(name: name, email: email, password: password)
-        let authResponse: AuthResponse = try await request(
-            urlStr: "\(PlistFiles.apiBaseUrl)/api/auth/registration",
-            method: "POST",
-            requestData: registrationData
-        )
-        UserManager.shared.set(accessToken: authResponse.accessToken)
-        return authResponse
-    }
-
-    func fetchTodoList() async throws -> [TodoItemResponseBody] {
-        guard let accessToken = UserManager.shared.accessToken else {
-            throw NetworkError.wrongResponse
-        }
-        let headers = ["Authorization": "Bearer \(accessToken)"]
-        let todosResponse: [TodoItemResponseBody] = try await request(
-            urlStr: "\(PlistFiles.apiBaseUrl)/api/todos",
-            method: "GET",
-            headers: headers
-        )
-        return todosResponse
-    }
-
-    func createNewTodo(title: String, description: String, date: Date) async throws -> TodoItemResponseBody {
-        guard let accessToken = UserManager.shared.accessToken else {
-            throw NetworkError.wrongResponse
-        }
-        let headers = ["Authorization": "Bearer \(accessToken)"]
-        let newItemData = NewTodoItemRequestBody(title: title, description: description, date: date)
-        let newTodoResponse: TodoItemResponseBody = try await request(
-            urlStr: "\(PlistFiles.apiBaseUrl)/api/todos",
-            method: "POST",
-            requestData: newItemData,
-            headers: headers
-        )
-        return newTodoResponse
-    }
-
-    func markCompletion(todoId: String) async throws -> EmptyResponse {
-        guard let accessToken = UserManager.shared.accessToken else {
-            throw NetworkError.wrongResponse
-        }
-        let headers = ["Authorization": "Bearer \(accessToken)"]
-        let markResponse: EmptyResponse = try await request(
-            urlStr: "\(PlistFiles.apiBaseUrl)/api/todos/mark/\(todoId)",
-            method: "PUT",
-            headers: headers
-        )
-        return markResponse
-    }
-
-    func deleteTodo(todoId: String) async throws -> EmptyResponse {
-        guard let accessToken = UserManager.shared.accessToken else {
-            throw NetworkError.wrongResponse
-        }
-        let headers = ["Authorization": "Bearer \(accessToken)"]
-        let deleteResponse: EmptyResponse = try await request(
-            urlStr: "\(PlistFiles.apiBaseUrl)/api/todos/\(todoId)",
-            method: "DELETE",
-            headers: headers
-        )
-        return deleteResponse
-    }
-
-    func profile() async throws -> ProfileResponse {
-        guard let accessToken = UserManager.shared.accessToken else {
-            throw NetworkError.wrongResponse
-        }
-        let headers = ["Authorization": "Bearer \(accessToken)"]
-        let profileResponse: ProfileResponse = try await request(
-            urlStr: "\(PlistFiles.apiBaseUrl)/api/user",
-            method: "GET",
-            headers: headers
-        )
-        return profileResponse
     }
 }
