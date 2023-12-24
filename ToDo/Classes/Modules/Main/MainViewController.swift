@@ -201,7 +201,8 @@ extension MainViewController: UICollectionViewDataSource {
                     item = data[indexPath.row]
                 }
                 if let item {
-                    cell.setup(item: item)
+                    let cellData = MainItemCell.Data(from: item)
+                    cell.setup(data: cellData)
                 }
 
                 cell.delegate = self
@@ -249,7 +250,6 @@ extension MainViewController: NewItemViewControllerDelegate {
         loadToDos()
         switch action {
         case .add:
-
             if selectedDate == nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.scrollToLastItem()

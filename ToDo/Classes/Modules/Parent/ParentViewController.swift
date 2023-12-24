@@ -27,6 +27,10 @@ class ParentViewController: UIViewController {
     }
 
     func showSnackbar(message: String, duration: TimeInterval = 3.0) {
+        guard let window = window else {
+            return
+        }
+
         let snackbarLabel = UILabel()
         snackbarLabel.translatesAutoresizingMaskIntoConstraints = false
         snackbarLabel.textColor = UIColor.Color.white
@@ -41,15 +45,15 @@ class ParentViewController: UIViewController {
         snackbarContainer.alpha = 0
         snackbarContainer.translatesAutoresizingMaskIntoConstraints = false
 
-        window?.addSubview(snackbarContainer)
+        window.addSubview(snackbarContainer)
         snackbarContainer.addSubview(snackbarLabel)
 
         let statusBarHeight = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.statusBarManager?.statusBarFrame.height ?? 54
 
         NSLayoutConstraint.activate([
-            snackbarContainer.topAnchor.constraint(equalTo: window?.topAnchor ?? view.topAnchor),
-            snackbarContainer.leadingAnchor.constraint(equalTo: window?.leadingAnchor ?? view.leadingAnchor),
-            snackbarContainer.trailingAnchor.constraint(equalTo: window?.trailingAnchor ?? view.trailingAnchor),
+            snackbarContainer.topAnchor.constraint(equalTo: window.topAnchor),
+            snackbarContainer.leadingAnchor.constraint(equalTo: window.leadingAnchor),
+            snackbarContainer.trailingAnchor.constraint(equalTo: window.trailingAnchor),
 
             snackbarLabel.topAnchor.constraint(equalTo: snackbarContainer.topAnchor, constant: statusBarHeight + 8),
             snackbarLabel.leadingAnchor.constraint(equalTo: snackbarContainer.leadingAnchor, constant: 16),

@@ -12,6 +12,13 @@ protocol MainItemCellDelegate: AnyObject {
 }
 
 final class MainItemCell: UICollectionViewCell {
+    struct Data {
+        let id: String
+        let title: String
+        let deadline: Date
+        let isCompleted: Bool
+    }
+
     weak var delegate: MainItemCellDelegate?
     static let reuseID = String(describing: MainItemCell.self)
     private var itemId: String?
@@ -42,13 +49,13 @@ final class MainItemCell: UICollectionViewCell {
 
     private let currentDate = Date()
 
-    func setup(item: TodoItemResponseBody) {
-        itemId = item.id
-        titleLabel.text = item.title
-        deadlineLabel.text = "\(L10n.Main.deadline) \(DateFormatter.dateFormate.string(from: item.date))"
-        deadlineLabel.textColor = currentDate > item.date ? UIColor.Color.red : UIColor.Color.black
+    func setup(data: Data) {
+        itemId = data.id
+        titleLabel.text = data.title
+        deadlineLabel.text = "\(L10n.Main.deadline) \(DateFormatter.dateFormate.string(from: data.deadline))"
+        deadlineLabel.textColor = currentDate > data.deadline ? UIColor.Color.red : UIColor.Color.black
 
-        if item.isCompleted {
+        if data.isCompleted {
             radioButton.setImage(UIImage.Main.radiobuttonCheckmark, for: .normal)
         } else {
             radioButton.setImage(UIImage.Main.radiobuttonDefault, for: .normal)
@@ -63,5 +70,14 @@ final class MainItemCell: UICollectionViewCell {
         if let itemId = itemId {
             delegate?.didTapRadioButton(on: itemId)
         }
+    }
+}
+
+extension MainItemCell.Data {
+    init(from item: TodoItemResponseBody) {
+        id = item.id
+        title = item.title
+        deadline = item.date
+        isCompleted = item.isCompleted
     }
 }

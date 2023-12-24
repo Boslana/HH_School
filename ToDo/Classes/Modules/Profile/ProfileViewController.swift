@@ -24,7 +24,7 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
         navigationItem.title = L10n.Profile.title
 
         avatarImageButton.layer.cornerRadius = avatarImageButton.frame.height / 2
-        avatarImageButton.imageView?.contentMode = .scaleAspectFit
+        avatarImageButton.imageView?.contentMode = .scaleAspectFill
         avatarImageButton.imageView?.clipsToBounds = true
         avatarImageButton.contentHorizontalAlignment = .fill
         avatarImageButton.contentVerticalAlignment = .fill
@@ -38,11 +38,25 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
         exitButton.setTitle(L10n.Profile.exitButton, for: .normal)
 
         getProfileData()
+
+        avatarImageButton.addSubview(loadingIndicator)
+        NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: avatarImageButton.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: avatarImageButton.centerYAnchor),
+        ])
     }
 
     @IBOutlet private var avatarImageButton: UIButton!
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var exitButton: TextButton!
+
+    private lazy var loadingIndicator: LoadingIndicatorImageView = {
+        let loadingIndicator = LoadingIndicatorImageView()
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicator.image = UIImage.Common.loaderLarge
+        loadingIndicator.isHidden = true
+        return loadingIndicator
+    }()
 
     @IBAction private func didTapAvatar(_: Any) {
         imagePicker.sourceType = .photoLibrary
@@ -65,6 +79,7 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
 
     private func loadAvatarImage() {
         guard let imageId = profile?.imageId else {
+            avatarImageButton.setImage(UIImage.Profile.profileAvatar, for: .normal)
             return
         }
 
@@ -77,7 +92,7 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
         }
 
         avatarImageButton.kf.cancelImageDownloadTask()
-        let urlString = "http://45.144.64.179/api/user/photo/\(imageId)"
+        let urlString = "\(PlistFiles.apiBaseUrl)/api/user/photo/\(imageId)"
         avatarImageButton.kf.setImage(
             with: URL(string: urlString),
             for: .normal,
@@ -90,6 +105,7 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
         if let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage, let imageData = selectedImage.jpegData(compressionQuality: 0.9) {
             let fileName = (info[UIImagePickerController.InfoKey.imageURL] as? URL)?.lastPathComponent ?? "profile_photo.jpg"
 
+            showLoadingIndicator(true)
             Task {
                 do {
                     _ = try await networkManager.uploadProfilePhoto(imageData: imageData, fileName: fileName)
@@ -99,6 +115,7 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
                         self.showSnackbar(message: error.localizedDescription)
                     }
                 }
+                showLoadingIndicator(false)
             }
         }
         picker.dismiss(animated: true)
@@ -120,5 +137,10 @@ final class ProfileViewController: ParentViewController, UIImagePickerController
         alert.addAction(cancelAction)
 
         present(alert, animated: true)
+    }
+
+    private func showLoadingIndicator(_ show: Bool) {
+        loadingIndicator.isHidden = !show
+        avatarImageButton.alpha = show ? 0.5 : 1
     }
 }

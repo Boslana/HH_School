@@ -31,6 +31,8 @@ final class PrimaryButton: MainButton {
         NSLayoutConstraint.activate([
             loader.centerXAnchor.constraint(equalTo: centerXAnchor),
             loader.centerYAnchor.constraint(equalTo: centerYAnchor),
+            loader.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
+            loader.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor),
         ])
         return loader
     }()

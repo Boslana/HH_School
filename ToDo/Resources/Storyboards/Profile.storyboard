@@ -22,7 +22,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Rz0-eW-znG">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="205"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2aa-bG-Rb5">
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2aa-bG-Rb5">
                                                 <rect key="frame" x="111" y="0.0" width="139" height="139"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="139" id="HOe-4B-ATc"/>
